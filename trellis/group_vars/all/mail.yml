@@ -1,0 +1,6 @@
+# Documentation: https://roots.io/trellis/docs/mail/
+mail_smtp_server: smtp.sendgrid.net:587
+mail_admin: admin@welcome.dog
+mail_hostname: welcome.dog
+mail_user: mlHJt66wRC2NE_LJ1tOQLg
+mail_password: "{{ vault_mail_password }}" # Define this variable in group_vars/all/vault.yml
