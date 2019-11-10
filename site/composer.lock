@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64647af16b32cbbf9f4407b079b40229",
+    "content-hash": "f5b9acd726c200c0f819812a0d64866c",
     "packages": [
         {
             "name": "composer/installers",
@@ -582,6 +582,24 @@
                 "environment"
             ],
             "time": "2019-06-15T22:40:20+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/user-submitted-posts",
+            "version": 20190902,
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/user-submitted-posts/",
+                "reference": "tags/20190902"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/user-submitted-posts.20190902.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/user-submitted-posts/"
         }
     ],
     "packages-dev": [
