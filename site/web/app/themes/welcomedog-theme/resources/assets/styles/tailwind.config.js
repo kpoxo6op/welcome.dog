@@ -49,7 +49,7 @@ const globalStyles = ({ addBase, config }) => {
 module.exports = {
   theme: {
     colors: {
-      primary: '#525ddc',
+      primary: '#1a202c',
       white: '#fff',
       gray: {
         100: '#f7fafc',
