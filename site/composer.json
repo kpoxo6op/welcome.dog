@@ -17,7 +17,12 @@
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
+    "bedrock",
+    "composer",
+    "roots",
+    "wordpress",
+    "wp",
+    "wp-config"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -27,6 +32,10 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:kpoxo6op/usp-pro.git"
     }
   ],
   "require": {
@@ -38,7 +47,7 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "vlucas/phpdotenv": "^3.4.0",
-    "wpackagist-plugin/user-submitted-posts": "20190902"
+    "kpoxo6op/usp-pro": "3.4"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.4.2",
@@ -53,9 +62,15 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+      "web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "wordpress-install-dir": "web/wp"
   },
