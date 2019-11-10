@@ -1,3 +1,10 @@
 path: web/wp
 server:
   docroot: web
+
+@development:
+  ssh: vagrant@welcomedog.test/srv/www/petswelcome.org/current
+@staging:
+  ssh: web@staging.example.com/srv/www/example.com/current
+@production:
+  ssh: web@welcome.dog/srv/www/petswelcome.org/current
