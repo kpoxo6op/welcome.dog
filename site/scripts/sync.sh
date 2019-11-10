@@ -7,7 +7,7 @@
 DEVDIR="web/app/uploads/"
 DEVSITE="http://welcomedog.test"
 
-PRODDIR="web@welcome.dog:/srv/www/example/shared/uploads/"
+PRODDIR="web@welcome.dog:/srv/www/welcome.dog/shared/uploads/"
 PRODSITE="https://welcome.dog"
 
 STAGDIR="web@staging.example.com:/srv/www/example/shared/uploads/"
