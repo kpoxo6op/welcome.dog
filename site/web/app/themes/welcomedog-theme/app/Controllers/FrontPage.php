@@ -14,12 +14,12 @@ class FrontPage extends Controller {
 
         return array_map(function ($post) {
             return [
+                'title'     => apply_filters('the_title', $post->post_title),
                 'content'   => apply_filters('the_content', $post->post_content),
                 'excerpt'   => apply_filters('the_excerpt', $post->post_content),
                 'thumbnail' => get_the_post_thumbnail($post->ID, 'large'),
                 'thumb_url' => get_the_post_thumbnail_url($post->ID, 'large'),
                 'alt'       => get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true),
-                'title'     => apply_filters('the_title', $post->post_title),
                 'permalink' => apply_filters('permalink', get_permalink($post)),
                 'type'      => get_the_terms($post->ID, 'dogplace-type'),
             ];
