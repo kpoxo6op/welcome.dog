@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdce693c01b0b3cd8e4d4361ec099685",
+    "content-hash": "3025d151675c4d0d2979d0178996b0fb",
     "packages": [
         {
             "name": "composer/installers",
@@ -619,6 +619,24 @@
                 "environment"
             ],
             "time": "2019-09-10T21:37:39+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/email-templates",
+            "version": "1.3.1.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/email-templates/",
+                "reference": "tags/1.3.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/email-templates.1.3.1.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/email-templates/"
         }
     ],
     "packages-dev": [

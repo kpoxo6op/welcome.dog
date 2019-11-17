@@ -11,9 +11,7 @@
             <div class="p-4 h-auto md:h-40 lg:h-48">
                 <a href="{!! $dp['permalink'] !!}" class="block text-blue-500 hover:text-blue-600 font-semibold mb-2 text-lg md:text-base lg:text-lg">{!! $dp['title'] !!}</a>
                 <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
-                    @foreach ($dp['type'] as $type)
-                    <a class="" href="#">{!! $type->name !!}</a>
-                    @endforeach
+                    <a class="" href="#">{{ $dp['type'] }}</a>
                     <p>{!! $dp['excerpt'] !!}</p>
                 </div>
                 <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block">

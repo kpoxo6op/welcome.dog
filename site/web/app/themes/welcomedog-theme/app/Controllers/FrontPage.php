@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Sober\Controller\Controller;
 class FrontPage extends Controller {
     public function latest_dogplaces() {
-        $args = get_posts([
+        $raw_posts = get_posts([
             'post_type' => 'dogplace',
             'orderby'   => 'date',
             'order'     => 'desc',
@@ -21,8 +21,8 @@ class FrontPage extends Controller {
                 'thumb_url' => get_the_post_thumbnail_url($post->ID, 'large'),
                 'alt'       => get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true),
                 'permalink' => apply_filters('permalink', get_permalink($post)),
-                'type'      => get_the_terms($post->ID, 'dogplace-type'),
+                'type' => (current(get_the_terms($post->ID, 'dogplace-type')))->name,
             ];
-        }, $args);
+        }, $raw_posts);
     }
 }
