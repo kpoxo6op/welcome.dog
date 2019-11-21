@@ -21,6 +21,7 @@ class FrontPage extends Controller {
                 'thumb_url' => get_the_post_thumbnail_url($post->ID, 'large'),
                 'alt'       => get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true),
                 'permalink' => apply_filters('permalink', get_permalink($post)),
+                'term_link' => get_term_link(current(get_the_terms($post->ID, 'dogplace-type'))),
                 'type' => (current(get_the_terms($post->ID, 'dogplace-type')))->name,
             ];
         }, $raw_posts);
