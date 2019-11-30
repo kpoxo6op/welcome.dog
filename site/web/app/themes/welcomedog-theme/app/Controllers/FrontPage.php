@@ -11,12 +11,12 @@ class FrontPage extends Controller {
             'order'     => 'desc',
             'posts_per_page' => 3,
         ]);
-
+        
         return array_map(function ($post) {
             return [
                 'title'     => apply_filters('the_title', $post->post_title),
                 'content'   => apply_filters('the_content', $post->post_content),
-                'excerpt'   => apply_filters('the_excerpt', $post->post_content),
+                'excerpt'   => apply_filters('the_excerpt', $post->post_excerpt),
                 'thumbnail' => get_the_post_thumbnail($post->ID, 'large'),
                 'thumb_url' => get_the_post_thumbnail_url($post->ID, 'large'),
                 'alt'       => get_post_meta(get_post_thumbnail_id($post->ID), '_wp_attachment_image_alt', true),
