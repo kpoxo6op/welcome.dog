@@ -36,6 +36,10 @@
     {
       "type": "vcs",
       "url": "git@github.com:kpoxo6op/usp-pro.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:kpoxo6op/acf-pro.git"
     }
   ],
   "require": {
@@ -43,6 +47,7 @@
     "composer/installers": "^1.7",
     "johnbillion/extended-cpts": "^4.3",
     "kpoxo6op/usp-pro": "3.4",
+    "kpoxo6op/acf-pro": "5.8.7",
     "oscarotero/env": "^1.2.0",
     "roots/wordpress": "5.2.3",
     "roots/wp-config": "1.0.0",
