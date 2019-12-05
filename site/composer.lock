@@ -294,7 +294,7 @@
         },
         {
             "name": "kpoxo6op/wp-google-maps-pro",
-            "version": "8.0.0",
+            "version": "8.0.12",
             "source": {
                 "type": "git",
                 "url": "git@github.com:kpoxo6op/wp-google-maps-pro.git",

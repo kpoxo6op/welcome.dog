@@ -9,7 +9,8 @@ add_action( 'init', function() {
       'thumbnail',
       'excerpt',
       'comments',
-    ]
+    ],
+    'taxonomies'  => array( 'category' ),
   ]);
 
   register_extended_taxonomy( 'dogplace-type', 'dogplace', [
