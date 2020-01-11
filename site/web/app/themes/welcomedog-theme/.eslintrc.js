@@ -1,8 +1,8 @@
 module.exports = {
   'root': true,
   'extends': [
-  	'eslint:recommended',
-  	'plugin:vue/essential',
+    'eslint:recommended',
+    'plugin:vue/essential',
   ],
   'globals': {
     'wp': true,

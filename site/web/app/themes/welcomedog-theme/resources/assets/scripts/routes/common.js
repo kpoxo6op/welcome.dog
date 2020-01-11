@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import AppComponent from '../vue/vue2-demo-project/src/App/index.vue'
+import AppComponent from '../vue/vue2-demo-project/src/App.vue'
 
 export default {
   init() {
