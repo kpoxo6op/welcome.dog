@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import AppComponent from '../vue/vue2-map/src/App.vue'
+import AppComponent from '../vue/vue2-map/src/components/App.vue'
 
 export default {
   init() {
