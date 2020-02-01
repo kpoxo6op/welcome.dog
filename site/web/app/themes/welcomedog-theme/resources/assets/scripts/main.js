@@ -7,12 +7,14 @@ import './autoload/**/*'
 // import local dependencies
 import Vue from 'vue';
 import Router from './util/Router';
+import store from './vue/vue2-map/src/store/index';
 import common from './routes/common';
 import home from './routes/home';
 import aboutUs from './routes/about';
 import githubDemo from './routes/github-demo';
 import map from './routes/map';
 import * as VueGoogleMaps from 'vue2-google-maps'
+import AppComponent from './vue/vue2-map/src/components/App.vue'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -34,6 +36,15 @@ const routes = new Router({
   // full page map
   map,
 });
+
+new Vue({
+  el: '#map-app',
+  store,
+  components: {
+    app: AppComponent,
+  },
+  render: h => h('app'),
+})
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
