@@ -1,27 +1,38 @@
 <template>
-  <div class="w-full bg-gray-500 bg-no-repeat">
-    <div class="p-4 py-6 flex flex-col flex-wrap justify-center content-left">
-      <div class="m-0 p-0 text-xl text-white antialiased">
-        <div v-for="topLvlCategory in topLvlCategories" :key="topLvlCategory.id">
-          {{ topLvlCategory }}
+      <div>
+        <h2>This is our map</h2>
+        <div class="flex">
+          <div class="px-2 py-2" v-for="topLvlCategory in topLvlCategories" :key="topLvlCategory.id">
+            {{ topLvlCategory }}
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
 import axios from 'axios';
+import {mapActions, mapState, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      topLvlCategories: [],
+      //topLvlCategories: [],
       errors: [],
     }
   },
+  computed: {
+    ...mapGetters({
+      topLvlCategories: 'topLvlCategoryNames',
+    })
+  },
+
+  // do we have to map actions?
+  methods: mapActions({
+    //getAllcategories: 'getAllcategories',
+  }),
 
   created() {
+    /*
     //TODO: make it async
     axios.get('http://welcomedog.test/wp-json/wp/v2/dogplace-type?per_page=100')
     .then(response => {
@@ -34,6 +45,8 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
+    */
+    this.$store.dispatch('getAllCategories')
   },
 }
 </script>
