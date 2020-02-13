@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const desire = require('./util/desire');
 const config = require('./config');
@@ -51,11 +52,31 @@ let webpackConfig = {
         loader: 'import-glob',
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
         test: /\.js$/,
         exclude: [/node_modules(?![/|\\](bootstrap|foundation-sites))/],
         use: [
           { loader: 'cache' },
-          { loader: 'buble', options: { objectAssign: 'Object.assign' } },
+          {
+            loader: 'buble', options: {
+              objectAssign: 'Object.assign',
+              transforms: {
+                modules: false,
+                dangerousForOf: true,
+              }
+            }
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: config.paths.assets,
+        use: [
+          { loader: 'vue-style-loader' },
+          { loader: 'css-loader' },
         ],
       },
       {
@@ -125,6 +146,9 @@ let webpackConfig = {
       config.paths.assets,
       'node_modules',
     ],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+    },
     enforceExtension: false,
   },
   resolveLoader: {
@@ -164,6 +188,7 @@ let webpackConfig = {
       debug: config.enabled.watcher,
       stats: { colors: true },
     }),
+    new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
       test: /\.s?css$/,
       options: {

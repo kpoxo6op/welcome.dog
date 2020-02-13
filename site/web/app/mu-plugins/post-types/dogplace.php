@@ -11,9 +11,11 @@ add_action( 'init', function() {
       'comments',
     ],
     'taxonomies'  => array( 'category' ),
+    'show_in_rest' => true,
   ]);
 
   register_extended_taxonomy( 'dogplace-type', 'dogplace', [
     'meta_box' => 'radio',
+    'show_in_rest' => true,
   ]);
 });
