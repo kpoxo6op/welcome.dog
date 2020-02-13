@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "249941b89d15b1258343a9f1628f0036",
+    "content-hash": "1cc43a8ec0ce546658c291431e17f94a",
     "packages": [
         {
             "name": "composer/installers",
@@ -255,114 +255,6 @@
                 "wordpress"
             ],
             "time": "2019-11-10T06:49:47+00:00"
-        },
-        {
-            "name": "kpoxo6op/wp-google-maps-gold",
-            "version": "5.0.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:kpoxo6op/wp-google-maps-gold.git",
-                "reference": "1864c5ed2268d30650c2214f7466feabffeecf1f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kpoxo6op/wp-google-maps-gold/zipball/1864c5ed2268d30650c2214f7466feabffeecf1f",
-                "reference": "1864c5ed2268d30650c2214f7466feabffeecf1f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "type": "wordpress-plugin",
-            "authors": [
-                {
-                    "name": "Nick",
-                    "homepage": "https://www.wpgmaps.com"
-                }
-            ],
-            "description": "The Gold Add-on require the Pro Add-on",
-            "homepage": "https://github.com/kpoxo6op/wp-google-maps-gold",
-            "keywords": [
-                "plugin",
-                "wordpress"
-            ],
-            "support": {
-                "source": "https://github.com/kpoxo6op/wp-google-maps-gold/tree/5.0.0",
-                "issues": "https://github.com/kpoxo6op/wp-google-maps-gold/issues"
-            },
-            "time": "2019-12-01T02:44:46+00:00"
-        },
-        {
-            "name": "kpoxo6op/wp-google-maps-pro",
-            "version": "8.0.12",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:kpoxo6op/wp-google-maps-pro.git",
-                "reference": "6029723ff217dcb95d39dcc65f3da2480f37c2f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kpoxo6op/wp-google-maps-pro/zipball/6029723ff217dcb95d39dcc65f3da2480f37c2f0",
-                "reference": "6029723ff217dcb95d39dcc65f3da2480f37c2f0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "type": "wordpress-plugin",
-            "authors": [
-                {
-                    "name": "Nick",
-                    "homepage": "https://www.wpgmaps.com"
-                }
-            ],
-            "description": "The Pro version is an Add-on to wpgmaps.com Basic version",
-            "homepage": "https://github.com/kpoxo6op/wp-google-maps-pro",
-            "keywords": [
-                "plugin",
-                "wordpress"
-            ],
-            "support": {
-                "source": "https://github.com/kpoxo6op/wp-google-maps-pro/tree/8.0.0",
-                "issues": "https://github.com/kpoxo6op/wp-google-maps-pro/issues"
-            },
-            "time": "2019-12-01T02:38:50+00:00"
-        },
-        {
-            "name": "kpoxo6op/wp-google-maps-ugm",
-            "version": "3.18",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:kpoxo6op/wp-google-maps-ugm.git",
-                "reference": "617c4fe87480f54ed925d6bbedaa5829e650b523"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kpoxo6op/wp-google-maps-ugm/zipball/617c4fe87480f54ed925d6bbedaa5829e650b523",
-                "reference": "617c4fe87480f54ed925d6bbedaa5829e650b523",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "type": "wordpress-plugin",
-            "authors": [
-                {
-                    "name": "Nick",
-                    "homepage": "https://www.wpgmaps.com"
-                }
-            ],
-            "description": "The Visitor Generated Markers Add-on require the Pro Add-on",
-            "homepage": "https://github.com/kpoxo6op/wp-google-maps-ugm",
-            "keywords": [
-                "plugin",
-                "wordpress"
-            ],
-            "support": {
-                "source": "https://github.com/kpoxo6op/wp-google-maps-ugm/tree/3.18",
-                "issues": "https://github.com/kpoxo6op/wp-google-maps-ugm/issues"
-            },
-            "time": "2019-12-01T02:46:08+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -804,24 +696,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/email-templates/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-google-maps",
-            "version": "8.0.16",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-google-maps/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-google-maps.zip?timestamp=1580374272"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-google-maps/"
         }
     ],
     "packages-dev": [

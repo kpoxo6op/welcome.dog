@@ -60,17 +60,13 @@
     "johnbillion/extended-cpts": "^4.3",
     "kpoxo6op/acf-pro": "5.8.7",
     "kpoxo6op/usp-pro": "3.4",
-    "kpoxo6op/wp-google-maps-gold": "^5.0.0",
-    "kpoxo6op/wp-google-maps-pro": "^8.0.0",
-    "kpoxo6op/wp-google-maps-ugm": "^3.18",
     "oscarotero/env": "^1.2.0",
     "roots/wordpress": "5.2.3",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "vlucas/phpdotenv": "^3.4.0",
     "wpackagist-plugin/acf-to-rest-api": "^3.1",
-    "wpackagist-plugin/email-templates": "1.3.1.1",
-    "wpackagist-plugin/wp-google-maps": "^8.0"
+    "wpackagist-plugin/email-templates": "1.3.1.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.4.2",
