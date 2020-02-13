@@ -1,0 +1,862 @@
+[
+    {
+        "id": 127,
+        "date": "2019-11-24T00:18:15",
+        "date_gmt": "2019-11-24T00:18:15",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=127"
+        },
+        "modified": "2019-11-30T08:40:16",
+        "modified_gmt": "2019-11-30T08:40:16",
+        "slug": "big-bay-holiday-park",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/big-bay-holiday-park/",
+        "title": {
+            "rendered": "Big Bay Holiday Park"
+        },
+        "content": {
+            "rendered": "<p>Holiday Park for ages 0-11, Little Boxing Gym for ages 11-18, Frank&#8217;s Dance Hall for ages 18-64 and the Professional Boxing Gym.<br />\n&#8220;We hope that you love what we&#8217;ve put together,&#8221; he added. &#8220;And we hope that as an American community that you give us a chance to succeed.&#8221;<br />\nAs much as Auburn is concerned about the Tigers&#8217; future, the 25-year-old baby elephant doesn&#8217;t want to be confined to the Motor City. There are open houses all around Washington, D.C., such as Oceti Sak</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Holiday Park for ages 0-11, Little Boxing Gym for ages 11-18, Frank&#8217;s Dance Hall for ages 18-64 and the Professional Boxing Gym.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 128,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            9
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "20 Quay Street, Auckland CBD, Auckland 1010, New Zealand",
+                "lat": -36.8472394,
+                "lng": 174.77895309999997,
+                "zoom": 14,
+                "place_id": "ChIJKc0iLwRIDW0RNdYyJx9ZQ7c",
+                "street_number": "20",
+                "street_name": "Quay Street",
+                "street_name_short": "Quay St",
+                "city": "Auckland",
+                "state": "Auckland",
+                "post_code": "1010",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/127"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=127"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/128"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=127"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=127"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=127"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 125,
+        "date": "2019-11-24T00:17:51",
+        "date_gmt": "2019-11-24T00:17:51",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=125"
+        },
+        "modified": "2019-12-01T06:16:37",
+        "modified_gmt": "2019-12-01T06:16:37",
+        "slug": "avondale-motor-park",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/avondale-motor-park/",
+        "title": {
+            "rendered": "Avondale Motor Park"
+        },
+        "content": {
+            "rendered": "<p>Holiday Park? Do you have any suggested improvements? (such as lighting or nearby urinals?) Please post your comments</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Holiday Park? Do you have any suggested improvements? (such as lighting or nearby urinals?) Please post your comments</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 126,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            9
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Tauranga, New Zealand",
+                "lat": -37.68779749999999,
+                "lng": 176.16512950000003,
+                "zoom": 14,
+                "place_id": "ChIJ5WTUe-d2bm0RJpmjQ2HvAAU",
+                "city": "Tauranga",
+                "state": "Bay Of Plenty",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/125"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=125"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/126"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=125"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=125"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=125"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 123,
+        "date": "2019-11-21T08:57:00",
+        "date_gmt": "2019-11-21T08:57:00",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=123"
+        },
+        "modified": "2019-12-01T06:17:10",
+        "modified_gmt": "2019-12-01T06:17:10",
+        "slug": "random-holiday-park",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/random-holiday-park/",
+        "title": {
+            "rendered": "Random Holiday Park"
+        },
+        "content": {
+            "rendered": "<p>Random Holiday Park Events 2016 Holiday Park Holiday Park in Kāneʻohe is a part of the United States Postal Service&#8217;s Holiday Park network. Since 1932, the Park has hosted more than 3.5 million visitors in its season of outdoor holiday activities. These include a Christmas tree lighting ceremony, 11 grand parades, 27,000 Christmas decorations, indoor Christmas tree lightings, holiday concerts, the pre- and post-Christmas Parade, Mālama Honua (Hawaiian traditional dance performance) and Pūleloana, Hawaiian ho&#8217;i&#8217;i&#8217;i&#8217;s Hawaiian version of the Macy&#8217;s Thanksgiving Day Parade.</p>\n<p>At Holiday Park in Kāneʻohe, there are two main attractions for visitors; Hauula (Southern Ocean Village) and Ka&#8217;ūlau Paʻakaloa (Southern Ocean Beach).</p>\n<p>Read more about the grounds and interior of Hawaiian Holiday.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Random Holiday Park Events 2016 Holiday Park Holiday Park in Kāneʻohe is a part of the United States Postal Service&#8217;s Holiday Park network.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 124,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            9
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Westport, New Zealand",
+                "lat": -41.7545216,
+                "lng": 171.60589030000006,
+                "zoom": 14,
+                "place_id": "ChIJ9SsJQ8hsJW0R0MN5hIbvAAU",
+                "city": "Westport",
+                "state": "West Coast",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/123"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=123"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/124"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=123"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=123"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=123"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 110,
+        "date": "2019-11-17T04:53:47",
+        "date_gmt": "2019-11-17T04:53:47",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=110"
+        },
+        "modified": "2019-12-01T06:17:30",
+        "modified_gmt": "2019-12-01T06:17:30",
+        "slug": "atka-777",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/atka-777/",
+        "title": {
+            "rendered": "Takapuna Beach Holiday Park"
+        },
+        "content": {
+            "rendered": "<div class=\"usp-images-wrap\"><span class=\"usp-image-wrap\"><a href=\"http://welcomedog.test/app/uploads/2019/11/2019-11-17_5dd0d235c65aa_blurryyellowlights.jpg\" class=\"lightbox\" rel=\"lightbox\" title=\"\"><img id=\"usp-attach-id-111\" class=\"usp-image\" src=\"http://welcomedog.test/app/uploads/2019/11/2019-11-17_5dd0d235c65aa_blurryyellowlights-150x150.jpg\" width=\"150\" height=\"150\" /></a></span></div><p>Chiquita kushaet.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Chiquita kushaet.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 111,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            9
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Tokoroa, New Zealand",
+                "lat": -38.2179652,
+                "lng": 175.87057860000004,
+                "zoom": 14,
+                "place_id": "ChIJSSJFl6RBbG0RgA-jQ2HvAAU",
+                "city": "Tokoroa",
+                "state": "Waikato",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/110"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=110"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/111"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=110"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=110"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=110"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 107,
+        "date": "2019-11-17T03:57:44",
+        "date_gmt": "2019-11-17T03:57:44",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=107"
+        },
+        "modified": "2019-12-01T06:16:28",
+        "modified_gmt": "2019-12-01T06:16:28",
+        "slug": "atka-77",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/atka-77/",
+        "title": {
+            "rendered": "Atka 77"
+        },
+        "content": {
+            "rendered": "<p>Здесь кормят собачек, но немного.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Здесь кормят собачек, но немного.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 64,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            8
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Bluff 9814, New Zealand",
+                "lat": -46.5996116,
+                "lng": 168.3457088,
+                "zoom": 14,
+                "place_id": "ChIJu0c6TmS40qkRkGF5hIbvAAU",
+                "city": "Bluff",
+                "state": "Southland",
+                "post_code": "9814",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/107"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=107"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/64"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=107"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=107"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=107"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 95,
+        "date": "2019-11-16T08:29:34",
+        "date_gmt": "2019-11-16T08:29:34",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=95"
+        },
+        "modified": "2019-12-01T06:17:20",
+        "modified_gmt": "2019-12-01T06:17:20",
+        "slug": "roofed-cows-eatery",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/roofed-cows-eatery/",
+        "title": {
+            "rendered": "Roofed Cows Eatery"
+        },
+        "content": {
+            "rendered": "<div class=\"usp-images-wrap\"><span class=\"usp-image-wrap\"><a href=\"http://welcomedog.test/app/uploads/2019/11/0_krysokot.jpg\" class=\"lightbox\" rel=\"lightbox\" title=\"\"><img id=\"usp-attach-id-101\" class=\"usp-image\" src=\"http://welcomedog.test/app/uploads/2019/11/0_krysokot-150x150.jpg\" width=\"150\" height=\"150\" /></a></span></div><p>Please select the number of guests dining and the required date. Excellence Award for achieving highest culinary standards in Beef and Lamb 2009-2018 Winner of Monteith’s Wild Food Challenge 2009, 2013 Big Pork Breakfast-chef and butcher challenge silver award 2014. Somehow the initial ticket got lost so I opened a new ticket with them and added the last response with details I sent them. About 24 hrs after I set things up with them I still hadn’t had an answer from them.</p>\n<p>Then I did get a reply again to add a phone number and sent some screenshots of the web app we were building. Et voila, the day after so after about 48 hours our account got accepted!</p>\n<p>I’ve copied mail.yml from /all into each environment and added the vault_mail_password variable to each environment’s vault.yml.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Please select the number of guests dining and the required date. Excellence Award for achieving highest culinary standards in Beef and Lamb 2009-2018 Winner of Monteith’s Wild Food Challenge 2009, 2013 Big Pork Breakfast-chef and butcher challenge silver award 2014.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 54,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            14
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Timaru, New Zealand",
+                "lat": -44.3969718,
+                "lng": 171.25497289999998,
+                "zoom": 14,
+                "place_id": "ChIJ78dhY4ljLG0ROZl5hIbvAAU",
+                "city": "Timaru",
+                "state": "Canterbury",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/95"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=95"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/54"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=95"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=95"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=95"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 60,
+        "date": "2019-11-12T07:05:59",
+        "date_gmt": "2019-11-12T07:05:59",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=60"
+        },
+        "modified": "2019-12-01T06:16:48",
+        "modified_gmt": "2019-12-01T06:16:48",
+        "slug": "mission-bay",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/mission-bay/",
+        "title": {
+            "rendered": "Mission Bay"
+        },
+        "content": {
+            "rendered": "<div class=\"usp-images-wrap\"><span class=\"usp-image-wrap\"><a href=\"http://welcomedog.test/app/uploads/2019/11/2019-11-12_5dca57f1ba568_1148575168_5.jpg\" class=\"lightbox\" rel=\"lightbox\" title=\"\"><img id=\"usp-attach-id-61\" class=\"usp-image\" src=\"http://welcomedog.test/app/uploads/2019/11/2019-11-12_5dca57f1ba568_1148575168_5-150x150.jpg\" width=\"150\" height=\"150\" /></a></span></div><p>Wraps any form content with a fieldset element . While creating a form, click the “USP:Fieldset” quicktag to include the opening fieldset, then again to include the closing fieldset.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>Wraps any form content with a fieldset element</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 61,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [
+            10
+        ],
+        "acf": {
+            "dogplace_map": {
+                "address": "Dunedin, New Zealand",
+                "lat": -45.87876050000001,
+                "lng": 170.5027976,
+                "zoom": 14,
+                "place_id": "ChIJPVFfD-DkK6gRQZl5hIbvAAU",
+                "city": "Dunedin",
+                "state": "Otago",
+                "state_short": "OTA",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/60"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=60"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/61"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=60"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=60"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=60"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 53,
+        "date": "2019-11-11T08:34:11",
+        "date_gmt": "2019-11-11T08:34:11",
+        "guid": {
+            "rendered": "http://welcomedog.test/?post_type=dogplace&#038;p=53"
+        },
+        "modified": "2019-12-01T06:17:37",
+        "modified_gmt": "2019-12-01T06:17:37",
+        "slug": "test-place",
+        "status": "publish",
+        "type": "dogplace",
+        "link": "http://welcomedog.test/dogplaces/test-place/",
+        "title": {
+            "rendered": "Test place"
+        },
+        "content": {
+            "rendered": "<div class=\"usp-images-wrap\"><span class=\"usp-image-wrap\"><a href=\"http://welcomedog.test/app/uploads/2019/11/2019-11-11_5dc91cd6f2c32_winter_0050.jpg\" class=\"lightbox\" rel=\"lightbox\" title=\"\"><img id=\"usp-attach-id-54\" class=\"usp-image\" src=\"http://welcomedog.test/app/uploads/2019/11/2019-11-11_5dc91cd6f2c32_winter_0050-150x150.jpg\" width=\"150\" height=\"150\" alt=\"winter valley\" /></a></span></div><p>some beautiful place ok.</p>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>some beautiful place ok.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 54,
+        "parent": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "categories": [],
+        "dogplace-type": [],
+        "acf": {
+            "dogplace_map": {
+                "address": "Gisborne, New Zealand",
+                "lat": -38.662334,
+                "lng": 178.017649,
+                "zoom": 14,
+                "place_id": "ChIJl6ywQZzAZW0RB5miQ2HvAAU",
+                "city": "Gisborne",
+                "state": "Gisborne",
+                "country": "New Zealand",
+                "country_short": "NZ"
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace/53"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/types/dogplace"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/comments?post=53"
+                }
+            ],
+            "wp:featuredmedia": [
+                {
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media/54"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "http://welcomedog.test/wp-json/wp/v2/media?parent=53"
+                }
+            ],
+            "wp:term": [
+                {
+                    "taxonomy": "category",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/categories?post=53"
+                },
+                {
+                    "taxonomy": "dogplace-type",
+                    "embeddable": true,
+                    "href": "http://welcomedog.test/wp-json/wp/v2/dogplace-type?post=53"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]

@@ -9,41 +9,70 @@ const store = new Vuex.Store({
 
   state: {
     categories: [],
+    dogPlaces: [],
   },
 
   getters: {
-    //read from state
     //read ALL categories from state
     allCategories: state => state.categories,
     //read parent categories from state
+
     topLvlCategoryNames: state => state.categories
       .filter(category => category.parent == 0)
       .map(category => category.name),
 
+    allDogPlaces: state => state.dogPlaces,
+
+    allDogPlaceCoordinates: state => {
+      let allDogPlaceCoordinates = [];
+      for (const [, value] of Object.entries(state.dogPlaces)) {
+        allDogPlaceCoordinates.push({
+          id: value.id,
+          position: {
+            lat: value.acf.dogplace_map.lat,
+            lng: value.acf.dogplace_map.lng,
+          },
+        });
+      }
+      return allDogPlaceCoordinates
+    },
+
 
 
     /*
-  doneTodos: state => {
-    return state.todos.filter(todo => todo.done)
-  }
-  */
+doneTodos: state => {
+  return state.todos.filter(todo => todo.done)
+}
+*/
 
   },
 
   mutations: {
     //modify state
-    //put dogplace categories in our state
+    //put dogplace categories and dogplaces in our state
     setCategories(state, categories) {
       state.categories = categories
+    },
+    setDogPlaces(state, dogPlaces) {
+      state.dogPlaces = dogPlaces
     },
   },
 
   actions: {
-    //get dogplace categories from Wordpress
-    getAllCategories({ commit }) {
+    //get categories and dogplaces from Wordpress
+    getAllCategoriesSync({ commit }) {
       axios.get('http://welcomedog.test/wp-json/wp/v2/dogplace-type?per_page=100')
         .then(response => {
           commit('setCategories', response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    getAllDogPlacesSync({ commit }) {
+      axios.get('http://welcomedog.test/wp-json/wp/v2/dogplace?per_page=100')
+        .then(response => {
+          commit('setDogPlaces', response.data)
         })
         .catch(e => {
           console.log(e)
