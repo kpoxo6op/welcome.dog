@@ -11,19 +11,8 @@ import home from './routes/home';
 import aboutUs from './routes/about';
 import githubDemo from './routes/github-demo';
 import map from './routes/map';
-//Vue
-//import Vue from 'vue';
-//import store from './vue/vue2-map/src/store';
-//import * as VueGoogleMaps from 'vue2-google-maps'
-//import AppComponent from './vue/vue2-map/src/components/App.vue'
+import integrated from './routes/integrated';
 
-// Vue.use(VueGoogleMaps, {
-//   load: {
-//     //how do I hide it?
-//     key: 'AIzaSyCkY9AU1X_KFg6YoBa-OhBvOquFj9HpE9g',
-//     libraries: 'places',
-//   },
-// })
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -36,16 +25,9 @@ const routes = new Router({
   githubDemo,
   // full page map
   map,
+  // integrate into WordPress and use dotenv inside the app
+  integrated,
 });
-
-// new Vue({
-//   el: '#map-app',
-//   store,
-//   components: {
-//     app: AppComponent,
-//   },
-//   render: h => h('app'),
-// })
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());

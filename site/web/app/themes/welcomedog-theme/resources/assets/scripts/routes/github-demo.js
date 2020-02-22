@@ -3,7 +3,7 @@ import AppComponent from '../vue/vue2-demo-project/src/App.vue'
 
 export default {
   init() {
-    // JavaScript fired on a page with a body class that CONTAINS github-demo pages
+    // JavaScript fired on a page with a body class that CONTAINS github-demo
     new Vue({
       el: '#app',
       components: {

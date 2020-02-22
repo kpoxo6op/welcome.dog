@@ -1,5 +1,7 @@
 'use strict'; // eslint-disable-line
 
+
+const Dotenv = require('dotenv-webpack'); //https://discourse.roots.io/t/best-practice-to-store-api-keys/17558/3
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanPlugin = require('clean-webpack-plugin');
@@ -158,6 +160,9 @@ let webpackConfig = {
     jquery: 'jQuery',
   },
   plugins: [
+    new Dotenv({
+      path: '../../../../.env',
+    }),
     new CleanPlugin([config.paths.dist], {
       root: config.paths.root,
       verbose: false,
