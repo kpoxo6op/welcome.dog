@@ -11,7 +11,6 @@ import home from './routes/home';
 import aboutUs from './routes/about';
 import githubDemo from './routes/github-demo';
 import map from './routes/map';
-import integrated from './routes/integrated';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -25,8 +24,6 @@ const routes = new Router({
   githubDemo,
   // full page map
   map,
-  // integrate into WordPress and use dotenv inside the app
-  integrated,
 });
 
 // Load Events
