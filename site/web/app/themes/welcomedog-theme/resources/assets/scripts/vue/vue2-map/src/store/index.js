@@ -61,12 +61,13 @@ doneTodos: state => {
   actions: {
     //get categories and dogplaces from Wordpress
     getAllCategoriesSync({ commit }) {
-      console.log('WP_HOME value from .env at /site level - ')
-      console.log(process.env.WP_HOME)
-      //console.log('WP_SITEURL value from .env at /site level - ')
-      //console.log(process.env.WP_SITEURL)
+      const instance = axios.create({
+        baseURL: sageData.ajaxBaseURL, // eslint-disable-line
+      });
+      console.log('using ajaxBaseURL from setup.php - ')
+      console.log(sageData.ajaxBaseURL) // eslint-disable-line
 
-      axios.get(process.env.WP_HOME + '/wp-json/wp/v2/dogplace-type?per_page=100')
+      instance.get('wp-json/wp/v2/dogplace-type?per_page=100')
         .then(response => {
           commit('setCategories', response.data)
         })
@@ -75,7 +76,11 @@ doneTodos: state => {
         })
     },
     getAllDogPlacesSync({ commit }) {
-      axios.get(process.env.WP_HOME + '/wp-json/wp/v2/dogplace?per_page=100')
+      const instance = axios.create({
+        baseURL: sageData.ajaxBaseURL, // eslint-disable-line
+      });
+
+      instance.get('wp-json/wp/v2/dogplace?per_page=100')
         .then(response => {
           commit('setDogPlaces', response.data)
         })

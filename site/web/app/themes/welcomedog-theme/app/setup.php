@@ -17,6 +17,11 @@ add_action('wp_enqueue_scripts', function () {
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
+
+    wp_localize_script('sage/main.js', 'sageData', [
+    'ajaxBaseURL' => trailingslashit( get_home_url() )
+    ]);
+
 }, 100);
 
 /**
