@@ -2,8 +2,10 @@
       <div>
         <h2>This is our map</h2>
         <div class="flex">
-          <div class="px-2 py-2" v-for="topLvlCategory in topLvlCategories" :key="topLvlCategory.id">
-            {{ topLvlCategory }}
+          <div class="p-2" v-for="(value, name) in categoriesParentChild" :key="name.id">
+            <MenuButton
+              v-bind="value"
+            ></MenuButton>
           </div>
         </div>
       </div>
@@ -11,8 +13,12 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import MenuButton from './MenuButton.vue'
 
 export default {
+  components: {
+    MenuButton,
+  },
   data() {
     return {
       errors: [],
@@ -21,7 +27,7 @@ export default {
   
   computed: {
     ...mapGetters({
-      topLvlCategories: 'topLvlCategoryNames',
+      categoriesParentChild: 'allCategoriesParentChild',
     }),
   },
 
@@ -29,6 +35,7 @@ export default {
     this.$store.dispatch('getAllCategoriesSync')
   },
 }
+
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="antialiased">
-    <Filters></Filters>
+    <ButtonMenu></ButtonMenu>
     <GoogleMap></GoogleMap>
   </div>
 </template>
@@ -8,11 +8,11 @@
 <script>
 //register components with the App component
 //App will render them
-import Filters from './Filters.vue'
+import ButtonMenu from './ButtonMenu.vue'
 import GoogleMap from './GoogleMap.vue'
 export default {
   components: {
-    Filters,
+    ButtonMenu,
     GoogleMap,
   },
   data() {

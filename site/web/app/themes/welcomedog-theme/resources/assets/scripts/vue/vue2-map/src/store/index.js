@@ -37,6 +37,33 @@ const store = new Vuex.Store({
       return allDogPlaceCoordinates
     },
 
+    allCategoriesParentChild: state => {
+      let categoriesClone = state.categories.slice()
+      let categoriesSorted = categoriesClone.sort((i, j) => i.parent - j.parent)
+      let allCategoriesParentChild = [];
+      categoriesSorted.reduce((acc, category) => {
+        // create the new object
+        let ctg = {
+          id: category.id,
+          name: category.name,
+          children: [],
+        };
+        // if there is a parent
+        if (category.parent) {
+          // add the current object to the parent
+          acc[category.parent].children.push(ctg);
+        } else {
+          // or add the current object to the root
+          allCategoriesParentChild.push(ctg);
+          ctg['isOpen'] = false
+        }
+        // easy acces to this object
+        acc[category.id] = ctg;
+        return acc;
+      }, []);
+      return allCategoriesParentChild
+    },
+
 
 
     /*
@@ -64,9 +91,6 @@ doneTodos: state => {
       const instance = axios.create({
         baseURL: sageData.ajaxBaseURL, // eslint-disable-line
       });
-      console.log('using ajaxBaseURL from setup.php - ')
-      console.log(sageData.ajaxBaseURL) // eslint-disable-line
-
       instance.get('wp-json/wp/v2/dogplace-type?per_page=100')
         .then(response => {
           commit('setCategories', response.data)
