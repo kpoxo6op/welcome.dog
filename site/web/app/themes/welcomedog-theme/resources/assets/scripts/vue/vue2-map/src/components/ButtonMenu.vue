@@ -6,13 +6,14 @@
             <MenuButton
               v-bind="value"
             ></MenuButton>
+          <button @click="closeCards" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-50 cursor-default z-0"></button>
           </div>
         </div>
       </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import MenuButton from './MenuButton.vue'
 
 export default {
@@ -33,6 +34,12 @@ export default {
 
   created() {
     this.$store.dispatch('getCategories')
+  },
+
+  methods: {
+    ...mapActions([
+      'closeCards',
+    ]),
   },
 }
 

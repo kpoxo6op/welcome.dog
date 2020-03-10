@@ -37,7 +37,7 @@ const store = new Vuex.Store({
     setDogPlaces(state, dogPlaces) {
       state.dogPlaces = dogPlaces
     },
-    openCard(state, clickedItemId) {
+    toggleCard(state, clickedItemId) {
       state.categories = state.categories.map(el => {
         if (el.id === clickedItemId) {
           return {
@@ -50,12 +50,23 @@ const store = new Vuex.Store({
           isOpen: false,
         }
       })
-    }, //openCard mutation end
+    }, //toggleCard mutation end
+    closeCards(state) {
+      state.categories = state.categories.map(el => {
+        return {
+          ...el,
+          isOpen: false,
+        }
+      })
+    }, //closeCards mutation end
   }, //mutations end
 
   actions: {
-    openCard({ commit }, id) {
-      commit('openCard', id)
+    toggleCard({ commit }, id) {
+      commit('toggleCard', id)
+    },
+    closeCards({ commit }) {
+      commit('closeCards')
     },
     //TODO: abstract out axios API
     getCategories({ commit }) {
@@ -100,10 +111,6 @@ const store = new Vuex.Store({
         .catch(e => {
           console.log(e)
         })
-    },
-
-    openCardAction({ commit }, id) {
-      commit('openCard', id)
     },
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <button @click="openCard(id)" class="relative z-10">
+      <button @click="toggleCard(id)" class="relative z-10">
         {{ name }}
       </button>
     </div>
@@ -28,7 +28,7 @@ import CheckboxMenu from './CheckboxMenu.vue'
 
     methods: {
       ...mapActions([
-        'openCard',
+        'toggleCard',
       ]),
     },
   }
