@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <button @click="isOpen = !isOpen" class="relative z-10">
+      <button @click="openCard(id)" class="relative z-10">
         {{ name }}
       </button>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import CheckboxMenu from './CheckboxMenu.vue'
   export default {
     components: {
@@ -25,31 +26,10 @@ import CheckboxMenu from './CheckboxMenu.vue'
       isOpen: Boolean,
     },
 
-    data() {
-      return {
-        childrenHardcoded: [
-          {
-            'id': 19,
-            'name': 'Food',
-            'children': [],
-          },
-          {
-            'id': 17,
-            'name': 'Grooming',
-            'children': [],
-          },
-          {
-            'id': 20,
-            'name': 'Kennel',
-            'children': [],
-          },
-          {
-            'id': 18,
-            'name': 'Vets',
-            'children': [],
-          },
-        ],
-      }
+    methods: {
+      ...mapActions([
+        'openCard',
+      ]),
     },
   }
 </script>
