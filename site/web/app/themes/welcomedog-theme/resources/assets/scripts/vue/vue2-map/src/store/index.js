@@ -57,7 +57,7 @@ const store = new Vuex.Store({
     openCard({ commit }, id) {
       commit('openCard', id)
     },
-    //TODO: abstract out axios API
+    //TODO: abstract out axios API 
     getCategories({ commit }) {
       const instance = axios.create({
         baseURL: sageData.ajaxBaseURL, // eslint-disable-line
