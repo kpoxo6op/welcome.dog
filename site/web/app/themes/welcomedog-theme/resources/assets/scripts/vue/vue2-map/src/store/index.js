@@ -60,7 +60,7 @@ const store = new Vuex.Store({
     //TODO: abstract out axios API
     getCategories({ commit }) {
       const instance = axios.create({
-        baseURL: sageData.ajaxBaseURL, // eslint-disable-line
+        baseURL: sageData.ajaxBaseURL, // eslint-disable-line 
       })
 
       instance.get('wp-json/wp/v2/dogplace-type?per_page=100')
