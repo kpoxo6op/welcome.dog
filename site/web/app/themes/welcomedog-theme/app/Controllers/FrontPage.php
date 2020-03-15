@@ -23,6 +23,10 @@ class FrontPage extends Controller {
                 'permalink' => apply_filters('permalink', get_permalink($post)),
                 'term_link' => get_term_link(current(get_the_terms($post->ID, 'dogplace-type'))),
                 'type' => (current(get_the_terms($post->ID, 'dogplace-type')))->name,
+                /*
+                lines above produce this error:
+                current() expects parameter 1 to be array, bool given
+                */
             ];
         }, $raw_posts);
     }

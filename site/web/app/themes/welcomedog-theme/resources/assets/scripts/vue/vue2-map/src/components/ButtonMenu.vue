@@ -6,7 +6,8 @@
             <MenuButton
               v-bind="value"
             ></MenuButton>
-          <button @click="closeCards" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-50 cursor-default z-0"></button>
+            <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full cursor-default"></button>
+            <!-- <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full bg-black opacity-25 cursor-default"></button> -->
           </div>
         </div>
       </div>

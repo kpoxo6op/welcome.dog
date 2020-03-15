@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   state: {
     categories: [],
     dogPlaces: [],
+    filters: [],
   },
 
   getters: {
@@ -31,9 +32,14 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    setFilters(state, filters) {
+      state.filters = filters
+    },
+
     setCategories(state, categories) {
       state.categories = categories
     },
+
     setDogPlaces(state, dogPlaces) {
       state.dogPlaces = dogPlaces
     },
@@ -62,6 +68,11 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
+    setFilters({ commit }, checkboxes) {
+      console.log('update filters')
+      console.log('do I need to create another store object? Update in categories?')
+      commit('setFilters', checkboxes)
+    },
     toggleCard({ commit }, id) {
       commit('toggleCard', id)
     },
@@ -88,6 +99,7 @@ const store = new Vuex.Store({
               children: [],
             }
             if (category.parent) {
+              ctg['isChecked'] = false
               acc[category.parent].children.push(ctg)
             } else {
               categoriesParentChild.push(ctg)
@@ -99,12 +111,17 @@ const store = new Vuex.Store({
           commit('setCategories', categoriesParentChild)
         })
     },
-    getAllDogPlacesSync({ commit }) {
+    getDogPlaces({ commit }, ids) {
       const instance = axios.create({
         baseURL: sageData.ajaxBaseURL, // eslint-disable-line
       })
-
-      instance.get('wp-json/wp/v2/dogplace?per_page=100')
+      /*
+      17 - grooming, 22 - shopping
+      instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
+      */
+      console.log('add these IDs to URL as parameters - ')
+      console.log(ids)
+      instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=')
         .then(response => {
           commit('setDogPlaces', response.data)
         })

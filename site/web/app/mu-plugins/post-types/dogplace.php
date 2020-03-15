@@ -10,7 +10,7 @@ add_action( 'init', function() {
       'excerpt',
       'comments',
     ],
-    'taxonomies'  => array( 'category' ),
+    'taxonomies' => array( 'dogplace-type' ),
     'show_in_rest' => true,
   ]);
 

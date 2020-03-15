@@ -3,7 +3,7 @@
     <GmapMap
       :center='center'
       :zoom='10'
-      style='width:100%;  height: 400px;' 
+      style='height: 400px;'
     >
 
       <GmapMarker
@@ -42,7 +42,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('getAllDogPlacesSync')
+    this.$store.dispatch('getDogPlaces')
   },
 
   mounted() {
