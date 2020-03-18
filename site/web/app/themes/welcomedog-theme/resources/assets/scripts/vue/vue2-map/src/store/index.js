@@ -10,9 +10,13 @@ const store = new Vuex.Store({
   state: {
     categories: [],
     dogPlaces: [],
-    checkboxes: [], //Object[1]
-    checkboxesHardcodedArrayOfObject: [ //Array[1]
-      { //0: Object
+    //Object[1]
+    checkboxes: [],
+    //Array works, this is what I want to pass
+    //Array[1]
+    checkboxesHardcodedArrayOfObject: [
+      //0: Object
+      {
         'id': 16,
         'name': 'Commercial',
         'isOpen': true,
@@ -44,7 +48,8 @@ const store = new Vuex.Store({
         ],
       },
     ],
-    checkboxesHardcodedWhatIsIt: {
+    //Object - this is the same Object as I actually pass, this does not work (error below)
+    checkboxesHardcodedObject: {
       'id': 16,
       'name': 'Commercial',
       'isOpen': true,
@@ -98,7 +103,10 @@ const store = new Vuex.Store({
   mutations: {
     updateCheckboxes(state, checkboxes) {
       state.checkboxes = checkboxes
+      //works with Array of Object
       state.categories = state.categories.map(obj => state.checkboxesHardcodedArrayOfObject.find(o => o.id === obj.id) || obj);
+      //Error in v-on handler: "TypeError: state.checkboxesHardcodedObject.find is not a function"
+      //state.categories = state.categories.map(obj => state.checkboxesHardcodedObject.find(o => o.id === obj.id) || obj);
     },
 
     setCategories(state, categories) {
