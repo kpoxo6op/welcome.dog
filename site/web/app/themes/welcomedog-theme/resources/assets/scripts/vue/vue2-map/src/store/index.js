@@ -10,7 +10,71 @@ const store = new Vuex.Store({
   state: {
     categories: [],
     dogPlaces: [],
-    filters: [],
+    checkboxes: [], //Object[1]
+    checkboxesHardcodedArrayOfObject: [ //Array[1]
+      { //0: Object
+        'id': 16,
+        'name': 'Commercial',
+        'isOpen': true,
+        'children': [
+          {
+            'id': 19,
+            'name': 'Food',
+            'children': [],
+            'isChecked': false,
+          },
+          {
+            'id': 17,
+            'name': 'Grooming',
+            'children': [],
+            'isChecked': true,
+          },
+          {
+            'id': 20,
+            'name': 'Kennel',
+            'children': [],
+            'isChecked': true,
+          },
+          {
+            'id': 18,
+            'name': 'Vets',
+            'children': [],
+            'isChec,ked': false,
+          },
+        ],
+      },
+    ],
+    checkboxesHardcodedWhatIsIt: {
+      'id': 16,
+      'name': 'Commercial',
+      'isOpen': true,
+      'children': [
+        {
+          'id': 19,
+          'name': 'Food',
+          'children': [],
+          'isChecked': false,
+        },
+        {
+          'id': 17,
+          'name': 'Grooming',
+          'children': [],
+          'isChecked': true,
+        },
+        {
+          'id': 20,
+          'name': 'Kennel',
+          'children': [],
+          'isChecked': true,
+        },
+        {
+          'id': 18,
+          'name': 'Vets',
+          'children': [],
+          'isChec,ked': false,
+        },
+      ],
+    },
   },
 
   getters: {
@@ -32,8 +96,9 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    setFilters(state, filters) {
-      state.filters = filters
+    updateCheckboxes(state, checkboxes) {
+      state.checkboxes = checkboxes
+      state.categories = state.categories.map(obj => state.checkboxesHardcodedArrayOfObject.find(o => o.id === obj.id) || obj);
     },
 
     setCategories(state, categories) {
@@ -68,10 +133,8 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
-    setFilters({ commit }, checkboxes) {
-      console.log('update filters')
-      console.log('do I need to create another store object? Update in categories?')
-      commit('setFilters', checkboxes)
+    updateCheckboxes({ commit }, checkboxes) {
+      commit('updateCheckboxes', checkboxes)
     },
     toggleCard({ commit }, id) {
       commit('toggleCard', id)

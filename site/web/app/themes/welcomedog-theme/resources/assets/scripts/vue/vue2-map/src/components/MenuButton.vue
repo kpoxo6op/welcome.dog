@@ -5,18 +5,18 @@
         {{ name }}
       </button>
     </div>
-    <CheckboxMenu v-if="isOpen"
-      v-bind:checkboxProps=children
-    ></CheckboxMenu>
+    <CheckboxCard v-if="isOpen"
+      v-bind:checkboxProps=$props
+    ></CheckboxCard>
   </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
-import CheckboxMenu from './CheckboxMenu.vue'
+import CheckboxCard from './CheckboxCard.vue'
   export default {
     components: {
-      CheckboxMenu,
+      CheckboxCard,
     },
 
     props: {

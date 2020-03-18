@@ -1,6 +1,6 @@
 <template>
   <div class="antialiased">
-    <ButtonMenu></ButtonMenu>
+    <ButtonRow></ButtonRow>
     <GoogleMap></GoogleMap>
   </div>
 </template>
@@ -8,11 +8,11 @@
 <script>
 //register components with the App component
 //App will render them
-import ButtonMenu from './ButtonMenu.vue'
+import ButtonRow from './ButtonRow.vue'
 import GoogleMap from './GoogleMap.vue'
 export default {
   components: {
-    ButtonMenu,
+    ButtonRow,
     GoogleMap,
   },
   data() {
