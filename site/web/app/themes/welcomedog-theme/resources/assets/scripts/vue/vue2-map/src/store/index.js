@@ -5,7 +5,9 @@ import Api from './api'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+  //this does not set it to true in Dev
+  //strict: process.env.NODE_ENV !== 'production',
+  strict: true,
 
   state: {
     categories: [],
