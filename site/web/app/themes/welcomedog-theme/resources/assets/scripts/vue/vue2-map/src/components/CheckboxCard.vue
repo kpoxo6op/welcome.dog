@@ -12,7 +12,8 @@
     </div>
     <div class="flex">
       <button class="px-2" @click="clearCheckboxes">Clear</button>
-      <button class="px-2" @click="updateCheckboxes(checkboxes)">Save</button>
+      <!--[wrap into object] -->
+      <button class="px-2" @click="updateCheckboxes([checkboxes])">Save</button>
     </div>
   </div>
 </template>
@@ -21,9 +22,9 @@
   import {mapActions } from 'vuex';
   export default {
     props: {
-      checkboxProps: {
-        type: Object, //Invalid prop: type check failed for prop "checkboxProps". Expected Array, got Object 
-        //type: Array, Invalid prop: type check failed for prop "checkboxProps". Expected Array, got Object 
+      checkbox: {
+        type: Object,
+        //type: Array, Invalid prop: type check failed for prop "checkboxProps". Expected Array, got Object
         default: () =>
         ({
           id: null,
@@ -43,7 +44,7 @@
     data() {
       return {
          // deep clone https://www.codementor.io/@junedlanja/copy-javascript-object-right-way-ohppc777d
-         checkboxes: JSON.parse(JSON.stringify(this.checkboxProps)),
+         checkboxes: JSON.parse(JSON.stringify(this.checkbox)),
       }
     },
 

@@ -4,7 +4,7 @@
         <div class="flex">
           <div class="p-2" v-for="(value, name) in categories" :key="name.id">
             <MenuButton
-              v-bind="value"
+              v-bind:button="value"
             ></MenuButton>
             <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full cursor-default"></button>
             <!-- <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full bg-black opacity-25 cursor-default"></button> -->

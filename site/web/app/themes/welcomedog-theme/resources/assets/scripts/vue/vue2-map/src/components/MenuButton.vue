@@ -1,12 +1,12 @@
 <template>
   <div>
     <div>
-      <button @click="toggleCard(id)" class="relative z-100010 mx-2 border border-gray-900 rounded-full w-full text-gray-900">
-        {{ name }}
+      <button @click="toggleCard(button.id)" class="relative z-100010 mx-2 border border-gray-900 rounded-full w-full text-gray-900">
+        {{ button.name }}
       </button>
     </div>
-    <CheckboxCard v-if="isOpen"
-      v-bind:checkboxProps=$props
+    <CheckboxCard v-if="button.isOpen"
+      v-bind:checkbox=button
     ></CheckboxCard>
   </div>
 </template>
@@ -18,14 +18,26 @@ import CheckboxCard from './CheckboxCard.vue'
     components: {
       CheckboxCard,
     },
-
+    //Object
     props: {
-      id: Number,
-      name: String,
-      children: Array,
-      isOpen: Boolean,
+      button: {
+        type: Object,
+        default: () =>
+        ({
+          id: null,
+          name: 'Unknown',
+          children:
+            [{
+            id: null,
+            name: 'Unknown',
+            children: [],
+            isChecked: false,
+          }],
+          isOpen: false,
+        }),
+        required: true,
+      },
     },
-
     methods: {
       ...mapActions([
         'toggleCard',

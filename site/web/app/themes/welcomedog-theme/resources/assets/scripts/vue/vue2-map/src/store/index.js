@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import Api from './api'
 
 Vue.use(Vuex)
 
@@ -10,76 +10,6 @@ const store = new Vuex.Store({
   state: {
     categories: [],
     dogPlaces: [],
-    //Object[1]
-    checkboxes: [],
-    //Array works, this is what I want to pass
-    //Array[1]
-    checkboxesHardcodedArrayOfObject: [
-      //0: Object
-      {
-        'id': 16,
-        'name': 'Commercial',
-        'isOpen': true,
-        'children': [
-          {
-            'id': 19,
-            'name': 'Food',
-            'children': [],
-            'isChecked': false,
-          },
-          {
-            'id': 17,
-            'name': 'Grooming',
-            'children': [],
-            'isChecked': true,
-          },
-          {
-            'id': 20,
-            'name': 'Kennel',
-            'children': [],
-            'isChecked': true,
-          },
-          {
-            'id': 18,
-            'name': 'Vets',
-            'children': [],
-            'isChec,ked': false,
-          },
-        ],
-      },
-    ],
-    //Object - this is the same Object as I actually pass, this does not work (error below)
-    checkboxesHardcodedObject: {
-      'id': 16,
-      'name': 'Commercial',
-      'isOpen': true,
-      'children': [
-        {
-          'id': 19,
-          'name': 'Food',
-          'children': [],
-          'isChecked': false,
-        },
-        {
-          'id': 17,
-          'name': 'Grooming',
-          'children': [],
-          'isChecked': true,
-        },
-        {
-          'id': 20,
-          'name': 'Kennel',
-          'children': [],
-          'isChecked': true,
-        },
-        {
-          'id': 18,
-          'name': 'Vets',
-          'children': [],
-          'isChec,ked': false,
-        },
-      ],
-    },
   },
 
   getters: {
@@ -98,15 +28,23 @@ const store = new Vuex.Store({
       }
       return allDogPlaceCoordinates
     },
+    checkedCategoryIds: state => state.categories
+      //dive into children
+      .map(topc =>
+        topc.children
+          //find checked checkboxes
+          .filter(el => el.isChecked === true)
+          //select Ids
+          .map(el => el.id)
+      )
+      .flat()
+      .toString(),
   },
 
   mutations: {
-    updateCheckboxes(state, checkboxes) {
+    updateCategoryCheckboxes(state, checkboxes) {
       state.checkboxes = checkboxes
-      //works with Array of Object
-      state.categories = state.categories.map(obj => state.checkboxesHardcodedArrayOfObject.find(o => o.id === obj.id) || obj);
-      //Error in v-on handler: "TypeError: state.checkboxesHardcodedObject.find is not a function"
-      //state.categories = state.categories.map(obj => state.checkboxesHardcodedObject.find(o => o.id === obj.id) || obj);
+      state.categories = state.categories.map(obj => checkboxes.find(o => o.id === obj.id) || obj);
     },
 
     setCategories(state, categories) {
@@ -141,8 +79,10 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
-    updateCheckboxes({ commit }, checkboxes) {
-      commit('updateCheckboxes', checkboxes)
+    updateCheckboxes({ commit, getters, dispatch }, checkboxes) {
+      commit('updateCategoryCheckboxes', checkboxes)
+      let ids = getters.checkedCategoryIds
+      dispatch('getDogPlaces', ids)
     },
     toggleCard({ commit }, id) {
       commit('toggleCard', id)
@@ -152,11 +92,7 @@ const store = new Vuex.Store({
     },
     //TODO: abstract out axios API
     getCategories({ commit }) {
-      const instance = axios.create({
-        baseURL: sageData.ajaxBaseURL, // eslint-disable-line 
-      })
-
-      instance.get('wp-json/wp/v2/dogplace-type?per_page=100')
+      Api().get('/dogplace-type?per_page=100')
         .then(response => {
           const categoriesFlat = response.data
           const categoriesSorted = categoriesFlat.sort(
@@ -183,16 +119,18 @@ const store = new Vuex.Store({
         })
     },
     getDogPlaces({ commit }, ids) {
-      const instance = axios.create({
-        baseURL: sageData.ajaxBaseURL, // eslint-disable-line
-      })
       /*
       17 - grooming, 22 - shopping
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       */
       console.log('add these IDs to URL as parameters - ')
       console.log(ids)
-      instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=')
+      Api().get('/dogplace', {
+        params: {
+          'per_page': '100',
+          'dogplace-type': ids,
+        },
+      })
         .then(response => {
           commit('setDogPlaces', response.data)
         })
