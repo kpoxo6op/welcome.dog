@@ -13,7 +13,7 @@
     <div class="flex">
       <button class="px-2" @click="clearCheckboxes">Clear</button>
       <!--[wrap into object] -->
-      <button class="px-2" @click="updateCheckboxes([checkboxes])">Save</button>
+      <button class="px-2" @click="updateMap([checkboxes])">Save</button>
     </div>
   </div>
 </template>
@@ -58,11 +58,15 @@
     methods: {
       ...mapActions([
         'getDogPlaces',
-        'updateCheckboxes',
+        'updateMap',
       ]),
-
+      //Error: [vuex] do not mutate vuex store state outside mutation handlers.
+      //check, click on save, clear, check console
+      //why this happens?
+      //update checkboxes at the store?
+      //don't bother for now? I don't make progress if I get stuck with this small issue
       clearCheckboxes: function () {
-        this.checkboxes = this.checkboxes.map(el => {
+        this.checkboxes.children = this.checkboxes.children.map(el => {
           return {
             ...el,
             isChecked: false,

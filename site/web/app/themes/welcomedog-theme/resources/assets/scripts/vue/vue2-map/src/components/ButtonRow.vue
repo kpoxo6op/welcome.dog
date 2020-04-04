@@ -1,14 +1,15 @@
 <template>
       <div>
-        <h2>This is our map</h2>
-        <div class="flex">
-          <div class="p-2" v-for="(value, name) in categories" :key="name.id">
+        <h2>Map</h2>
+        <button @click="filterOpen = !filterOpen" type="button" class="sm:hidden">Filters</button>
+        <div class="md:flex">
+          <nav :class="filterOpen ? 'block' : 'hidden'" class="md:p-2" v-for="(value, name) in categories" :key="name.id">
             <MenuButton
               v-bind:button="value"
             ></MenuButton>
             <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full cursor-default"></button>
             <!-- <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed z-100000 inset-0 h-full w-full bg-black opacity-25 cursor-default"></button> -->
-          </div>
+          </nav>
         </div>
       </div>
 </template>
@@ -24,6 +25,7 @@ export default {
   data() {
     return {
       errors: [],
+      filterOpen: false,
     }
   },
   

@@ -45,10 +45,9 @@ const store = new Vuex.Store({
 
   mutations: {
     updateCategoryCheckboxes(state, checkboxes) {
-      state.checkboxes = checkboxes
+      //state.checkboxes = checkboxes
       state.categories = state.categories.map(obj => checkboxes.find(o => o.id === obj.id) || obj);
     },
-
     setCategories(state, categories) {
       state.categories = categories
     },
@@ -81,7 +80,7 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
-    updateCheckboxes({ commit, getters, dispatch }, checkboxes) {
+    updateMap({ commit, getters, dispatch }, checkboxes) {
       commit('updateCategoryCheckboxes', checkboxes)
       let ids = getters.checkedCategoryIds
       dispatch('getDogPlaces', ids)
