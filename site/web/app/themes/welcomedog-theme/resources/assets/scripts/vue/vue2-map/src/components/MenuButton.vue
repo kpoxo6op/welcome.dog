@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <button @click="toggleCard(button.id)" class="relative z-100010 mx-2 border border-gray-900 rounded-full w-full">
+      <button @click="toggleCard(button.id)" class="relative z-100010 md:mx-2 md:border md:border-gray-900 md:rounded-full w-full">
         {{ button.name }}
       </button>
     </div>

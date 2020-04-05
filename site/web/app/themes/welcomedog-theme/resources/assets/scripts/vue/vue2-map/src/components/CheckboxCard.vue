@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute z-100010 border-2 rounded bg-white">
+  <div class="relative md:absolute z-100040 rounded">
     <div v-for="(checkbox, index) in checkboxes.children" :key="checkbox.id">
       <input
         type="checkbox"
