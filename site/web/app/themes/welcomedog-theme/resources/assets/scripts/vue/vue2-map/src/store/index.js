@@ -12,6 +12,7 @@ const store = new Vuex.Store({
   state: {
     categories: [],
     dogPlaces: [],
+    markedCheckboxIds: [],
   },
 
   getters: {
@@ -44,10 +45,33 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    updateCategoryCheckboxes(state, checkboxes) {
-      //state.checkboxes = checkboxes
-      state.categories = state.categories.map(obj => checkboxes.find(o => o.id === obj.id) || obj);
+
+    addToChecked(state, checkboxId) {
+      state.markedCheckboxIds.push(checkboxId)
     },
+
+    removeFromChecked(state, checkboxId) {
+      state.markedCheckboxIds.pop(checkboxId)
+    },
+
+    clearAllCheckboxes(state) {
+      state.markedCheckboxIds = []
+    },
+
+    clearCheckboxesByCardId(state, checkboxCardId) {
+
+      console.log('mutation checkboxCardId - ')
+      console.log(checkboxCardId)
+
+      let cardCheckboxIds = state.categories
+        .filter(el => el.id === checkboxCardId)
+        .map(el => el.children.map(el => el.id))
+        .flat();
+
+      state.markedCheckboxIds = state.markedCheckboxIds
+        .filter(el => !cardCheckboxIds.includes(el));
+    },
+
     setCategories(state, categories) {
       state.categories = categories
     },
@@ -68,7 +92,7 @@ const store = new Vuex.Store({
           isOpen: false,
         }
       })
-    }, //toggleCard mutation end
+    },
     closeCards(state) {
       state.categories = state.categories.map(el => {
         return {
@@ -80,14 +104,25 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
-    updateMap({ commit, getters, dispatch }, checkboxes) {
-      commit('updateCategoryCheckboxes', checkboxes)
-      let ids = getters.checkedCategoryIds
-      dispatch('getDogPlaces', ids)
+
+    clearAllCheckboxesAction({ commit }) {
+      commit('clearAllCheckboxes')
     },
+
+    clearCheckboxByCardIdAction({ commit }, checkboxCardId) {
+      console.log('action checkboxCardId - ')
+      console.log(checkboxCardId)
+      commit('clearCheckboxesByCardId', checkboxCardId)
+    },
+
+    updateCategoryCheckboxAction({ commit }, checkbox) {
+      commit('toggleCheckbox', checkbox)
+    },
+
     toggleCard({ commit }, id) {
       commit('toggleCard', id)
     },
+
     closeCards({ commit }) {
       commit('closeCards')
     },
@@ -107,7 +142,6 @@ const store = new Vuex.Store({
               children: [],
             }
             if (category.parent) {
-              ctg['isChecked'] = false
               acc[category.parent].children.push(ctg)
             } else {
               categoriesParentChild.push(ctg)
@@ -119,13 +153,12 @@ const store = new Vuex.Store({
           commit('setCategories', categoriesParentChild)
         })
     },
-    getDogPlaces({ commit }, ids) {
+    getDogPlaces({ state, commit }) {
       /*
       17 - grooming, 22 - shopping
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       */
-      console.log('add these IDs to URL as parameters - ')
-      console.log(ids)
+      let ids = state.markedCheckboxIds.toString()
       Api().get('/dogplace', {
         params: {
           'per_page': '100',

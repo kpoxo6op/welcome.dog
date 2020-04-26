@@ -1,22 +1,23 @@
 <template>
   <div>
-    <button @click="toggleCard(button.id)" class="relative z-100010 text-left sm:text-center sm:mx-2 sm:border sm:border-gray-900 sm:rounded-full w-full">
-      {{ button.name }}
-    </button>
-    <CheckboxCard v-if="button.isOpen"
+    <div>
+      <button class="relative z-100010 text-left md:text-center md:mx-2 md:border md:border-gray-900 md:rounded-full w-full">
+        {{ button.name }}
+      </button>
+    </div>
+    <CheckboxCardMobile
       v-bind:checkboxProps=button
-    ></CheckboxCard>
+    ></CheckboxCardMobile>
   </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
-import CheckboxCard from './CheckboxCard.vue'
+import CheckboxCardMobile from './CheckboxCardMobile.vue'
   export default {
     components: {
-      CheckboxCard,
+      CheckboxCardMobile,
     },
-    //TODO: use computed properties
     props: {
       button: {
         type: Object,
@@ -35,11 +36,6 @@ import CheckboxCard from './CheckboxCard.vue'
         }),
         required: true,
       },
-    },
-    methods: {
-      ...mapActions([
-        'toggleCard',
-      ]),
     },
   }
 </script>

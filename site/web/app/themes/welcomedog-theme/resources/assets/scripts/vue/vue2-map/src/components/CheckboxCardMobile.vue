@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute z-100040 rounded bg-white p-4 border">
+  <div class="relative md:absolute z-100040 rounded">
     <!--
       TODO:
       Error: "[vuex] do not mutate vuex store state outside mutation handlers."
@@ -11,15 +11,10 @@
         <CheckboxToggle :checkbox="checkbox"></CheckboxToggle>
       </div>
     </form>
-    <div class="flex">
-      <button class="px-2" @click="clearCheckboxByCardIdAction(checkboxProps.id)">Clear</button>
-      <button class="px-2" @click="getDogPlaces">Save</button>
-    </div>
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
   import CheckboxToggle from './CheckboxToggle.vue';
   export default {
     components: {
@@ -42,12 +37,6 @@
           isOpen: false,
         }),
       },
-    },
-    methods: {
-      ...mapActions([
-        'getDogPlaces',
-        'clearCheckboxByCardIdAction',
-      ]),
     },
   }
 </script>
