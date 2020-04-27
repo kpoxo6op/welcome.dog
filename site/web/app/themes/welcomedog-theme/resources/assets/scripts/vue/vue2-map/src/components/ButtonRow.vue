@@ -96,7 +96,6 @@ export default {
 
     closeFilter() {
       this.filterOpen = false
-      this.$store.dispatch('clearAllCheckboxesAction')
     },
   },
 }

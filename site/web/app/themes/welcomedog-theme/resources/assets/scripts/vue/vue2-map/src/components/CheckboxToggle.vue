@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <input type='checkbox'
-      :name="checkbox.name"
-      :id="checkbox.id"
-      :value="checkbox.value"
-      v-model="value"
-    >
-    <label :for="checkbox.id">{{ checkbox.name }}</label>
+  <div class="mt-1">
+    <label :for="checkbox.id">
+      <input type='checkbox' class='form-checkbox h-8 w-8'
+        :name="checkbox.name"
+        :id="checkbox.id"
+        :value="checkbox.value"
+        v-model="value"
+      >
+      {{ checkbox.name }}
+    </label>
   </div>
 </template>
 

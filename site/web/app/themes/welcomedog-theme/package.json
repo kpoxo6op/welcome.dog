@@ -37,6 +37,7 @@
     "node": ">= 8.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
     "autoprefixer": "~8.2.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
