@@ -48,7 +48,14 @@ const globalStyles = ({ addBase, config }) => {
 /**
  * Configuration
  */
+const { PWD } = process.env;
 module.exports = {
+  purge: [
+    `${PWD}/app/**/*.php`,
+    `${PWD}/resources/views/**/*.php`,
+    `${PWD}/resources/assets/scripts/**/*.js`,
+    `${PWD}/resources/assets/scripts/vue/vue2-map/src/**/*.vue`,
+  ],
   prefix: '',
   important: false,
   separator: ':',

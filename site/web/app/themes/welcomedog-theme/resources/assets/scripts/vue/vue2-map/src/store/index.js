@@ -42,6 +42,10 @@ const store = new Vuex.Store({
       )
       .flat()
       .toString(),
+
+    someCheckboxesMarked: state => {
+      return state.markedCheckboxIds && state.markedCheckboxIds.length
+    },
   },
 
   mutations: {
@@ -51,7 +55,11 @@ const store = new Vuex.Store({
     },
 
     removeFromChecked(state, checkboxId) {
-      state.markedCheckboxIds.pop(checkboxId)
+      //console.log('store uncheck ' + checkboxId)
+      const index = state.markedCheckboxIds.indexOf(checkboxId);
+      if (index !== -1) {
+        state.markedCheckboxIds.splice(index, 1);
+      }
     },
 
     clearAllCheckboxes(state) {

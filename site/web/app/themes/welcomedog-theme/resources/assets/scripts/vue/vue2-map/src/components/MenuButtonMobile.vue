@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
 import CheckboxCardMobile from './CheckboxCardMobile.vue'
   export default {
     components: {
