@@ -48,6 +48,7 @@ const globalStyles = ({ addBase, config }) => {
 /**
  * Configuration
  */
+//https://discourse.roots.io/t/purgecss-removing-some-tailwind-css-utilities-classes-e-g-w-1-3/18158/7
 const { PWD } = process.env;
 module.exports = {
   purge: [
