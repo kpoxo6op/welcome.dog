@@ -7,38 +7,38 @@
         <!-- lg:hidden min-width: 1024px -->
         <!-- xl:hidden min-width: 1280px -->
         <div class="sm:hidden">
-          <div class="text-center mt-2">
-            <button @click="filterOpen = !filterOpen" type="button" class="text-center border border-gray-900 rounded-full px-2 text-2xl">Filters</button>
+          <div class="mt-2 text-center">
+            <button @click="filterOpen = !filterOpen" type="button" class="px-2 text-2xl text-center border border-gray-900 rounded-full">Filters</button>
           </div>
           <transition
-            enter-active-class="transition ease-out duration-100 transform"
-            enter-class="opacity-0 scale-95"
-            enter-to-class="opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75 transform"
-            leave-class="opacity-100 scale-100"
-            leave-to-class="opacity-0 scale-95"
+            enter-active-class="transition duration-100 ease-out transform"
+            enter-class="scale-95 opacity-0"
+            enter-to-class="scale-100 opacity-100"
+            leave-active-class="transition duration-75 ease-in transform"
+            leave-class="scale-100 opacity-100"
+            leave-to-class="scale-95 opacity-0"
           >
-            <div v-show="filterOpen" class="fixed inset-0 w-full h-auto bg-white overflow-auto z-100000 flex flex-col items-center md:static">
-              <div class="fixed w-full z-100050 bg-white h-16">
-                <div class="flex items-baseline text-2xl mt-4">
+            <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100000 md:static">
+              <div class="fixed w-full h-16 bg-white z-100050">
+                <div class="flex items-baseline mt-4 text-2xl">
                   <div class="w-1/3">
                      <button class="w-full pl-8 text-left" @click="closeFilter">X</button>
                   </div>
                   <div class="w-1/3 text-center">
-                    <h6 class="text-gray-900 font-semibold">Filters</h6>
+                    <h6 class="font-semibold text-gray-900">Filters</h6>
                   </div>
                   <div class="w-1/3 text-right">
                     <button :class="{ 'text-gray-900': someCheckboxesMarked }" class="pr-8 text-gray-500" @click="clearAllCheckboxesAction">Clear all</button>
                   </div>
                 </div>
-                <hr class="border-gray-500 mt-2 mx-4">
+                <hr class="mx-4 mt-2 border-gray-500">
               </div>
-              <div class="min-w-1/3 mt-16">
+              <div class="mt-16 min-w-1/3">
                 <div class="mt-4 md:p-2" v-for="(value, name) in categories" :key="name.id">
                   <MenuButtonMobile
                     v-bind:button="value"
                   ></MenuButtonMobile>
-                  <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 h-full w-full cursor-default"></button>
+                  <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full cursor-default"></button>
                 </div>
               </div>
               <div class="inset-x-0 bottom-0 text-center">
@@ -58,7 +58,7 @@
             <MenuButton
               v-bind:button="value"
             ></MenuButton>
-            <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 h-full w-full cursor-default"></button>
+            <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full cursor-default"></button>
           </div>
         </div>
       </div>
