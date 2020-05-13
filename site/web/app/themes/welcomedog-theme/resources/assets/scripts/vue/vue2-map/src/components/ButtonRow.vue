@@ -8,7 +8,7 @@
         <!-- xl:hidden min-width: 1280px -->
         <div class="sm:hidden">
           <div class="mt-2 text-center">
-            <button @click="filterOpen = !filterOpen" type="button" class="px-2 text-2xl text-center border border-gray-900 rounded-full">Filters</button>
+            <button @click="filterOpen = !filterOpen" type="button" class="px-2 text-xl text-center border border-gray-900 rounded-full">Filters</button>
           </div>
           <transition
             enter-active-class="transition duration-100 ease-out transform"
@@ -28,7 +28,7 @@
                     <h6 class="font-semibold text-gray-900">Filters</h6>
                   </div>
                   <div class="w-1/3 text-right">
-                    <button :class="{ 'text-gray-900': someCheckboxesMarked }" class="pr-8 text-gray-500" @click="clearAllCheckboxesAction">Clear all</button>
+                    <button :class="{ 'text-gray-900': someCheckboxesMarked }" class="pr-8 text-gray-500 whitespace-no-wrap" @click="clearAllCheckboxesAction">Clear all</button>
                   </div>
                 </div>
                 <hr class="mx-4 mt-2 border-gray-500">
@@ -41,8 +41,8 @@
                   <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full cursor-default"></button>
                 </div>
               </div>
-              <div class="inset-x-0 bottom-0 text-center">
-                <button class="p-8 text-2xl" @click="showResults">Show Results</button>
+              <div class="fixed inset-x-0 bottom-0 text-center bg-white z-100050">
+                <button class="py-4 text-2xl" @click="showResults">Show Results</button>
               </div>
             </div>
           </transition>

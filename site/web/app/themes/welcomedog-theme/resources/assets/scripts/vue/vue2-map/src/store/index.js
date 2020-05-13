@@ -46,6 +46,21 @@ const store = new Vuex.Store({
     someCheckboxesMarked: state => {
       return state.markedCheckboxIds && state.markedCheckboxIds.length
     },
+
+    dogPlaceCards: (state) => {
+      let dogPlaceCards = []
+      for (const [, dogPlace] of Object.entries(state.dogPlaces)) {
+        dogPlaceCards.push({
+          id: dogPlace.id,
+          imageURL1: 'todo',
+          //imageURL2: dogPlace._embedded['wp:featuredmedia'],
+          //imageURL3: Object.values(dogPlace._embedded),
+          title: dogPlace.title.rendered,
+          category: 'todo',
+        })
+      }
+      return dogPlaceCards
+    },
   },
 
   mutations: {
@@ -171,6 +186,7 @@ const store = new Vuex.Store({
         params: {
           'per_page': '100',
           'dogplace-type': ids,
+          '_embed': true,
         },
       })
         .then(response => {

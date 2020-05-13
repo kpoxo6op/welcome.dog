@@ -2,7 +2,7 @@
   Template Name: Full Page Map
 --}}
 
-@extends('layouts.app')
+@extends('layouts.noheader')
 
 @section('content')
     @include('vue.map-container')
