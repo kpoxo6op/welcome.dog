@@ -34,20 +34,20 @@ function wdog_get_post_meta_fields( $post_object, $field_name, $request ) {
 
 	// make additional fields available in the response using an associative array.
 	$additional_post_data = array();
-	$terms = array();
-	$term_links = array();
 
 	$post_id = $post_object['id']; // get the post id.
-	$post_categories = get_the_category( $post_id );
-	foreach ( $post_categories as $category ) {
-		$term_data = get_category( $category->term_id );
-		$term_name = $term_data->category_nicename;
-		$term_url = get_term_link( $term_data->name, $term_data->taxonomy );
-		$term_link = "<a href=\"$term_url\">$term_name</a>";
-
-		array_push( $terms, $term_name );
-		array_push( $term_links, $term_link );
+	$wdog_terms = get_the_terms( $post_id, 'dogplace-type' );
+	$wdog_term_names = array();
+	if ( !empty($wdog_terms) ) {
+    foreach ($wdog_terms as $wdog_term) {
+      $wdog_term_name = $wdog_term->name;
+      array_push( $wdog_term_names, $wdog_term_name );
+	  }
+  } else {
+			array_push( $wdog_term_names, 'unknown' );
 	}
+	$wdog_post_title = $post_object['title']['rendered'];
+	$wdog_post_link = $post_object['link'];
 
 	// add categories, custom excerpt, featured image to the api response.
 	$img_id  = get_post_thumbnail_id( $post_id );
@@ -58,8 +58,9 @@ function wdog_get_post_meta_fields( $post_object, $field_name, $request ) {
 			25,
 			' &hellip;'
 		),
-		'terms' => $terms,
-		'term_links' => $term_links,
+		'wdog_term'  => current($wdog_term_names),
+		'wdog_title' => $wdog_post_title,
+		'wdog_link'  => $wdog_post_link,
 		'featuredmedia_alt' => get_post_meta(
 			$img_id,
 			'_wp_attachment_image_alt',

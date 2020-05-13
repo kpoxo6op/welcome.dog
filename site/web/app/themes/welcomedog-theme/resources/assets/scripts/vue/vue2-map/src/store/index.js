@@ -31,17 +31,6 @@ const store = new Vuex.Store({
       }
       return allDogPlaceCoordinates
     },
-    checkedCategoryIds: state => state.categories
-      //dive into children
-      .map(topc =>
-        topc.children
-          //find checked checkboxes
-          .filter(el => el.isChecked === true)
-          //select Ids
-          .map(el => el.id)
-      )
-      .flat()
-      .toString(),
 
     someCheckboxesMarked: state => {
       return state.markedCheckboxIds && state.markedCheckboxIds.length
@@ -52,11 +41,11 @@ const store = new Vuex.Store({
       for (const [, dogPlace] of Object.entries(state.dogPlaces)) {
         dogPlaceCards.push({
           id: dogPlace.id,
-          imageURL1: 'todo',
-          //imageURL2: dogPlace._embedded['wp:featuredmedia'],
-          //imageURL3: Object.values(dogPlace._embedded),
+          imgURL: dogPlace.wdog_meta['featuredmedia_url'],
+          alt: dogPlace.wdog_meta['featuredmedia_alt'],
           title: dogPlace.title.rendered,
-          category: 'todo',
+          category: dogPlace.wdog_meta['wdog_term'],
+          link: dogPlace.wdog_meta['wdog_link'],
         })
       }
       return dogPlaceCards
@@ -186,7 +175,6 @@ const store = new Vuex.Store({
         params: {
           'per_page': '100',
           'dogplace-type': ids,
-          '_embed': true,
         },
       })
         .then(response => {
