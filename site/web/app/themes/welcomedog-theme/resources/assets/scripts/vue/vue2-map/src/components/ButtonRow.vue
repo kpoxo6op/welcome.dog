@@ -8,7 +8,7 @@
         <!-- xl:hidden min-width: 1280px -->
         <div class="sm:hidden">
           <div class="mt-2 text-center">
-            <button @click="filterOpen = !filterOpen" type="button" class="px-2 text-xl text-center border border-gray-900 rounded-full">Filters</button>
+            <button @click="toggleMobileFilter" type="button" class="px-2 text-xl text-center border border-gray-900 rounded-full">Filters</button>
           </div>
           <transition
             enter-active-class="transition duration-100 ease-out transform"
@@ -22,7 +22,7 @@
               <div class="fixed w-full h-16 bg-white z-100050">
                 <div class="flex items-baseline mt-4 text-2xl">
                   <div class="w-1/3">
-                     <button class="w-full pl-8 text-left" @click="closeFilter">X</button>
+                     <button class="w-full pl-8 text-left" @click="toggleMobileFilter">X</button>
                   </div>
                   <div class="w-1/3 text-center">
                     <h6 class="font-semibold text-gray-900">Filters</h6>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions, mapState} from 'vuex'
 import MenuButtonMobile from './MenuButtonMobile.vue'
 import MenuButton from './MenuButton.vue'
 
@@ -77,7 +77,6 @@ export default {
   data() {
     return {
       errors: [],
-      filterOpen: false,
     }
   },
   
@@ -86,6 +85,10 @@ export default {
       'categories',
       'someCheckboxesMarked',
     ]),
+
+    ...mapState({
+      filterOpen: state => state.mobileFilterIsOpen,
+    }),
   },
 
   created() {
@@ -99,13 +102,13 @@ export default {
       'getDogPlaces',
     ]),
 
-    showResults() {
-      this.$store.dispatch('getDogPlaces')
-      this.filterOpen = false
+    toggleMobileFilter() {
+      this.$store.commit('toggleMobileFilter')
     },
 
-    closeFilter() {
-      this.filterOpen = false
+    showResults() {
+      this.$store.dispatch('getDogPlaces')
+      this.toggleMobileFilter()
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-bind:class="{fixed: filterOpen}">
   <div v-if="!dogPlaceCards.length" class="flex flex-col items-center">No results</div>
   <div class="flex flex-col items-center" v-for="(value,name) in dogPlaceCards" :key="name.id" >
     <DogPlaceCard
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 import DogPlaceCard from './DogPlaceCard.vue'
 export default {
   components: {
@@ -21,6 +21,10 @@ export default {
     ...mapGetters([
       'dogPlaceCards',
     ]),
+
+    ...mapState({
+      filterOpen: state => state.mobileFilterIsOpen,
+    }),
   },
 }
 </script>

@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     categories: [],
     dogPlaces: [],
     markedCheckboxIds: [],
+    mobileFilterIsOpen: false,
   },
 
   getters: {
@@ -55,6 +56,10 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+
+    toggleMobileFilter(state) {
+      state.mobileFilterIsOpen = !state.mobileFilterIsOpen
+    },
 
     addToChecked(state, checkboxId) {
       state.markedCheckboxIds.push(checkboxId)
