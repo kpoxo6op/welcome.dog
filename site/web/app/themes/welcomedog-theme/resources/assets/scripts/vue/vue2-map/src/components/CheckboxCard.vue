@@ -13,7 +13,7 @@
     </form>
     <div class="flex">
       <button class="px-2" @click="clearCheckboxByCardIdAction(checkboxProps.id)">Clear</button>
-      <button class="px-2" @click="getDogPlaces">Save</button>
+      <button class="px-2" @click="getDogPlaces(); closeCards();">Save</button>
     </div>
   </div>
 </template>
@@ -46,6 +46,7 @@
     methods: {
       ...mapActions([
         'getDogPlaces',
+        'closeCards',
         'clearCheckboxByCardIdAction',
       ]),
     },

@@ -15,6 +15,14 @@ export default {
   props: {
     card: {
       type: Object,
+      default: () => ({
+        id:    0,
+        title: 'No Title',
+        link:  '#',
+        category: 'Unknown category',
+        alt:      'Dog place image',
+        imgURL:   'https://i.imgur.com/2D8GXzj.jpg',
+      }),
     },
   },
 }

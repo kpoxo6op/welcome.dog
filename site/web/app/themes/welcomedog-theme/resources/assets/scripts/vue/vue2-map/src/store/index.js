@@ -39,14 +39,16 @@ const store = new Vuex.Store({
     dogPlaceCards: (state) => {
       let dogPlaceCards = []
       for (const [, dogPlace] of Object.entries(state.dogPlaces)) {
-        dogPlaceCards.push({
-          id: dogPlace.id,
-          imgURL: dogPlace.wdog_meta['featuredmedia_url'],
-          alt: dogPlace.wdog_meta['featuredmedia_alt'],
-          title: dogPlace.title.rendered,
-          category: dogPlace.wdog_meta['wdog_term'],
-          link: dogPlace.wdog_meta['wdog_link'],
-        })
+        if (dogPlace.hasOwnProperty('wdog_meta')) {
+          dogPlaceCards.push({
+            id: dogPlace.id,
+            imgURL: dogPlace.wdog_meta['img_url'],
+            alt: dogPlace.wdog_meta['img_alt'],
+            title: dogPlace.wdog_meta['wdog_title'],
+            category: dogPlace.wdog_meta['wdog_term'],
+            link: dogPlace.wdog_meta['wdog_link'],
+          })
+        }
       }
       return dogPlaceCards
     },
