@@ -2,7 +2,7 @@
   <div>
     <div>
       <button
-        class="relative z-100010 text-left md:text-center md:mx-2 md:border md:border-gray-900 md:rounded-full w-full"
+        class="relative w-full text-left z-100010 md:text-center md:mx-2 md:border md:border-gray-900 md:rounded-full"
       >
         {{ button.name }}
       </button>

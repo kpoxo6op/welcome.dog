@@ -7,8 +7,9 @@
         <!-- lg:hidden min-width: 1024px -->
         <!-- xl:hidden min-width: 1280px -->
         <div class="sm:hidden">
-          <div class="mt-2 text-center">
-            <button @click="toggleMobileFilter" type="button" class="px-2 text-xl text-center border border-gray-900 rounded-full">Filters</button>
+          <div class="pt-64"></div>
+          <div class="relative text-center bg-white opacity-100 z-100040">
+            <button @click="toggleMobileFilter" type="button" class="px-2 mt-8 text-xl text-center border border-gray-900 rounded-full ">Filters</button>
           </div>
           <transition
             enter-active-class="transition duration-100 ease-out transform"
@@ -18,7 +19,7 @@
             leave-class="scale-100 opacity-100"
             leave-to-class="scale-95 opacity-0"
           >
-            <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100000 md:static">
+            <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050 md:static">
               <div class="fixed w-full h-16 bg-white z-100050">
                 <div class="flex items-baseline mt-4 text-2xl">
                   <div class="w-1/3">
@@ -38,7 +39,6 @@
                   <MenuButtonMobile
                     v-bind:button="value"
                   ></MenuButtonMobile>
-                  <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full cursor-default"></button>
                 </div>
               </div>
               <div class="fixed inset-x-0 bottom-0 text-center bg-white z-100050">
@@ -58,7 +58,7 @@
             <MenuButton
               v-bind:button="value"
             ></MenuButton>
-            <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full cursor-default"></button>
+            <button v-if="value.isOpen" @click="closeCards" tabindex="-1" class="fixed inset-0 w-full h-full bg-black bg-opacity-75 cursor-default"></button>
           </div>
         </div>
       </div>

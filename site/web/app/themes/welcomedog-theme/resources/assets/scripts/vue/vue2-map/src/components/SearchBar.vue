@@ -1,14 +1,15 @@
 <template>
-  <div class="flex items-center mt-2">
-    <div class="absolute">
-      <button class="p-1 text-gray-400 border-2 border-transparent rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700" aria-label="Notifications">
+<div class="fixed flex flex-row w-full h-16 bg-white border-b border-gray-400 opacity-100 z-100050">
+  <div class="flex flex-row items-center">
+    <div class="mx-3">
+      <button class="text-gray-400 border border-transparent rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700" aria-label="Notifications">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path d="M5.41 11H21a1 1 0 0 1 0 2H5.41l5.3 5.3a1 1 0 0 1-1.42 1.4l-7-7a1 1 0 0 1 0-1.4l7-7a1 1 0 0 1 1.42 1.4L5.4 11z"/>
         </svg>
       </button>
     </div>
     <div class="relative mx-auto text-gray-600">
-      <input class="h-10 px-5 pr-16 text-sm bg-white border-2 border-gray-300 rounded-lg focus:outline-none"
+      <input class="h-10 px-5 pr-16 text-sm bg-white border border-gray-300 rounded-lg focus:outline-none"
         type="search" name="search" placeholder="Search">
       <button type="submit" class="absolute top-0 right-0 mt-3 mr-4">
         <svg class="w-4 h-4 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +22,7 @@
       </button>
     </div>
   </div>
+</div>
 </template>
 
 <script>

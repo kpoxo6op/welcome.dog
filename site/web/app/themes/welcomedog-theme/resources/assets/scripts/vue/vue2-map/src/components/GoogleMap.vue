@@ -1,9 +1,19 @@
 <template>
-  <div class="mt-2">
+  <div class="fixed w-full h-full">
     <GmapMap
+      class="fixed w-full h-full"
       :center='center'
       :zoom='10'
-      style='height: 400px;'
+      style=''
+      :options="{
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        disableDefaultUi: false,
+      }"
     >
 
       <GmapMarker

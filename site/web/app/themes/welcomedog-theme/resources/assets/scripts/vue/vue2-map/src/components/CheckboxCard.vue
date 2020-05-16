@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute z-100040 rounded bg-white p-4 border">
+  <div class="absolute p-4 bg-white border rounded z-100040">
     <!--
       TODO:
       Error: "[vuex] do not mutate vuex store state outside mutation handlers."

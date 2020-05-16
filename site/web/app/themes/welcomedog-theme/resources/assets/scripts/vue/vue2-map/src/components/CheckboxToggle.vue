@@ -1,7 +1,7 @@
 <template>
   <label :for="checkbox.id">
     <div class="mt-1">
-      <input type='checkbox' class='form-checkbox h-8 w-8'
+      <input type='checkbox' class='w-8 h-8 form-checkbox'
         :name="checkbox.name"
         :id="checkbox.id"
         :value="checkbox.value"

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative md:absolute z-100040 rounded">
+  <div class="relative rounded md:absolute z-100040">
     <!--
       TODO:
       Error: "[vuex] do not mutate vuex store state outside mutation handlers."
