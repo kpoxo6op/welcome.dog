@@ -1,5 +1,5 @@
 <template>
-<div v-bind:class="{fixed: filterOpen}" class="relative bg-white opacity-100 z-100040">
+<div v-show="!mobileMapIsFullSreen" v-bind:class="{fixed: filterOpen}" class="relative bg-white opacity-100 z-100040">
   <div v-if="!dogPlaceCards.length" class="flex flex-col items-center h-64">No results</div>
   <div class="flex flex-col items-center" v-for="(value,name) in dogPlaceCards" :key="name.id" >
     <DogPlaceCard
@@ -13,6 +13,12 @@
 import {mapGetters, mapState} from 'vuex'
 import DogPlaceCard from './DogPlaceCard.vue'
 export default {
+  data() {
+    return {
+      // mobileMapIsFullSreen: false,
+    }
+  },
+
   components: {
     DogPlaceCard,
   },
@@ -24,6 +30,7 @@ export default {
 
     ...mapState({
       filterOpen: state => state.mobileFilterIsOpen,
+      mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
     }),
   },
 }

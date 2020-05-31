@@ -1,5 +1,5 @@
 <template>
-<div class="fixed flex flex-row w-full h-16 bg-white border-b border-gray-400 opacity-100 z-100050">
+<div v-show="!mobileMapIsFullSreen" class="fixed flex flex-row w-full h-16 bg-white border-b border-gray-400 opacity-100 z-100050">
   <div class="flex flex-row items-center">
     <div class="mx-3">
       <button class="text-gray-400 border border-transparent rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700" aria-label="Notifications">
@@ -26,7 +26,18 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
   export default {
+    data() {
+      return {
+        // mobileMapIsFullSreen: false,
+      }
+    },
     
+    computed: {
+      ...mapState({
+        mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
+      }),
+    },
   }
 </script>

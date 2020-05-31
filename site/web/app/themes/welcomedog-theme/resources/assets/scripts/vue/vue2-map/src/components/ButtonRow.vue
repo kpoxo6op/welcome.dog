@@ -6,10 +6,10 @@
         <!-- md:hidden min-width:  768px -->
         <!-- lg:hidden min-width: 1024px -->
         <!-- xl:hidden min-width: 1280px -->
-        <div class="sm:hidden">
+        <div v-show="!mobileMapIsFullSreen" class="sm:hidden">
           <div class="pt-64"></div>
           <div class="relative text-center bg-white opacity-100 z-100040">
-            <button @click="toggleMobileFilter" type="button" class="px-2 mt-8 text-xl text-center border border-gray-900 rounded-full ">Filters</button>
+            <button @click="toggleMobileFilter" type="button" class="px-2 mt-8 text-xl text-center border border-gray-900 rounded-full">Filters</button>
           </div>
           <transition
             enter-active-class="transition duration-100 ease-out transform"
@@ -88,6 +88,7 @@ export default {
 
     ...mapState({
       filterOpen: state => state.mobileFilterIsOpen,
+      mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
     }),
   },
 
