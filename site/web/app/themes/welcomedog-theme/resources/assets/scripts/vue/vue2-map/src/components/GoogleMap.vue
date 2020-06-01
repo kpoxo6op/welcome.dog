@@ -6,9 +6,6 @@
         ref="mapRef"
         class="fixed w-full h-full"
         @click="enterFullScreenMap"
-        @dragstart="enterFullScreenMap"
-        @rightclick="enterFullScreenMap"
-        @mousedown="enterFullScreenMap"
         :center="changingCenter"
         :zoom='10'
         style=''
@@ -28,8 +25,8 @@
         :key='m.id'
         :position='m.position'
         :clickable='true'
-        :draggable='true'
-        @click='center=m.position'
+        :draggable='false'
+        @click="showDogPlaceCard"
       >
       </GmapMarker>
 
@@ -91,7 +88,6 @@ export default {
  
      this.$refs.mapRef.$mapPromise.then((map) => {
        if (!this.mobileMapIsFullSreen) {
-         console.log('shifting map y pixels up when map is created')
          map.panBy(0, 130)
        }
      })
@@ -99,14 +95,20 @@ export default {
 
   methods: {
     enterFullScreenMap() {
+      //this fires once
       if (!this.mobileMapIsFullSreen) {
         this.$store.commit('enterFullScreenMap')
-        //TODO: Consider hiding things with z-index
-        console.log('shifting map y pixels down when entering fullscreen')
         this.$refs.mapRef.panBy(0, -130)
+        console.log('map goes fullscreen on map click')
       }
     },
 
+    showDogPlaceCard() {
+      //TODO: find out why this method is fired two times
+      console.log('display dog place info window on marker click')
+      console.log('map still goes fullscreen on marker click')
+      this.enterFullScreenMap()
+    },
 },
 }
 </script>
