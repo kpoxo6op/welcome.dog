@@ -58,8 +58,12 @@ const store = new Vuex.Store({
 
   mutations: {
 
-    toggleFullScreenMap(state) {
-      state.mobileMapIsFullSreen = !state.mobileMapIsFullSreen
+    enterFullScreenMap(state) {
+      state.mobileMapIsFullSreen = true
+    },
+
+    exitFullScreenMap(state) {
+      state.mobileMapIsFullSreen = false
     },
 
     toggleMobileFilter(state) {
@@ -128,10 +132,6 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
-    toggleFullScreenMapAction({ commit }) {
-      console.log('toggle Fullscreen map state at store')
-      commit('toggleFullScreenMap')
-    },
 
     clearAllCheckboxesAction({ commit }) {
       commit('clearAllCheckboxes')

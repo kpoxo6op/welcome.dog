@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="fixed w-full h-full">
+      <FullScreenMapControlsBar v-show="mobileMapIsFullSreen"></FullScreenMapControlsBar>
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
-        @click="toggleFullScreenMap"
-        @dragstart="toggleFullScreenMap"
+        @click="enterFullScreenMap"
+        @dragstart="enterFullScreenMap"
+        @rightclick="enterFullScreenMap"
+        @mousedown="enterFullScreenMap"
         :center="changingCenter"
         :zoom='10'
         style=''
@@ -20,15 +23,15 @@
         }"
       >
 
-        <GmapMarker
-          v-for='m in allDogPlaceCoordinates'
-          :key='m.id'
-          :position='m.position'
-          :clickable='true'
-          :draggable='true'
-          @click='center=m.position'
-        >
-        </GmapMarker>
+      <GmapMarker
+        v-for='m in allDogPlaceCoordinates'
+        :key='m.id'
+        :position='m.position'
+        :clickable='true'
+        :draggable='true'
+        @click='center=m.position'
+      >
+      </GmapMarker>
 
       </GmapMap>
     </div>
@@ -36,9 +39,13 @@
 </template>
 
 <script>
-import {mapGetters, mapActions, mapState} from 'vuex';
-
+import {mapGetters, mapState} from 'vuex';
+import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
 export default {
+  components: {
+    FullScreenMapControlsBar,
+  },
+
   name: 'GoogleMap',
   data() {
     return {
@@ -63,6 +70,18 @@ export default {
 
   created() {
     this.$store.dispatch('getDogPlaces')
+
+    this.unsubscribe = this.$store.subscribe((mutation) => {
+      if (mutation.type === 'exitFullScreenMap') {
+        console.log('exitFullScreenMap mutation subscription triggered')
+        console.log('shifting map y pixels UP when EXITING fullscreen')
+        this.$refs.mapRef.panBy(0, +130)
+      }
+    })
+  },
+
+  beforeDestroy() {
+    this.unsubscribe();
   },
 
   mounted() {
@@ -79,25 +98,16 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'toggleFullScreenMapAction',
-    ]),
-    toggleFullScreenMap() {
-      if (this.mobileMapIsFullSreen) {
+    enterFullScreenMap() {
+      if (!this.mobileMapIsFullSreen) {
+        this.$store.commit('enterFullScreenMap')
         //TODO: Consider hiding things with z-index
         console.log('shifting map y pixels down when entering fullscreen')
-        this.$refs.mapRef.panBy(0, +130)
-        console.log('hide search bar when entering fullscreen')
-        console.log('hide filters and results pane when entering fullscreen')
-      } else {
-        console.log('shifting map y pixels UP when EXITING fullscreen')
         this.$refs.mapRef.panBy(0, -130)
-        console.log('SHOW search bar when EXITING fullscreen')
-        console.log('SHOW filters and results pane when EXITING fullscreen')
       }
-      this.toggleFullScreenMapAction()
     },
-  },
+
+},
 }
 </script>
 

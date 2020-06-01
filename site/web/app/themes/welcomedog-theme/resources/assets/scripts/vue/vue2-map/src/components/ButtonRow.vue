@@ -8,45 +8,47 @@
         <!-- xl:hidden min-width: 1280px -->
         <div v-show="!mobileMapIsFullSreen" class="sm:hidden">
           <div class="pt-64"></div>
+          <!-- TODO: replace filter button with component -->
           <div class="relative text-center bg-white opacity-100 z-100040">
-            <button @click="toggleMobileFilter" type="button" class="px-2 mt-8 text-xl text-center border border-gray-900 rounded-full">Filters</button>
+            <button @click="toggleMobileFilter" type="button" class="px-2 mt-8 text-xl text-center border border-gray-900 rounded-full bg-white-500">Filters</button>
           </div>
-          <transition
-            enter-active-class="transition duration-100 ease-out transform"
-            enter-class="scale-95 opacity-0"
-            enter-to-class="scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in transform"
-            leave-class="scale-100 opacity-100"
-            leave-to-class="scale-95 opacity-0"
-          >
-            <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050 md:static">
-              <div class="fixed w-full h-16 bg-white z-100050">
-                <div class="flex items-baseline mt-4 text-2xl">
-                  <div class="w-1/3">
-                     <button class="w-full pl-8 text-left" @click="toggleMobileFilter">X</button>
-                  </div>
-                  <div class="w-1/3 text-center">
-                    <h6 class="font-semibold text-gray-900">Filters</h6>
-                  </div>
-                  <div class="w-1/3 text-right">
-                    <button :class="{ 'text-gray-900': someCheckboxesMarked }" class="pr-8 text-gray-500 whitespace-no-wrap" @click="clearAllCheckboxesAction">Clear all</button>
-                  </div>
+        </div>
+        <!-- TODO: replace with fullscreen filters component -->
+        <transition
+          enter-active-class="transition duration-100 ease-out transform"
+          enter-class="scale-95 opacity-0"
+          enter-to-class="scale-100 opacity-100"
+          leave-active-class="transition duration-75 ease-in transform"
+          leave-class="scale-100 opacity-100"
+          leave-to-class="scale-95 opacity-0"
+        >
+          <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050 md:static">
+            <div class="fixed w-full h-16 bg-white z-100050">
+              <div class="flex items-baseline mt-4 text-2xl">
+                <div class="w-1/3">
+                    <button class="w-full pl-8 text-left" @click="toggleMobileFilter">X</button>
                 </div>
-                <hr class="mx-4 mt-2 border-gray-500">
-              </div>
-              <div class="mt-16 min-w-1/3">
-                <div class="mt-4 md:p-2" v-for="(value, name) in categories" :key="name.id">
-                  <MenuButtonMobile
-                    v-bind:button="value"
-                  ></MenuButtonMobile>
+                <div class="w-1/3 text-center">
+                  <h6 class="font-semibold text-gray-900">Filters</h6>
+                </div>
+                <div class="w-1/3 text-right">
+                  <button :class="{ 'text-gray-900': someCheckboxesMarked }" class="pr-8 text-gray-500 whitespace-no-wrap" @click="clearAllCheckboxesAction">Clear all</button>
                 </div>
               </div>
-              <div class="fixed inset-x-0 bottom-0 text-center bg-white z-100050">
-                <button class="py-4 text-2xl" @click="showResults">Show Results</button>
+              <hr class="mx-4 mt-2 border-gray-500">
+            </div>
+            <div class="mt-16 min-w-1/3">
+              <div class="mt-4 md:p-2" v-for="(value, name) in categories" :key="name.id">
+                <MenuButtonMobile
+                  v-bind:button="value"
+                ></MenuButtonMobile>
               </div>
             </div>
-          </transition>
-        </div>
+            <div class="fixed inset-x-0 bottom-0 text-center bg-white z-100050">
+              <button class="py-4 text-2xl" @click="showResults">Show Results</button>
+            </div>
+          </div>
+        </transition>
         <!-- show on tablet screen and bigger -->
         <!-- HIDDEN -->
         <!-- sm:visibl min-width:  640px -->
