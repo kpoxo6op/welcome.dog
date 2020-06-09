@@ -1,6 +1,8 @@
 //console.log('loaded map.js')
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 import store from '../vue/vue2-map/src/store';
 import AppComponent from '../vue/vue2-map/src/components/App.vue'
 
@@ -10,6 +12,8 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
   },
 })
+
+Vue.use(VueAwesomeSwiper)
 
 export default {
   init() {

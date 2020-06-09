@@ -2,6 +2,7 @@
   <div>
     <div class="fixed w-full h-full">
       <FullScreenMapControlsBar v-show="mobileMapIsFullSreen"></FullScreenMapControlsBar>
+      <FullScreenSwipeCardsBar v-show="mobileMapIsFullSreen"></FullScreenSwipeCardsBar>
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
@@ -36,11 +37,47 @@
 </template>
 
 <script>
+/*
+<googlemaps-marker
+  v-for="post of posts"
+  :key="post._id"
+  :label="{
+    color: post === currentPost ? 'white' : 'black',
+    fontFamily: 'Material Icons',
+    fontSize: '20px',
+    text: 'face',
+  }"
+  :position="post.position"
+  :z-index="5"
+  @click="selectPost(post._id)"
+/>
+*/
+
+/*
+marker Properties
+-----------------
+animation : number
+attribution : object
+clickable : boolean
+cursor : string
+draggable : boolean
+icon : object
+label : string
+opacity : number
+place : object
+position : {lat: number, lng: number} | google.maps.LatLng
+shape : object        - https://diegoazh.github.io/gmap-vue/examples/basic-marker-shape.html#live-example
+title : string
+zIndex : number
+
+*/
 import {mapGetters, mapState} from 'vuex';
 import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
+import FullScreenSwipeCardsBar from './FullScreenSwipeCardsBar.vue';
 export default {
   components: {
     FullScreenMapControlsBar,
+    FullScreenSwipeCardsBar,
   },
 
   name: 'GoogleMap',
@@ -49,9 +86,8 @@ export default {
       changingCenter: {
         lat: -36.85,
         lng: 174.76,
-        },
-      //move this thing to the store
-      //mobileMapIsFullSreen: false,
+      },
+      imageUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
     }
   },
 
@@ -89,6 +125,7 @@ export default {
      this.$refs.mapRef.$mapPromise.then((map) => {
        if (!this.mobileMapIsFullSreen) {
          map.panBy(0, 130)
+         console.log('pan map up on start')
        }
      })
   },
@@ -99,14 +136,14 @@ export default {
       if (!this.mobileMapIsFullSreen) {
         this.$store.commit('enterFullScreenMap')
         this.$refs.mapRef.panBy(0, -130)
-        console.log('map goes fullscreen on map click')
+        console.log('map goes fullscreen')
       }
     },
 
     showDogPlaceCard() {
-      //TODO: find out why this method is fired two times
-      console.log('display dog place info window on marker click')
-      console.log('map still goes fullscreen on marker click')
+      //TODO: find out why this method is fired two times sometimes
+      //TODO: find out why this method is not fired at all sometimes
+      console.log('go fullscreen and display dog place info window')
       this.enterFullScreenMap()
     },
 },
