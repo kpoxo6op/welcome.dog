@@ -13,6 +13,17 @@
       -->
       <github-user-data :data="githubData[currentUsername]"></github-user-data>
     </p>
+
+    <div>slider</div>
+      <div class='fixed mb-12 z-100050 inset-x-0 bottom-0'>
+        <swiper ref='mySwiper' :options='swiperOptions' class="h-16">
+          <swiper-slide class='text-2xl items-center justify-center bg-white border border-black rounded-full inline-flex'><a href='#'>Carol</a></swiper-slide>
+          <swiper-slide class='text-2xl items-center justify-center bg-white border border-black rounded-full inline-flex'><a href='#'>Tanya</a></swiper-slide>
+          <swiper-slide class='text-2xl items-center justify-center bg-white border border-black rounded-full inline-flex'><a href='#'>Kokako</a></swiper-slide>
+          <swiper-slide class='text-2xl items-center justify-center bg-white border border-black rounded-full inline-flex'><a href='#'>Something Else</a></swiper-slide>
+          <swiper-slide class='text-2xl items-center justify-center bg-white border border-black rounded-full inline-flex'><a href='#'>Last Slide</a></swiper-slide>
+        </swiper>
+      </div>
   </div>
 </template>
 <script>
@@ -28,6 +39,15 @@ export default {
     return {
       currentUsername: null,
       githubData: {},
+      swiperOptions: {
+        slidesPerView: 1.5,
+        centeredSlides: true,
+        spaceBetween: 10,
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
+        // Some Swiper option/callback...
+      },
     }
   },
   //We then define the onUsernameChange method
@@ -69,6 +89,17 @@ export default {
   //let’s also stop listening for events when the component is destroyed by using the destroyed event:
   destroyed() {
     bus.$off('new-username', this.onUsernameChange)
+  },
+
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.$swiper
+    },
+  },
+
+  mounted() {
+    console.log('Current Swiper instance object', this.swiper)
+    // this.swiper.slideTo(3, 1000, false)
   },
 }
 </script>

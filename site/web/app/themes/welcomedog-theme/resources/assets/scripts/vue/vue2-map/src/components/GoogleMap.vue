@@ -2,7 +2,7 @@
   <div>
     <div class="fixed w-full h-full">
       <FullScreenMapControlsBar v-show="mobileMapIsFullSreen"></FullScreenMapControlsBar>
-      <FullScreenSwipeCardsBar v-show="mobileMapIsFullSreen"></FullScreenSwipeCardsBar>
+      <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen"></FullScreenSwipeCardsBar>
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
