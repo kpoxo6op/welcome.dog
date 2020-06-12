@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- v-show="mobileMapIsFullSreen" breaks slider -->
     <div class="fixed w-full h-full">
       <FullScreenMapControlsBar v-show="mobileMapIsFullSreen"></FullScreenMapControlsBar>
       <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen"></FullScreenSwipeCardsBar>
@@ -22,12 +23,15 @@
       >
 
       <GmapMarker
-        v-for='m in allDogPlaceCoordinates'
+        v-for='(m, index) in allDogPlaceCoordinates'
         :key='m.id'
         :position='m.position'
         :clickable='true'
         :draggable='false'
-        @click="showDogPlaceCard"
+        @click="selectMarker({
+          index: index
+          //id: m.id
+        })"
       >
       </GmapMarker>
 
@@ -71,7 +75,7 @@ title : string
 zIndex : number
 
 */
-import {mapGetters, mapState} from 'vuex';
+import {mapGetters, mapState, mapActions} from 'vuex';
 import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
 import FullScreenSwipeCardsBar from './FullScreenSwipeCardsBar.vue';
 export default {
@@ -131,6 +135,17 @@ export default {
   },
 
   methods: {
+
+    selectMarkerTest(index, id) {
+      console.log('clicked marker index', index)
+      console.log('clicked marker id', id)
+
+    },
+
+    ...mapActions([
+      'selectMarker',
+    ]),
+
     enterFullScreenMap() {
       //this fires once
       if (!this.mobileMapIsFullSreen) {
@@ -138,13 +153,6 @@ export default {
         this.$refs.mapRef.panBy(0, -130)
         console.log('map goes fullscreen')
       }
-    },
-
-    showDogPlaceCard() {
-      //TODO: find out why this method is fired two times sometimes
-      //TODO: find out why this method is not fired at all sometimes
-      console.log('go fullscreen and display dog place info window')
-      this.enterFullScreenMap()
     },
 },
 }

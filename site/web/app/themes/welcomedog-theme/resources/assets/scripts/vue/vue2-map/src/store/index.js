@@ -15,6 +15,7 @@ const store = new Vuex.Store({
     markedCheckboxIds: [],
     mobileFilterIsOpen: false,
     mobileMapIsFullSreen: false,
+    selectedMarkerIndex: 0,
   },
 
   getters: {
@@ -57,6 +58,11 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+
+    selectMarker(state, selectedMarkerIndex) {
+      //console.log('mutation selects marker', selectedMarkerIndex)
+      state.selectedMarkerIndex = selectedMarkerIndex
+    },
 
     enterFullScreenMap(state) {
       state.mobileMapIsFullSreen = true
@@ -132,6 +138,14 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
+
+    selectMarker({ commit }, { index }) {
+      //TODO - remove index or id
+      commit('enterFullScreenMap')
+      commit('selectMarker', index)
+      //console.log('store got index', index)
+      //console.log('store got id', id)
+    },
 
     clearAllCheckboxesAction({ commit }) {
       commit('clearAllCheckboxes')
