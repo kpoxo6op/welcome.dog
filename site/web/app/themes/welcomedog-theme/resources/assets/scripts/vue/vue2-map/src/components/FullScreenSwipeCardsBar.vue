@@ -1,10 +1,12 @@
 <template>
   <div class='fixed mb-12 z-100050 inset-x-0 bottom-0'>
     <swiper ref='mySwiper' @slideChange='onSlideChange' :options='swiperOptions' class='h-16'>
+      <!-- TOODO: :class visibly slows down transition-->
         <swiper-slide
-          v-for="card in cards"
+          v-for="(card, index) in cards"
           :key="card.id"
-          class='items-center justify-center bg-white border border-black rounded-full inline-flex'>
+          :class="[index === selectedMapMarkerIndex ? 'border-2': 'border']"
+          class='items-center justify-center bg-white border-black rounded-full inline-flex'>
           <a href='#'>{{ card.title }}</a>
         </swiper-slide>
     </swiper>
@@ -12,7 +14,7 @@
 </template>
 
 <script>
-import {mapGetters, mapState} from 'vuex';
+import {mapGetters, mapState, mapActions} from 'vuex';
 export default {
     components: {
     },
@@ -54,9 +56,17 @@ export default {
     },
 
     methods: {
+
+      ...mapActions([
+        'selectMarker',
+      ]),
+
       onSlideChange() {
         //console.log('previous slide Index', this.swiper.previousIndex)
-        //console.log('active slide Index', this.swiper.activeIndex)
+        console.log('active slide Index', this.swiper.activeIndex)
+        this.selectMarker({
+          index: this.swiper.activeIndex,
+        })
       },
     },
   }

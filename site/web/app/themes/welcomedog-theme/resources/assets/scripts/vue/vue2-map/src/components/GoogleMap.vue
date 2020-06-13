@@ -22,24 +22,30 @@
         }"
       >
 
-      <GmapMarker
-        v-for='(m, index) in allDogPlaceCoordinates'
-        :key='m.id'
-        :position='m.position'
-        :clickable='true'
-        :draggable='false'
-        @click="selectMarker({
-          index: index
-          //id: m.id
-        })"
-      >
-      </GmapMarker>
-
+        <GmapMarker
+          v-for='(m, index) in allDogPlaceCoordinates'
+          :key='m.id'
+          :position='m.position'
+          :clickable='true'
+          :draggable='false'
+          @click="selectMarker({
+            index: index
+            //id: m.id
+          })"
+          :icon="{
+            //url: require('./pets-black-18dp.svg'),
+            fillColor: index === selectedMapMarkerIndex ? 'black' : 'white',
+            fillOpacity: 1,
+            //strokeWeight: 0,
+            scale: 1.3,
+            path: 'M16,9V4l1,0c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H7C6.45,2,6,2.45,6,3v0 c0,0.55,0.45,1,1,1l1,0v5c0,1.66-1.34,3-3,3h0v2h5.97v7l1,1l1-1v-7H19v-2h0C17.34,12,16,10.66,16,9z',
+          }"
+        >
+        </GmapMarker>
       </GmapMap>
     </div>
   </div>
 </template>
-
 <script>
 /*
 <googlemaps-marker
@@ -91,7 +97,7 @@ export default {
         lat: -36.85,
         lng: 174.76,
       },
-      imageUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      //imageUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
     }
   },
 
@@ -102,23 +108,22 @@ export default {
 
     ...mapState({
       mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
+      selectedMapMarkerIndex: state => state.selectedMarkerIndex,
     }),
+  },
+
+  watch: {
+    mobileMapIsFullSreen(isFullSreen) {
+      if (isFullSreen) {
+        this.$refs.mapRef.panBy(0, -130)
+      } else {
+        this.$refs.mapRef.panBy(0, +130)
+      }
+    },
   },
 
   created() {
     this.$store.dispatch('getDogPlaces')
-
-    this.unsubscribe = this.$store.subscribe((mutation) => {
-      if (mutation.type === 'exitFullScreenMap') {
-        console.log('exitFullScreenMap mutation subscription triggered')
-        console.log('shifting map y pixels UP when EXITING fullscreen')
-        this.$refs.mapRef.panBy(0, +130)
-      }
-    })
-  },
-
-  beforeDestroy() {
-    this.unsubscribe();
   },
 
   mounted() {
@@ -136,21 +141,13 @@ export default {
 
   methods: {
 
-    selectMarkerTest(index, id) {
-      console.log('clicked marker index', index)
-      console.log('clicked marker id', id)
-
-    },
-
     ...mapActions([
       'selectMarker',
     ]),
 
     enterFullScreenMap() {
-      //this fires once
       if (!this.mobileMapIsFullSreen) {
         this.$store.commit('enterFullScreenMap')
-        this.$refs.mapRef.panBy(0, -130)
         console.log('map goes fullscreen')
       }
     },
