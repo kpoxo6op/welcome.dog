@@ -2,11 +2,12 @@
   <div class='fixed mb-12 z-100050 inset-x-0 bottom-0'>
     <swiper ref='mySwiper' @slideChange='onSlideChange' :options='swiperOptions' class='h-16'>
       <!-- TODO :class binding pauses slide during transition for 1 sec -->
+      <!-- :class="{ 'bg-black text-white': index === selectedMapMarkerIndex}" -->
         <swiper-slide
           v-for="(card, index) in cards"
           :key="card.id"
-          :class="{ 'bg-red-200': index === selectedMapMarkerIndex }"
-          class='items-center justify-center bg-white border border-black rounded-full inline-flex'>
+          :class="[selectedMapMarkerIndex === index ? 'bg-black text-white' : 'bg-white text-black']"
+          class='items-center justify-center border border-black rounded-full inline-flex'>
           <a href='#'>{{ card.title }}</a>
         </swiper-slide>
     </swiper>
