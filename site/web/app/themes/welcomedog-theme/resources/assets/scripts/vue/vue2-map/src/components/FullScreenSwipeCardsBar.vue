@@ -1,6 +1,6 @@
 <template>
   <div class='fixed mb-12 z-100050 inset-x-0 bottom-0'>
-    <swiper ref='mySwiper' @slideChange='onSlideChange' :options='swiperOptions' class='h-16'>
+    <swiper ref='mySwiper' @slideChangeTransitionEnd='onSlideChangeTransitionEnd' :options='swiperOptions' class='h-16'>
       <!-- TODO :class binding pauses slide during transition for 1 sec -->
       <!-- :class="[selectedMapMarkerIndex === index ? 'bg-black text-white' : 'bg-white text-black']" -->
         <swiper-slide
@@ -61,7 +61,7 @@ export default {
         'selectMarker',
       ]),
 
-      onSlideChange() {
+      onSlideChangeTransitionEnd() {
         //console.log('previous slide Index', this.swiper.previousIndex)
         console.log('active slide Index', this.swiper.activeIndex)
         this.selectMarker({
