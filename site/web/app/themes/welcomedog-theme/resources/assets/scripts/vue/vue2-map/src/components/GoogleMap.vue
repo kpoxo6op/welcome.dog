@@ -7,7 +7,10 @@
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
-        @click="enterFullScreenMap"
+        @zoom_changed="showSearchHereBtn"
+        @dragend="showSearchHereBtn"
+        @click="onClick"
+        @idle="onIdle"
         :center="changingCenter"
         :zoom='10'
         style=''
@@ -143,15 +146,20 @@ export default {
 
     ...mapActions([
       'selectMarker',
+      'showSearchHereBtn',
     ]),
 
-    enterFullScreenMap() {
+    onClick() {
       if (!this.mobileMapIsFullSreen) {
         this.$store.commit('enterFullScreenMap')
         console.log('map goes fullscreen')
       }
     },
-},
+
+    onIdle() {
+      this.$store.commit('mapIsIdle', true)
+    },
+  },
 }
 </script>
 

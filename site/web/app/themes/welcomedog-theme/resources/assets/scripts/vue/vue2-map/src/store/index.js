@@ -15,6 +15,8 @@ const store = new Vuex.Store({
     markedCheckboxIds: [],
     mobileFilterIsOpen: false,
     mobileMapIsFullSreen: false,
+    searchHereBtnIsVisible: false,
+    mapIsIdle: true,
     selectedMarkerIndex: 0,
   },
 
@@ -58,6 +60,20 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+
+    mapIsIdle(state, mapIsIdleState) {
+      state.mapIsIdle = mapIsIdleState
+    },
+
+    hideSearchHereBtn(state) {
+      state.searchHereBtnIsVisible = false
+    },
+
+    showSearchHereBtn(state) {
+      if (state.mapIsIdle) {
+        state.searchHereBtnIsVisible = true
+      }
+    },
 
     selectMarker(state, selectedMarkerIndex) {
       //console.log('mutation selects marker', selectedMarkerIndex)
@@ -138,6 +154,22 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
+
+    searchDogPlacesWithinBounds({ commit }) {
+      console.log('search dog places within visible map bounds')
+      commit('hideSearchHereBtn')
+    },
+
+    hideSearchHereBtn({ commit }) {
+      commit('hideSearchHereBtn')
+    },
+
+    showSearchHereBtn({ state, commit }) {
+      if (state.mobileMapIsFullSreen) {
+        //console.log('display search here button when fullsreen')
+        commit('showSearchHereBtn')
+      }
+    },
 
     selectMarker({ commit }, { index }) {
       //TODO - remove index or id

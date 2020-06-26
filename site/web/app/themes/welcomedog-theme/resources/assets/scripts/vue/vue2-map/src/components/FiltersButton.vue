@@ -1,5 +1,5 @@
 <template>
-    <button @click="toggleMobileFilter" type="button" class="px-2 text-3xl text-center bg-white border border-gray-900 rounded-full">Filters</button>
+    <button @click="toggleMobileFilter" type="button" class="px-2 text-xl text-center bg-white border border-gray-900 rounded-full">Filters</button>
 </template>
 
 <script>
