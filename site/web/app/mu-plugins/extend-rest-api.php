@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Extend REST API
 Plugin URI:   https://developer.wordpress.org/rest-api/extending-the-rest-api/modifying-responses/
-Description:  Add feautured image and other field to my custom post type dogplace
+Description:  Add feautured image and other fields to my custom post type dogplace
 Version:      0.0.1
 Author:       boris
 Author URI:   https://boris.rip
