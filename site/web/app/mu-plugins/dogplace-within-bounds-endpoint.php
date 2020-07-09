@@ -9,6 +9,13 @@ Author URI:   https://boris.rip/
 License:      MIT License
 */
 
+/*
+TODOs:
+- decide what to do with invalid URL requests
++ make sw and ne params optional
++ accept dogplace-type parameter
+*/
+
 // Auckland rectangular boundaries
 define("AKL_SW_BOUNDARY_LAT", -37.289350);
 define("AKL_SW_BOUNDARY_LNG", 173.997302);
@@ -29,39 +36,144 @@ define("WGN_LNG", 174.77557);
 define("RAR_LAT", -21.2333324);
 define("RAR_LNG", -159.7833302);
 
+
+
+add_action( 'rest_api_init', function () {
+  //TODO: only accept exact match sw=[optional -][required 1-3digits][optional , together with 20 digits]
+    register_rest_route( 'wdog/v1', '/dogplaces',
+    [
+      'args' => [
+        'sw' => [
+          'default' => ',',
+          'required' => false,
+        ],
+        'ne' => [
+          'default' => ',',
+          'required' => false,
+        ],
+        'dogplace-type' => [
+          'default' => '',
+          'required' => false,
+        ],
+      ],
+      'callback' => 'get_dogplaces_within_bounds',
+      'methods' => 'GET',
+    ]);
+} );
+
 function get_dogplaces_within_bounds( WP_REST_Request $request ) {
+  /* BEGIN check if we get coordintates */
+  $sw_coords = array_map('floatval', explode(',', urldecode($request['sw'])));
+  $ne_coords = array_map('floatval', explode(',', urldecode($request['ne'])));
+  $dogplace_types = $request['dogplace-type'];
+  if ($dogplace_types == '') {
+    $dogplace_types = get_terms(
+      array( 'dogplace-type' ),
+      array( 'fields' => 'ids' )
+    );
+  }
 
-  //sw and ne comes from the client as {{baseURL}}/wp-json/wdog/v1/dogplaces/sw/-37.029908,174.576413/ne/-36.718463,174.98634
-  $sw_coords = explode(',', $request['sw']);
-  $ne_coords = explode(',', $request['ne']);
+  if (!is_array($sw_coords)  ||
+      empty($sw_coords)      ||
+      count($sw_coords) != 2 ||
+      !is_numeric($sw_coords[0]) ||
+      !is_numeric($sw_coords[1]) ||
+      in_array(0, $sw_coords)
+  ) {
+    unset($sw_coords);
+  }
 
-  $Auckland   = array(AKL_LAT, AKL_LNG);
-  $Wellington = array(WGN_LAT, WGN_LNG);
-  $Rarotonga  = array(RAR_LAT, RAR_LNG);
-  $Rangitoto  = array(RANGITOTO_LAT, RANGITOTO_LNG);
+  if (!is_array($ne_coords)  ||
+      empty($ne_coords)      ||
+      count($ne_coords) != 2 ||
+      !is_numeric($ne_coords[0]) ||
+      !is_numeric($ne_coords[1]) ||
+      in_array(0, $ne_coords)
+  ) {
+    unset($ne_coords);
+  }
 
-  $sample_dogplaces = array($Auckland, $Wellington, $Rarotonga, $Rangitoto);
+  if ( isset($sw_coords) && isset($ne_coords) ) {
+    $geolimit = true;
+  } else {
+    $geolimit = false;
+  }
+  /* END check if we get coordintates */
 
-  foreach($sample_dogplaces as $place) {
-    if ( is_place_within_bounds($place, $sw_coords, $ne_coords) ) {
-      $places_on_screen[] = $place;
+  //TODO: what would happen when we have like 1mil places?
+  $args = array(
+    'numberposts' => -1,
+    'post_type' => 'dogplace',
+    //pagination?
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'dogplace-type',
+            'field'    => 'term_id',
+            'terms'    => ($dogplace_types),
+        ),
+    ),
+  );
+  //we grab all places from the DB. TODO only return places within bounds from the DB
+  //also have a look at pagination
+  $all_dogplaces = get_posts($args);
+  
+  $dogplaces = [];
+  foreach($all_dogplaces as $post) {
+    /* BEGIN attach wdog_meta to each post */
+    $custom_excerpt = wp_trim_words(
+      apply_filters('the_excerpt', $post->post_excerpt),
+      25,
+      ' &hellip;'
+    );
+    $terms = get_the_terms( $post->ID, 'dogplace-type' );
+    $term_names = array();
+    if ( !empty($terms) ) {
+      foreach ($terms as $wdog_term) {
+        $wdog_term_name = $wdog_term->name;
+        array_push( $term_names, $wdog_term_name );
+      }
+    } else {
+        array_push( $term_names, 'unknown' );
+    }
+    $term = current($term_names);
+
+    $title = $post->post_title;
+
+    $link = apply_filters('permalink', get_permalink($post));
+
+    $img_id  = get_post_thumbnail_id( $post->ID );
+    $img_alt = get_post_meta( $img_id,'_wp_attachment_image_alt', true );
+    $img_url = get_the_post_thumbnail_url($post->ID, 'full');
+
+    $additional_post_data = array(
+      'custom_excerpt' => $custom_excerpt ?: '',
+      'wdog_term'      => $term           ?: 'Unknown dog place type',
+      'wdog_title'     => $title          ?: 'No title',
+      'wdog_link'      => $link           ?: '#',
+      'img_alt'        => $img_alt        ?: 'Dog place image',
+      'img_url'        => $img_url        ?: 'https://i.imgur.com/2D8GXzj.jpg'
+    );
+    $post->{'wdog_meta'} = $additional_post_data;
+
+    $acf = get_fields( $post->ID );
+    $post->{'acf'} = $acf;
+    /* END attach wdog_meta to each post */
+
+    if ($geolimit) {
+      //only return if place fits within map bounds
+      $place_coords = array($acf['dogplace_map']['lat'], $acf['dogplace_map']['lng']);
+      if ( is_place_within_bounds($place_coords, $sw_coords, $ne_coords) ) {
+        $dogplaces[] = $post;
+      }
+    } else {
+      $dogplaces[] = $post;
     }
   }
 
-  return $places_on_screen;
+  return $dogplaces;
 }
 
-add_action( 'rest_api_init', function () {
-  // string $namespace Required
-  // string $route     Required
-  // array  $args      Optional
-  register_rest_route( 'wdog/v1', '/dogplaces/sw/(?P<sw>[a-z0-9 .\-,]+)/ne/(?P<ne>[a-z0-9 .\-,]+)', array(
-    'methods' => 'GET',
-    'callback' => 'get_dogplaces_within_bounds',
-  ) );
-} );
-
-function is_place_within_bounds($placeLatLng = array(AKL_LAT, AKL_LNG), $swLatLng = array(AKL_SW_BOUNDARY_LAT, AKL_SW_BOUNDARY_LNG), $neLatLng = array(AKL_NE_BOUNDARY_LAT, AKL_NE_BOUNDARY_LNG)) {
+function is_place_within_bounds($placeLatLng, $swLatLng, $neLatLng) {
   $dp_lat = $placeLatLng[0];
   $dp_lng = $placeLatLng[1];
 
@@ -73,66 +185,24 @@ function is_place_within_bounds($placeLatLng = array(AKL_LAT, AKL_LNG), $swLatLn
 
   if ($dp_lat >= $sw_lat && $dp_lat <= $ne_lat) {
     $lat_within_range = true;
+  } else {
+    $lat_within_range = false;
   }
 
   if ($dp_lng >= $sw_lng && $dp_lng <= $ne_lng) {
     $lng_within_range = true;
+  } else {
+    $lng_within_range = false;
   }
 
   return ($lat_within_range && $lng_within_range);
 }
 
+
 /*
-notes
-(?P[a-z0-9 .\-]+) for longitude or latitude
+  Examples:
+  trademe
+  https://www.trademe.co.nz/a/property/residential/sale/search?bof=viaqt6d6&latitude_max=-36.71307396253395&latitude_min=-36.8458906539457&longitude_max=175.1539773246926&longitude_min=175.00463192674337&rows=150
+  domain co au
+  https://www.domain.com.au/sale/?excludeunderoffer=1&startloc=-36.71501756132026%2C174.68587701176432&endloc=-37.16011585786423%2C175.56546990727213&displaymap=1
 */
-
-//The Following registers an api route with multiple parameters.
-// add_action( 'rest_api_init', 'add_custom_users_api');
- 
-// function add_custom_users_api(){
-//     register_rest_route( 'mmw/v1', '/users/
-//                                     market=(?P<market>[a-zA-Z0-9-]+)/
-//                                     lat=(?P<lat>[a-z0-9 .\-]+)/
-//                                     long=(?P<long>[a-z0-9 .\-]+)', array(
-//         'methods' => 'GET',
-//         'callback' => 'get_custom_users_data',
-//     ));
-// }
-
-// //Customize the callback to your liking
-// function get_custom_users_data($data){
-//     //get users by market
-//     $users = mmw_get_custom_users();
-//     foreach ($users as $key => $user) {
-//         $market = $user['Market'];
-//         $long = $user['long'];
-//         $lat = $user['lat'];
- 
-//         if( intval($market) === intval(trim($data['market'])) ){
-//             $result[] = array(
-//                 'user_login' => $user->user_login,
-//                 'avatar_url' => get_avatar_url($user->ID),
-//                 'lat' => $lat,
-//                 'long' => $long
-//             );
-//         }
-//     }
-//     return $result;
-// }
-
-
-  /*
-                        ne_lat
-                        ne_lng
-                              
-                              
-       dogplace inside        
-                              
-                              
-                              
-                              
-  sw_lat
-  sw_lng
-
-  */

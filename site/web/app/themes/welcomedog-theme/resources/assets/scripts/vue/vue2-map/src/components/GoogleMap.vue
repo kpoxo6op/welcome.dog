@@ -9,7 +9,10 @@
         class="fixed w-full h-full"
         @zoom_changed="showSearchHereBtn"
         @dragend="showSearchHereBtn"
-        @click="onClick"
+        @click="goFullScreen"
+        @dragstart="goFullScreen"
+        @rightclick="goFullScreen"
+        @dblclick="goFullScreen"
         @idle="onIdle"
         :center="changingCenter"
         :zoom='10'
@@ -97,8 +100,8 @@ export default {
   data() {
     return {
       changingCenter: {
-        lat: -36.85,
-        lng: 174.76,
+        lat: -36.8485,
+        lng: 174.7633,
       },
       //imageUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
     }
@@ -112,21 +115,23 @@ export default {
     ...mapState({
       mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
       selectedMapMarkerIndex: state => state.selectedMarkerIndex,
+      boundsExist: state => state.mapBounds,
     }),
   },
 
   watch: {
     mobileMapIsFullSreen(isFullSreen) {
       if (isFullSreen) {
-        this.$refs.mapRef.panBy(0, -130)
+        this.$refs.mapRef.panBy(0, 0)
       } else {
-        this.$refs.mapRef.panBy(0, +130)
+        this.$refs.mapRef.panBy(0, 0)
       }
     },
   },
 
   created() {
-    this.$store.dispatch('getDogPlaces')
+    //TODO: get dogplaces AFTER we have our bounds in store
+    //this.$store.dispatch('getDogPlaces')
   },
 
   mounted() {
@@ -136,8 +141,8 @@ export default {
  
      this.$refs.mapRef.$mapPromise.then((map) => {
        if (!this.mobileMapIsFullSreen) {
-         map.panBy(0, 130)
-         console.log('pan map up on start')
+         //TODO: pan to variable value because due to different screen size
+         map.panBy(0, 0)
        }
      })
   },
@@ -149,15 +154,21 @@ export default {
       'showSearchHereBtn',
     ]),
 
-    onClick() {
+    goFullScreen() {
       if (!this.mobileMapIsFullSreen) {
         this.$store.commit('enterFullScreenMap')
-        console.log('map goes fullscreen')
       }
     },
 
     onIdle() {
       this.$store.commit('mapIsIdle', true)
+      //TODO: replace workaround with mounted hooks
+      //getBounds and getDogplaces
+      if (!this.boundsExist) {
+        this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+        this.$store.dispatch('getDogPlaces')
+      }
+      this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
     },
   },
 }

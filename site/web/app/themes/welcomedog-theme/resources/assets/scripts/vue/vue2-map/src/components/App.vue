@@ -2,8 +2,7 @@
   <div class="antialiased">
     <SearchBar></SearchBar>
     <GoogleMap></GoogleMap>
-    <ButtonRow></ButtonRow>
-    <SearchResults></SearchResults>
+    <MainContent></MainContent>
   </div>
 </template>
 
@@ -11,18 +10,13 @@
 //register components with the App component
 //App will render them
 import SearchBar from './SearchBar.vue'
-import ButtonRow from './ButtonRow.vue'
 import GoogleMap from './GoogleMap.vue'
-import SearchResults from './SearchResults.vue'
+import MainContent from './MainContent.vue'
 export default {
   components: {
     SearchBar,
-    ButtonRow,
     GoogleMap,
-    SearchResults,
-  },
-  data() {
-    return {}
+    MainContent,
   },
 }
 </script>

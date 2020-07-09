@@ -25,7 +25,7 @@ class FrontPage extends Controller {
                 'type' => (current(get_the_terms($post->ID, 'dogplace-type')))->name,
                 /*
                 lines above produce this error:
-                current() expects parameter 1 to be array, bool given
+                current() expects parameter 1 to be array, bool given, probably due to Dogplace taxonomy doubling
                 */
             ];
         }, $raw_posts);

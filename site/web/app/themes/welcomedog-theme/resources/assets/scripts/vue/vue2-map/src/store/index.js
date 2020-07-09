@@ -18,6 +18,7 @@ const store = new Vuex.Store({
     searchHereBtnIsVisible: false,
     mapIsIdle: true,
     selectedMarkerIndex: 0,
+    mapBounds: null,
   },
 
   getters: {
@@ -60,6 +61,10 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+
+    setBounds(state, bounds) {
+      state.mapBounds = bounds
+    },
 
     mapIsIdle(state, mapIsIdleState) {
       state.mapIsIdle = mapIsIdleState
@@ -155,9 +160,9 @@ const store = new Vuex.Store({
 
   actions: {
 
-    searchDogPlacesWithinBounds({ commit }) {
-      console.log('search dog places within visible map bounds')
+    searchDogPlacesWithinBounds({ commit, dispatch }) {
       commit('hideSearchHereBtn')
+      dispatch('getDogPlaces')
     },
 
     hideSearchHereBtn({ commit }) {
@@ -202,7 +207,7 @@ const store = new Vuex.Store({
     },
     //TODO: abstract out axios API
     getCategories({ commit }) {
-      Api().get('/dogplace-type?per_page=100')
+      Api().get('/wp/v2/dogplace-type?per_page=100')
         .then(response => {
           const categoriesFlat = response.data
           const categoriesSorted = categoriesFlat.sort(
@@ -231,12 +236,17 @@ const store = new Vuex.Store({
       /*
       17 - grooming, 22 - shopping
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
+      switched from '/wp/v2/dogplace' to custom route '/wdog/v1/dogplaces'
       */
-      let ids = state.markedCheckboxIds.toString()
-      Api().get('/dogplace', {
+
+      const ids = state.markedCheckboxIds.toString()
+      const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue())
+      const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue())
+      Api().get('/wdog/v1/dogplaces', {
         params: {
-          'per_page': '100',
           'dogplace-type': ids,
+          'sw': sw,
+          'ne': ne,
         },
       })
         .then(response => {
