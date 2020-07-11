@@ -10,15 +10,17 @@
     >
       <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050 md:static">
         <FullScreenMobileFilterTopBar></FullScreenMobileFilterTopBar>
-        <div class="mt-16 min-w-1/3">
+        <div class="pb-32 mt-16 min-w-1/3">
           <div class="mt-4 md:p-2" v-for="(value, name) in categories" :key="name.id">
             <MenuButtonMobile
               v-bind:button="value"
             ></MenuButtonMobile>
           </div>
         </div>
-        <div class="fixed inset-x-0 bottom-0 text-center bg-white z-100050">
-          <button class="py-4 text-2xl" @click="showResults">Show Results</button>
+        <div class="fixed inset-x-0 bottom-0 h-20 bg-white flex flex-col justify-center border-t border-gray-600 rounded-t-none z-100050">
+            <div class="relative transition duration-100 ease-in-out text-gray-800 hover:bg-black hover:text-white border-gray-700 border-2 m-4 rounded-lg">
+              <button class="w-full py-2 text-2xl" @click="showResults">Show Results</button>
+            </div>
         </div>
       </div>
     </transition>
