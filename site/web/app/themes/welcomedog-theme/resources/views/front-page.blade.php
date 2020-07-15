@@ -1,5 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.noheader')
 @section('content')
+    @include('partials.search')
     @include('partials.hero')
-    @include('partials.recently-added')
+    @include('partials.promocards')
+    @include('partials.destinations')
+    @include('partials.submit-new-invite')
 @endsection

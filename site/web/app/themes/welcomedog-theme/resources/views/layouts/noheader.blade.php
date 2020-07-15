@@ -5,7 +5,7 @@
     @php do_action('get_header') @endphp
     <div class="container wrap" role="document">
       <div class="content">
-        <main class="main">
+        <main class="main mx-6">
           @yield('content')
         </main>
         @if (App\display_sidebar())

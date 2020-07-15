@@ -21,6 +21,10 @@ add_action('wp_enqueue_scripts', function () {
     wp_localize_script('sage/main.js', 'sageData', [
     'ajaxBaseURL' => trailingslashit( get_home_url() )
     ]);
+    //TODO: load slider only on frontpage
+    // if (is_page('frontpage?')) {
+        wp_enqueue_script('sage/frontPageSlider.js', asset_path('scripts/frontPageSlider.js'), ['jquery'], null, true);
+    // }
 
 }, 100);
 

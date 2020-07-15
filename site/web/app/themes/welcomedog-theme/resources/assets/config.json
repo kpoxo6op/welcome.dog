@@ -6,6 +6,9 @@
     ],
     "customizer": [
       "./scripts/customizer.js"
+    ],
+    "frontPageSlider": [
+      "./scripts/frontPageSlider.js"
     ]
   },
   "publicPath": "/wp-content/themes/welcomedog-theme",
