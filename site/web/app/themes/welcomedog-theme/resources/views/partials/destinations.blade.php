@@ -1,20 +1,24 @@
-<div class="text-xl mt-8">Destinations</div>
-<div class="font-semibold">Auckland</div>
-<hr>
-<div class="font-semibold">Christchirch</div>
-<hr>
-<div class="font-semibold">Wellington</div>
-<hr>
-<div class="font-semibold">Hamilton</div>
-<hr>
-<div class="font-semibold">Tauranga</div>
-<hr>
-<div class="font-semibold">Dunedin</div>
-<hr>
-<div class="font-semibold">Palmerston North</div>
-<hr>
-<div class="font-semibold">Napier</div>
-<hr>
-<div class="font-semibold">Porirua</div>
-<hr>
-<div class="font-semibold">New Plymouth</div>
+<div class="mx-6">
+  <div class="text-2xl mt-8 font-medium text-gray-800">Destinations</div>
+  <div class="mt-6">
+    <div class="text-gray-900">Auckland</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Christchirch</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Wellington</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Hamilton</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Tauranga</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Dunedin</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Palmerston North</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Napier</div>
+    <hr class="my-4">
+    <div class="text-gray-900">Porirua</div>
+    <hr class="my-4">
+    <div class="text-gray-900">New Plymouth</div>
+  </div>
+</div>

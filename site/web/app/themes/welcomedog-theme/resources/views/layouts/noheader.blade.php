@@ -3,9 +3,10 @@
   @include('partials.head')
   <body @php body_class() @endphp>
     @php do_action('get_header') @endphp
+    <!-- <div class="container wrap bg-purple-200 sm:bg-gray-200 md:bg-red-200 lg:bg-orange-400 xl:bg-green-200" role="document"> -->
     <div class="container wrap" role="document">
       <div class="content">
-        <main class="main mx-6">
+        <main class="main">
           @yield('content')
         </main>
         @if (App\display_sidebar())
