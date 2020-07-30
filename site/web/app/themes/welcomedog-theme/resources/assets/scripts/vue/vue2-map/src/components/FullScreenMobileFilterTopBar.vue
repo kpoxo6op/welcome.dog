@@ -12,7 +12,7 @@
       <!-- Clear All button -->
       <div class="w-1/3 text-right">
         <button :class="{ 'text-gray-900': someCheckboxesMarked }"
-                  class="pr-8 text-gray-500 whitespace-no-wrap"
+                class="pr-8 text-gray-500 whitespace-no-wrap"
                 @click="clearAllCheckboxesAction">
                 Clear all
         </button>

@@ -1,15 +1,13 @@
 import Vue from 'vue'
 import AppComponent from '../vue/vue2-demo-project/src/App.vue'
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
-Vue.use(VueAwesomeSwiper)
+import router from '../vue/vue2-demo-project/src/router'
 
 export default {
   init() {
     // JavaScript fired on a page with a body class that CONTAINS github-demo
     new Vue({
       el: '#app',
+      router,
       components: {
         app: AppComponent,
       },

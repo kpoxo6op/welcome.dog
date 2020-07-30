@@ -53,40 +53,7 @@
   </div>
 </template>
 <script>
-/*
-<googlemaps-marker
-  v-for="post of posts"
-  :key="post._id"
-  :label="{
-    color: post === currentPost ? 'white' : 'black',
-    fontFamily: 'Material Icons',
-    fontSize: '20px',
-    text: 'face',
-  }"
-  :position="post.position"
-  :z-index="5"
-  @click="selectPost(post._id)"
-/>
-*/
 
-/*
-marker Properties
------------------
-animation : number
-attribution : object
-clickable : boolean
-cursor : string
-draggable : boolean
-icon : object
-label : string
-opacity : number
-place : object
-position : {lat: number, lng: number} | google.maps.LatLng
-shape : object        - https://diegoazh.github.io/gmap-vue/examples/basic-marker-shape.html#live-example
-title : string
-zIndex : number
-
-*/
 import {mapGetters, mapState, mapActions} from 'vuex';
 import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
 import FullScreenSwipeCardsBar from './FullScreenSwipeCardsBar.vue';
@@ -114,6 +81,7 @@ export default {
 
     ...mapState({
       mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
+      mapIsSmall: state => !state.mobileMapIsFullSreen,
       selectedMapMarkerIndex: state => state.selectedMarkerIndex,
       boundsExist: state => state.mapBounds,
     }),
@@ -122,16 +90,19 @@ export default {
   watch: {
     mobileMapIsFullSreen(isFullSreen) {
       if (isFullSreen) {
-        this.$refs.mapRef.panBy(0, 0)
+        this.$refs.mapRef.panBy(0, -120)
       } else {
-        this.$refs.mapRef.panBy(0, 0)
+        this.$refs.mapRef.panBy(0, +120)
       }
     },
   },
 
-  created() {
-    //TODO: get dogplaces AFTER we have our bounds in store
-    //this.$store.dispatch('getDogPlaces')
+  created () {//change to created event handler
+      // this.$store.dispatch("userRequest").then(profile => {
+      //   if (this.$store.getters.isAuthenticated) {//wait for user request action to complete before evaluating getters
+      //   Vue.prototype.$gate = new Gate(profile);//can use profile directly here
+      // }
+      // });
   },
 
   mounted() {
@@ -140,9 +111,9 @@ export default {
     // Therefore we need to write mapRef.$mapPromise.then(() => ...)
  
      this.$refs.mapRef.$mapPromise.then((map) => {
-       if (!this.mobileMapIsFullSreen) {
+       if (this.mapIsSmall) {
          //TODO: pan to variable value because due to different screen size
-         map.panBy(0, 0)
+         map.panBy(0, +120)
        }
      })
   },
@@ -155,25 +126,29 @@ export default {
     ]),
 
     goFullScreen() {
-      if (!this.mobileMapIsFullSreen) {
+      if (this.mapIsSmall) {
         this.$store.commit('enterFullScreenMap')
       }
     },
 
     onIdle() {
       this.$store.commit('mapIsIdle', true)
-      //TODO: replace workaround with mounted hooks
-      //getBounds and getDogplaces
-      if (!this.boundsExist) {
-        this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
-        this.$store.dispatch('getDogPlaces')
-      }
+      console.log('4.0 set map bounds')
       this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      //Load places automatically on small map. Fires only on page load
+      // if (this.mapIsSmall) {
+      //   console.log('5.0 automatically dispatch "Get places" on small map')
+      //   this.$store.dispatch('getDogPlaces')
+      // }
     },
   },
 }
+
+
 </script>
 
 <style lang='scss' scoped>
 
 </style>
+
+

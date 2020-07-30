@@ -1,5 +1,5 @@
 <template>
-  <label :for="checkbox.id">
+  <label :for="checkbox.id" @click="toggleURLQueryString">
     <div class="mt-1">
       <input type='checkbox' class='w-8 h-8 form-checkbox'
         :name="checkbox.name"
@@ -14,6 +14,7 @@
 
 <script>
   export default {
+    props: ['checkbox'],
     computed: {
       value: {
         get() {
@@ -25,6 +26,11 @@
         },
       },
     },
-    props: ['checkbox'],
+
+    methods: {
+      toggleURLQueryString() {
+        console.log('toggle URL query string')
+      },
+    },
   }
 </script>

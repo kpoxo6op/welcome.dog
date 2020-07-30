@@ -65,9 +65,12 @@ function get_dogplaces_within_bounds( WP_REST_Request $request ) {
   /* BEGIN check if we get coordintates */
   $sw_coords = array_map('floatval', explode(',', urldecode($request['sw'])));
   $ne_coords = array_map('floatval', explode(',', urldecode($request['ne'])));
-  $dogplace_types = $request['dogplace-type'];
-  if ($dogplace_types == '') {
-    $dogplace_types = get_terms(
+  
+  $dogplace_type_str = urldecode($request['dogplace-type']);
+  if ($dogplace_type_str !== '') {
+    $dogplace_type_arr = explode( ',', $dogplace_type_str );
+  } else {
+    $dogplace_type_arr = get_terms(
       array( 'dogplace-type' ),
       array( 'fields' => 'ids' )
     );
@@ -109,7 +112,7 @@ function get_dogplaces_within_bounds( WP_REST_Request $request ) {
         array(
             'taxonomy' => 'dogplace-type',
             'field'    => 'term_id',
-            'terms'    => ($dogplace_types),
+            'terms'    => $dogplace_type_arr,
         ),
     ),
   );

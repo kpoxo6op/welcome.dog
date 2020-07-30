@@ -3,17 +3,17 @@
     <!-- TODO: replace fixed height with proper map window -->
     <!-- insert h-64 windows between searchbar and button row -->
     <div class="h-64"></div>
-    <ButtonRow></ButtonRow>
+    <Controls></Controls>
     <SearchResults></SearchResults>
   </div>
 </template>
 
 <script>
-import ButtonRow from './ButtonRow.vue'
+import Controls from './Controls.vue'
 import SearchResults from './SearchResults.vue'
 export default {
   components: {
-    ButtonRow,
+    Controls,
     SearchResults,
   },
 }

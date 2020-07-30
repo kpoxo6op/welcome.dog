@@ -1,6 +1,11 @@
 <template>
   <div>
-    <button v-show="searchHereBtnIsVisible" @click="searchDogPlacesWithinBounds" type="button" class="px-2 text-center bg-white border border-gray-900 rounded-full">Search Here</button>
+    <button
+      v-show="searchHereBtnIsVisible"
+      @click="searchDogPlacesWithinBounds"
+      type="button"
+      class="px-2 text-center bg-white border border-gray-900 rounded-full">Search Here
+    </button>
   </div>
 </template>
 

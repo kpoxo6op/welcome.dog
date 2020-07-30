@@ -1,3 +1,4 @@
+<a href="{{ home_url('/map/#/?category=Beach') }}">
 <div class="ml-6 sm:ml-0 sm:mr-4 mb-4 max-w-sm rounded-lg overflow-hidden shadow-lg">
   <img class="w-full" src="@asset('images/promocard1.jpg')" alt="card">
   <div class="px-6 py-4">
@@ -7,3 +8,4 @@
     </p>
   </div>
 </div>
+</a>

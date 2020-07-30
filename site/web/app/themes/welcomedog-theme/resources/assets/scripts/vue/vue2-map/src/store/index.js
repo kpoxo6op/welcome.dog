@@ -19,9 +19,12 @@ const store = new Vuex.Store({
     mapIsIdle: true,
     selectedMarkerIndex: 0,
     mapBounds: null,
+    categoriesFromURL: [],
+    status: null,
   },
 
   getters: {
+    requestSuccess: state => state.status === 'success',
     categories: state => state.categories,
     allDogPlaces: state => state.dogPlaces,
     allDogPlaceCoordinates: state => {
@@ -42,6 +45,10 @@ const store = new Vuex.Store({
       return state.markedCheckboxIds && state.markedCheckboxIds.length
     },
 
+    markedCheckboxesCount: state => {
+      return state.markedCheckboxIds.length
+    },
+
     dogPlaceCards: (state) => {
       let dogPlaceCards = []
       for (const [, dogPlace] of Object.entries(state.dogPlaces)) {
@@ -58,11 +65,37 @@ const store = new Vuex.Store({
       }
       return dogPlaceCards
     },
+
+    categoryIdByName: (state) => (categoryName) => {
+      return state.categories
+        .map(
+          el => el.children.filter(el => el.name === categoryName)
+        )
+        .filter(el => el.length)
+        .flat()
+        .map(el => el.id)[0]
+    },
   },
 
   mutations: {
 
+    requestLoading: (state) => {
+      state.status = 'loading';
+    },
+    requestSuccess: (state) => {
+      state.status = 'success';
+    },
+    requestError: (state) => {
+      state.status = 'error';
+    },
+
+    setURLCategories(state, categoryNameString) {
+      state.categoriesFromURL = categoryNameString.split(',')
+      console.log('1.1(last) saved category names from URL to Store')
+    },
+
     setBounds(state, bounds) {
+      console.log('4.1(last) saved map bounds to store')
       state.mapBounds = bounds
     },
 
@@ -97,8 +130,8 @@ const store = new Vuex.Store({
       state.mobileFilterIsOpen = !state.mobileFilterIsOpen
     },
 
-    addToChecked(state, checkboxId) {
-      state.markedCheckboxIds.push(checkboxId)
+    addToChecked(state, categoryId) {
+      state.markedCheckboxIds.push(categoryId)
     },
 
     removeFromChecked(state, checkboxId) {
@@ -129,6 +162,8 @@ const store = new Vuex.Store({
 
     setCategories(state, categories) {
       state.categories = categories
+      console.log('2.2(last) Wrote Categories from WordPress to Store')
+
     },
 
     setDogPlaces(state, dogPlaces) {
@@ -159,6 +194,37 @@ const store = new Vuex.Store({
   }, //mutations end
 
   actions: {
+
+    addToFilterFromStore({ state, commit, getters }) {
+      let categoryIDs = state.categoriesFromURL.map(
+        categoryName => {
+          console.log('3.1 converted category name to id:', categoryName)
+          return getters.categoryIdByName(categoryName)
+        }
+      )
+      categoryIDs.map(
+        cid => {
+          console.log('3.2(last) Added URL categoryID to Filter:', cid)
+          return commit('addToChecked', cid)
+        }
+      )
+    },
+
+    addToFilterFromURL({ commit, getters }, categoryNameString) {
+      let categoryNameArray = categoryNameString.split(',')
+      let categoryIDs = categoryNameArray.map(
+        categoryName => {
+          console.log('x.x converted category name to id:', categoryName)
+          return getters.categoryIdByName(categoryName)
+        }
+      )
+      categoryIDs.map(
+        cid => {
+          console.log('x.x Added URL categoryID to Filter:', cid)
+          return commit('addToChecked', cid)
+        }
+      )
+    },
 
     searchDogPlacesWithinBounds({ commit, dispatch }) {
       commit('hideSearchHereBtn')
@@ -206,8 +272,8 @@ const store = new Vuex.Store({
       commit('closeCards')
     },
     //TODO: abstract out axios API
-    getCategories({ commit }) {
-      Api().get('/wp/v2/dogplace-type?per_page=100')
+    setCategories({ commit, dispatch }) {
+      return Api().get('/wp/v2/dogplace-type?per_page=100') // <--return promise
         .then(response => {
           const categoriesFlat = response.data
           const categoriesSorted = categoriesFlat.sort(
@@ -229,7 +295,23 @@ const store = new Vuex.Store({
             acc[category.id] = ctg
             return acc
           }, [])
+
+          console.log('2.1 write ALL WP categories to Store')
           commit('setCategories', categoriesParentChild)
+          commit('requestSuccess')
+
+          console.log('3.0 add URL category IDs to Filters')
+          dispatch('addToFilterFromStore')
+
+          //from example:
+          //https://forum.vuejs.org/t/wait-for-store-getter-to-deliver-data/62690/2
+          return categoriesParentChild
+
+
+        })
+        .catch(err => {
+          commit('requestError')
+          console.log('handle errors', err)
         })
     },
     getDogPlaces({ state, commit }) {
@@ -238,8 +320,8 @@ const store = new Vuex.Store({
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       switched from '/wp/v2/dogplace' to custom route '/wdog/v1/dogplaces'
       */
-
-      const ids = state.markedCheckboxIds.toString()
+      console.log('5.1 get filtered places within bounds')
+      const ids = encodeURIComponent(state.markedCheckboxIds.toString())
       const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue())
       const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue())
       Api().get('/wdog/v1/dogplaces', {
@@ -250,6 +332,7 @@ const store = new Vuex.Store({
         },
       })
         .then(response => {
+          console.log('5.2(last) write retrieved Dog Places to Store')
           commit('setDogPlaces', response.data)
         })
         .catch(e => {

@@ -9,6 +9,7 @@ $(document).ready(function () {
     slidesToScroll: 1,
     mobileFirst: true,
     focusOnSelect: true,
+    touchThreshold: 50,
     responsive: [{
       breakpoint: 639,
       settings: {
