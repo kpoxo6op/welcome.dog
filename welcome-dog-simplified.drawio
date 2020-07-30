@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-07-30T00:50:26.123Z" agent="5.0 (Windows)" etag="NX73vwZMauDTGre87nbi" version="13.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-07-30T03:04:05.412Z" agent="5.0 (Windows)" etag="pioceHR7oizpEp0rmQrq" version="13.5.3" type="github">
   <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
     <mxGraphModel dx="1185" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="2000" background="#ffffff" math="0" shadow="0">
       <root>
@@ -7,41 +7,47 @@
         <mxCell id="JqlryfgMJIv1-VmyIzc9-7" value="WordPress site and WordPress REST API" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="1230" y="200" width="100" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="JqlryfgMJIv1-VmyIzc9-8" value="Front Page" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
-          <mxGeometry x="270" y="290" width="100" height="1500" as="geometry" />
+        <mxCell id="JqlryfgMJIv1-VmyIzc9-8" value="&lt;font style=&quot;font-size: 12px&quot;&gt;Front Page&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
+          <mxGeometry x="270" y="290" width="100" height="500" as="geometry" />
         </mxCell>
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="JqlryfgMJIv1-VmyIzc9-8">
           <mxGeometry x="45" y="110" width="10" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="JqlryfgMJIv1-VmyIzc9-9" value="WordPress" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
-          <mxGeometry x="750" y="290" width="100" height="1500" as="geometry" />
+        <mxCell id="JqlryfgMJIv1-VmyIzc9-9" value="WordPress REST API" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
+          <mxGeometry x="750" y="290" width="100" height="500" as="geometry" />
         </mxCell>
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-21" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="JqlryfgMJIv1-VmyIzc9-9">
-          <mxGeometry x="45" y="130" width="10" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-22" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="JqlryfgMJIv1-VmyIzc9-9" target="Y14T1K6cYxlP2Jm4EltI-21">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-105" y="130.04999999999995" as="sourcePoint" />
-            <mxPoint x="50" y="130.00000000000023" as="targetPoint" />
-          </mxGeometry>
+          <mxGeometry x="45" y="120" width="10" height="230" as="geometry" />
         </mxCell>
         <mxCell id="JqlryfgMJIv1-VmyIzc9-15" value="Standard WordPress page without Vue JS in user browser" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="270" y="200" width="100" height="70" as="geometry" />
         </mxCell>
         <mxCell id="JqlryfgMJIv1-VmyIzc9-16" value="Vuex Store" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
-          <mxGeometry x="590" y="290" width="100" height="1500" as="geometry" />
+          <mxGeometry x="590" y="290" width="100" height="500" as="geometry" />
         </mxCell>
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-19" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="JqlryfgMJIv1-VmyIzc9-16">
-          <mxGeometry x="45" y="130" width="10" height="80" as="geometry" />
+          <mxGeometry x="45" y="120" width="10" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-65" value="Front Page" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" vertex="1" parent="JqlryfgMJIv1-VmyIzc9-16">
+          <mxGeometry x="-320" width="100" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-66" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="Y14T1K6cYxlP2Jm4EltI-65">
+          <mxGeometry x="45" y="110" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-67" value="Vue App with Router" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" vertex="1" parent="JqlryfgMJIv1-VmyIzc9-16">
+          <mxGeometry x="-165" width="110" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-68" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="Y14T1K6cYxlP2Jm4EltI-67">
+          <mxGeometry x="50" y="120" width="10" height="230" as="geometry" />
         </mxCell>
         <mxCell id="zZore4M1GCGTvKos9PnM-23" value="" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;strokeColor=#808080;fontColor=#808080;" parent="1" vertex="1">
-          <mxGeometry x="150" y="290" width="20" height="1500" as="geometry" />
+          <mxGeometry x="150" y="290" width="20" height="500" as="geometry" />
         </mxCell>
         <mxCell id="zZore4M1GCGTvKos9PnM-40" value="Vue App with Router" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
-          <mxGeometry x="425" y="290" width="110" height="1450" as="geometry" />
+          <mxGeometry x="425" y="290" width="110" height="500" as="geometry" />
         </mxCell>
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-7" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="zZore4M1GCGTvKos9PnM-40">
-          <mxGeometry x="50" y="120" width="10" height="150" as="geometry" />
+          <mxGeometry x="50" y="120" width="10" height="230" as="geometry" />
         </mxCell>
         <mxCell id="zZore4M1GCGTvKos9PnM-41" value="WP page with VueJS app mounted to &amp;lt;app&amp;gt; div" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fontColor=#808080;strokeColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="430" y="200" width="100" height="70" as="geometry" />
@@ -68,34 +74,58 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-20" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-7" target="Y14T1K6cYxlP2Jm4EltI-19">
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-20" value="" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-7" target="Y14T1K6cYxlP2Jm4EltI-19">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="490" y="420.0000000000002" as="sourcePoint" />
             <mxPoint x="640" y="420.0000000000002" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-23" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="645" y="454.99999999999994" as="sourcePoint" />
-            <mxPoint x="795" y="454.99999999999994" as="targetPoint" />
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-57" value="dispatch &#39;getPlaces&#39;" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-7" target="Y14T1K6cYxlP2Jm4EltI-19">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="500" y="510" as="sourcePoint" />
+            <mxPoint x="580" y="510" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="570" y="540" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-24" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485" y="454.99999999999994" as="sourcePoint" />
-            <mxPoint x="635" y="454.99999999999994" as="targetPoint" />
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-58" value="GET" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-19" target="Y14T1K6cYxlP2Jm4EltI-21">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="660" y="550" as="sourcePoint" />
+            <mxPoint x="770" y="550" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="745" y="550" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-25" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-60" value="JSON" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;entryX=1.228;entryY=0.878;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-21" target="Y14T1K6cYxlP2Jm4EltI-19">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="645" y="455" as="sourcePoint" />
-            <mxPoint x="795" y="455" as="targetPoint" />
+            <mxPoint x="790" y="630" as="sourcePoint" />
+            <mxPoint x="710" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Y14T1K6cYxlP2Jm4EltI-26" value="URL with params" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-62" value="JSON" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=-0.014;exitY=0.911;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Y14T1K6cYxlP2Jm4EltI-19" target="Y14T1K6cYxlP2Jm4EltI-7">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485" y="455" as="sourcePoint" />
-            <mxPoint x="635" y="455" as="targetPoint" />
+            <mxPoint x="600" y="620" as="sourcePoint" />
+            <mxPoint x="520" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-22" value="" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1.133;exitY=0.065;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1" target="Y14T1K6cYxlP2Jm4EltI-21" source="Y14T1K6cYxlP2Jm4EltI-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="645" y="420.04999999999995" as="sourcePoint" />
+            <mxPoint x="800" y="420.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-63" value="" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1;exitY=0.067;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="455.46" as="sourcePoint" />
+            <mxPoint x="635" y="455.46" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y14T1K6cYxlP2Jm4EltI-64" value="" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1.133;exitY=0.065;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="646.3299999999999" y="455.00000000000006" as="sourcePoint" />
+            <mxPoint x="795" y="455.00000000000006" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
