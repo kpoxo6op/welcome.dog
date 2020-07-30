@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2020-07-30T06:25:09.253Z" agent="5.0 (Windows)" etag="Frf_tdmEgIi2KssNem14" version="13.5.5" type="github">
+<mxfile host="app.diagrams.net" modified="2020-07-30T06:44:04.834Z" agent="5.0 (Windows)" etag="J0TMP_3DoNd8qnak_v6c" version="13.5.5" type="github">
   <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
     <mxGraphModel dx="1146" dy="546" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="2000" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="JqlryfgMJIv1-VmyIzc9-7" value="WordPress site and WordPress REST API" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
+        <mxCell id="JqlryfgMJIv1-VmyIzc9-7" value="IP Geolocation, Google, my WordPress site APIs" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
           <mxGeometry x="750" y="180" width="100" height="90" as="geometry" />
         </mxCell>
         <mxCell id="JqlryfgMJIv1-VmyIzc9-8" value="&lt;font style=&quot;font-size: 12px&quot;&gt;Front Page&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
@@ -13,13 +13,13 @@
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="JqlryfgMJIv1-VmyIzc9-8" vertex="1">
           <mxGeometry x="45" y="110" width="10" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="JqlryfgMJIv1-VmyIzc9-9" value="WordPress REST API" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
+        <mxCell id="JqlryfgMJIv1-VmyIzc9-9" value="External APIs" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
           <mxGeometry x="750" y="290" width="100" height="600" as="geometry" />
         </mxCell>
         <mxCell id="Y14T1K6cYxlP2Jm4EltI-21" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="JqlryfgMJIv1-VmyIzc9-9" vertex="1">
           <mxGeometry x="45" y="120" width="10" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="JqlryfgMJIv1-VmyIzc9-15" value="Standard WordPress page without Vue JS in user browser" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
+        <mxCell id="JqlryfgMJIv1-VmyIzc9-15" value="Standard WordPress page frontage (no Vue)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
           <mxGeometry x="270" y="180" width="100" height="90" as="geometry" />
         </mxCell>
         <mxCell id="JqlryfgMJIv1-VmyIzc9-16" value="Vuex Store" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
@@ -37,7 +37,7 @@
         <mxCell id="zZore4M1GCGTvKos9PnM-23" value="" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
           <mxGeometry x="150" y="290" width="20" height="600" as="geometry" />
         </mxCell>
-        <mxCell id="zZore4M1GCGTvKos9PnM-41" value="Page with mounted Vue app (Router, Vuex, Google Maps plugin)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
+        <mxCell id="zZore4M1GCGTvKos9PnM-41" value="WordPress page with mounted Vue app (Router, Vuex, Google Maps plugin)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
           <mxGeometry x="430" y="180" width="100" height="90" as="geometry" />
         </mxCell>
         <mxCell id="zZore4M1GCGTvKos9PnM-48" value="site.com/app/#/?category=beach" style="shape=note;whiteSpace=wrap;html=1;size=11;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" parent="1" vertex="1">
@@ -130,14 +130,8 @@
             <mxPoint x="635" y="449.99999999999994" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rumwd16TLbsH2NDdp6VV-3" value="" style="html=1;verticalAlign=bottom;endArrow=block;exitX=1.133;exitY=0.065;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=block;startFill=1;fontColor=#B3B3B3;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="646.3300000000002" y="449.99999999999994" as="sourcePoint" />
-            <mxPoint x="795" y="449.99999999999994" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="rumwd16TLbsH2NDdp6VV-5" value="Note" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;strokeColor=#B3B3B3;fontColor=#B3B3B3;" vertex="1" parent="1">
-          <mxGeometry x="840" y="410" width="200" height="120" as="geometry" />
+          <mxGeometry x="1100" y="180" width="200" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
