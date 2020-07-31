@@ -195,6 +195,10 @@ const store = new Vuex.Store({
 
   actions: {
 
+    setBounds({ commit }, bounds) {
+      commit('setBounds', bounds)
+    },
+
     addToFilterFromStore({ state, commit, getters }) {
       let categoryIDs = state.categoriesFromURL.map(
         categoryName => {

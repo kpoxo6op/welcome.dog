@@ -15,7 +15,7 @@ add_action( 'init', function() {
   ]);
 
   register_extended_taxonomy( 'dogplace-type', 'dogplace', [
-    'meta_box'     => 'dropdown',
+    'meta_box'     => 'radio',
     'show_in_rest' => true,
   ]);
 

@@ -123,6 +123,7 @@ export default {
     ...mapActions([
       'selectMarker',
       'showSearchHereBtn',
+      'setBounds',
     ]),
 
     goFullScreen() {
@@ -133,13 +134,8 @@ export default {
 
     onIdle() {
       this.$store.commit('mapIsIdle', true)
-      console.log('4.0 set map bounds')
-      this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
-      //Load places automatically on small map. Fires only on page load
-      // if (this.mapIsSmall) {
-      //   console.log('5.0 automatically dispatch "Get places" on small map')
-      //   this.$store.dispatch('getDogPlaces')
-      // }
+      console.log('4.0 dispatch "Set map bounds"')
+      this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
     },
   },
 }
