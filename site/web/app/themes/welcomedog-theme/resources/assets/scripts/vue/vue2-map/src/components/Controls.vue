@@ -46,39 +46,32 @@ export default {
   },
 
   created() {
-    if (this.$route.query.category) {
+    // if (this.$route.query.category) {
 
-      console.log('1.0 commit "save category names from URL"')
-      this.$store.commit('setURLCategories', this.$route.query.category)
+    //   console.log('1.0 commit "save category names from URL"')
+    //   this.$store.commit('setURLCategories', this.$route.query.category)
 
-      console.log('2.0 dispatch "set Categories"')
-      this.$store.dispatch('setCategories').then(() => {
-        if (this.requestSuccess && this.boundsAreSet) {
-          console.log('5.0 dispatch "Get places"')
-          this.$store.dispatch('getDogPlaces')
-        } else {
-          console.log('5.0 not met conditions to get dogplaces: ')
-          console.log('this.requestSuccess', this.requestSuccess)
-          console.log('this.boundsAreSet', this.boundsAreSet)
-        }
-      });
+    //   console.log('2.0 dispatch "set Categories"')
+    //   this.$store.dispatch('setCategories').then(() => {
+    //     if (this.requestSuccess && this.boundsAreSet) {
+    //       console.log('5.0 dispatch "Get places"')
+    //       this.$store.dispatch('getDogPlaces')
+    //     } else {
+    //       console.log('5.0 doesnt meet conditions to get dogplaces: ')
+    //       console.log('this.requestSuccess', this.requestSuccess)
+    //       console.log('this.boundsAreSet', this.boundsAreSet)
+    //     }
+    //   });
 
-    } else {
-      console.log('1.0 no categories in URL found')
-      console.log('2.0 dispatch "set Categories"')
-      this.$store.dispatch('setCategories')
-    }
-    /*
-    TODO - implement this order of page load
-    - set categories to store from WP
-    - set filters to store from URL
-    - get map bounds
-    - get dofplaces with selectedcategories+mapbounds
-
-    */
+    // } else {
+    //   console.log('1.0 no categories in URL found')
+    //   console.log('2.0 dispatch "set Categories"')
+    //   this.$store.dispatch('setCategories')
+    // }
   },
 
   mounted() {
+
   },
 
   methods: {

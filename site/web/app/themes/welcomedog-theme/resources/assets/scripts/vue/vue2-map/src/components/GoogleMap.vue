@@ -78,6 +78,7 @@ export default {
   computed: {
     ...mapGetters({
       allDogPlaceCoordinates: 'allDogPlaceCoordinates',
+      boundsAreSet: 'boundsAreSet',
     }),
 
     ...mapState({
@@ -125,6 +126,7 @@ export default {
       'selectMarker',
       'showSearchHereBtn',
       'setBounds',
+      'requestSuccess',
     ]),
 
     goFullScreen() {
@@ -144,8 +146,29 @@ export default {
     },
 
     boundsChanged() {
-      console.log('4.0 dispatch "Set map bounds"')
-      this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      if (this.boundsAreSet) {
+        console.log('1.2 bounds already set (duplicate boundsChanged event bug)')
+      } else {
+        console.log('1.0 dispatch "Set map bounds"')
+        this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+        .then(() => {
+          if (this.$route.query.category) {
+            console.log('2.0 commit "save category names from URL"')
+            this.$store.commit('setURLCategories', this.$route.query.category)
+            console.log('3.0 dispatch "set Categories"')
+            this.$store.dispatch('setCategories').then(() => {
+              if (this.requestSuccess && this.boundsAreSet) {
+                console.log('5.0 dispatch "Get places"')
+                this.$store.dispatch('getDogPlaces')
+              } else {
+                console.log('5.0 doesnt meet conditions to get dogplaces: ')
+                console.log('this.requestSuccess', this.requestSuccess)
+                console.log('this.boundsAreSet', this.boundsAreSet)
+              }
+            });
+          }
+        })
+      }
     },
   },
 }

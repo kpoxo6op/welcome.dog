@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     mobileFilterIsOpen: false,
     mobileMapIsFullSreen: false,
     searchHereBtnIsVisible: false,
-    mapIsIdle: true,
+    mapIsIdle: null,
     selectedMarkerIndex: 0,
     mapBounds: null,
     categoriesFromURL: [],
@@ -25,10 +25,11 @@ const store = new Vuex.Store({
 
   getters: {
     boundsAreSet: state => {
-      if (typeof state.mapBounds === 'undefined' || state.mapBounds === null) {
-        return false
+      if (typeof state.mapBounds !== 'undefined' && state.mapBounds !== null && Object.keys(state.mapBounds).length !== 0) {
+        //console.log('getter: bounds are set')
+        return true
       } else {
-        return Object.keys(state.mapBounds).length !== 0
+        //console.log('getter: bounds are NOT set')
       }
     },
     requestSuccess: state => state.status === 'success',
@@ -98,11 +99,11 @@ const store = new Vuex.Store({
 
     setURLCategories(state, categoryNameString) {
       state.categoriesFromURL = categoryNameString.split(',')
-      console.log('1.1(last) saved category names from URL to Store')
+      console.log('2.1(step done) saved category names from URL to Store')
     },
 
     setBounds(state, bounds) {
-      console.log('4.1(last) saved map bounds to store')
+      console.log('1.1(step done) saved map bounds to store')
       state.mapBounds = bounds
     },
 
@@ -138,7 +139,12 @@ const store = new Vuex.Store({
     },
 
     addToChecked(state, categoryId) {
-      state.markedCheckboxIds.push(categoryId)
+      if (state.markedCheckboxIds.indexOf(categoryId) == -1) {
+        state.markedCheckboxIds.push(categoryId)
+      } else {
+        //TODO: remove code called twice in GoogleMap setbounds
+        console.log('already marked', categoryId)
+      }
     },
 
     removeFromChecked(state, checkboxId) {
@@ -169,7 +175,7 @@ const store = new Vuex.Store({
 
     setCategories(state, categories) {
       state.categories = categories
-      console.log('2.2(last) Wrote Categories from WordPress to Store')
+      console.log('3.2(step done) Wrote Categories from WordPress to Store')
 
     },
 
@@ -209,13 +215,13 @@ const store = new Vuex.Store({
     addToFilterFromStore({ state, commit, getters }) {
       let categoryIDs = state.categoriesFromURL.map(
         categoryName => {
-          console.log('3.1 converted category name to id:', categoryName)
+          console.log('4.1 converted category name to id:', categoryName)
           return getters.categoryIdByName(categoryName)
         }
       )
       categoryIDs.map(
         cid => {
-          console.log('3.2(last) Added URL categoryID to Filter:', cid)
+          console.log('4.2(step done) Added URL categoryID to Filter:', cid)
           return commit('addToChecked', cid)
         }
       )
@@ -237,10 +243,10 @@ const store = new Vuex.Store({
     //   )
     // },
 
-    searchDogPlacesWithinBounds({ commit, dispatch, getters }) {
+    searchDogPlacesWithinBounds({ commit, dispatch }) {
       commit('hideSearchHereBtn')
       dispatch('getDogPlaces')
-      console.log('getters.boundsAreSet', getters.boundsAreSet)
+      //console.log('getters.boundsAreSet', getters.boundsAreSet)
     },
 
     hideSearchHereBtn({ commit }) {
@@ -308,11 +314,11 @@ const store = new Vuex.Store({
             return acc
           }, [])
 
-          console.log('2.1 write ALL WP categories to Store')
+          console.log('3.1 write ALL WP categories to Store')
           commit('setCategories', categoriesParentChild)
           commit('requestSuccess')
 
-          console.log('3.0 add URL category IDs to Filters')
+          console.log('4.0 add URL category IDs to Filters')
           dispatch('addToFilterFromStore')
 
           //from example:
@@ -342,7 +348,7 @@ const store = new Vuex.Store({
         },
       })
         .then(response => {
-          console.log('5.2(last) write retrieved Dog Places to Store')
+          console.log('5.2(step done) write retrieved Dog Places to Store')
           commit('setDogPlaces', response.data)
         })
         .catch(e => {
