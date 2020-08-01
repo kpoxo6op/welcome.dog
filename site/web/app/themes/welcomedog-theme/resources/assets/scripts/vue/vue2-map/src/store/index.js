@@ -24,6 +24,9 @@ const store = new Vuex.Store({
   },
 
   getters: {
+    boundsAreSet: state => {
+      return Object.keys(state.mapBounds).length !== 0
+    },
     requestSuccess: state => state.status === 'success',
     categories: state => state.categories,
     allDogPlaces: state => state.dogPlaces,
@@ -214,25 +217,26 @@ const store = new Vuex.Store({
       )
     },
 
-    addToFilterFromURL({ commit, getters }, categoryNameString) {
-      let categoryNameArray = categoryNameString.split(',')
-      let categoryIDs = categoryNameArray.map(
-        categoryName => {
-          console.log('x.x converted category name to id:', categoryName)
-          return getters.categoryIdByName(categoryName)
-        }
-      )
-      categoryIDs.map(
-        cid => {
-          console.log('x.x Added URL categoryID to Filter:', cid)
-          return commit('addToChecked', cid)
-        }
-      )
-    },
+    // addToFilterFromURL({ commit, getters }, categoryNameString) {
+    //   let categoryNameArray = categoryNameString.split(',')
+    //   let categoryIDs = categoryNameArray.map(
+    //     categoryName => {
+    //       console.log('x.x converted category name to id:', categoryName)
+    //       return getters.c a t e g o r y I d By N a m e(categoryName)
+    //     }
+    //   )
+    //   categoryIDs.map(
+    //     cid => {
+    //       console.log('x.x Added URL categoryID to Filter:', cid)
+    //       return commit('a d d T o C h e c k e d', cid)
+    //     }
+    //   )
+    // },
 
-    searchDogPlacesWithinBounds({ commit, dispatch }) {
+    searchDogPlacesWithinBounds({ commit, dispatch, getters }) {
       commit('hideSearchHereBtn')
       dispatch('getDogPlaces')
+      console.log('getters.boundsAreSet', getters.boundsAreSet)
     },
 
     hideSearchHereBtn({ commit }) {
@@ -309,8 +313,6 @@ const store = new Vuex.Store({
 
           //from example:
           //https://forum.vuejs.org/t/wait-for-store-getter-to-deliver-data/62690/2
-          return categoriesParentChild
-
 
         })
         .catch(err => {

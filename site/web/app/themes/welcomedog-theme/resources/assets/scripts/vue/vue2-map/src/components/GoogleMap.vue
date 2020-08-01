@@ -14,6 +14,7 @@
         @rightclick="goFullScreen"
         @dblclick="goFullScreen"
         @idle="onIdle"
+        @bounds_changed="boundsChanged"
         :center="changingCenter"
         :zoom='10'
         style=''
@@ -134,8 +135,17 @@ export default {
 
     onIdle() {
       this.$store.commit('mapIsIdle', true)
+      // console.log('4.0 dispatch "Set map bounds"')
+      // this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      // .then(() => {
+      //   console.log('4.2 check mapBounds object status')
+      //   console.log('mapBounds', this.$store.mapBounds)
+      // })
+    },
+
+    boundsChanged() {
       console.log('4.0 dispatch "Set map bounds"')
-      this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
     },
   },
 }

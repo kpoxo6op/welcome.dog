@@ -27,12 +27,13 @@ export default {
   computed: {
     ...mapState({
       mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
-      boundsAreSet: state => state.mapBounds,
     }),
     
     ...mapGetters([
       'someCheckboxesMarked',
       'markedCheckboxesCount',
+      'boundsAreSet',
+      'requestSuccess',
     ]),
 
     labelText() {
@@ -51,15 +52,21 @@ export default {
       this.$store.commit('setURLCategories', this.$route.query.category)
 
       console.log('2.0 dispatch "set Categories"')
-      //this.$store.dispatch('setCategories')
-
       this.$store.dispatch('setCategories').then(() => {
-        if (this.$store.getters.requestSuccess && this.boundsAreSet) {//wait for request action to complete before evaluating getters
-          console.log('5.0 automatically dispatch "Get places" on small map')
+        if (this.requestSuccess && this.boundsAreSet) {
+          console.log('5.0 dispatch "Get places"')
           this.$store.dispatch('getDogPlaces')
+        } else {
+          console.log('5.0 not met conditions to get dogplaces: ')
+          console.log('this.requestSuccess', this.requestSuccess)
+          console.log('this.boundsAreSet', this.boundsAreSet)
         }
       });
 
+    } else {
+      console.log('1.0 no categories in URL found')
+      console.log('2.0 dispatch "set Categories"')
+      this.$store.dispatch('setCategories')
     }
     /*
     TODO - implement this order of page load
