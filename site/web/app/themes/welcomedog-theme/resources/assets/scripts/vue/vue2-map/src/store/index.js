@@ -25,7 +25,11 @@ const store = new Vuex.Store({
 
   getters: {
     boundsAreSet: state => {
-      return Object.keys(state.mapBounds).length !== 0
+      if (typeof state.mapBounds === 'undefined' || state.mapBounds === null) {
+        return false
+      } else {
+        return Object.keys(state.mapBounds).length !== 0
+      }
     },
     requestSuccess: state => state.status === 'success',
     categories: state => state.categories,
