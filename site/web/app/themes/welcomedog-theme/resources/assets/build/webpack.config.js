@@ -62,13 +62,16 @@ let webpackConfig = {
         use: [
           { loader: 'cache' },
           {
-            loader: 'buble', options: {
-              objectAssign: 'Object.assign',
-              transforms: {
-                modules: false,
-                dangerousForOf: true,
-              }
+            loader: 'babel', options: {
+              presets: ['@babel/preset-env']
             }
+            // loader: 'buble', options: {
+            //   objectAssign: 'Object.assign',
+            //   transforms: {
+            //     modules: false,
+            //     dangerousForOf: true,
+            //   }
+            // }
           },
         ],
       },

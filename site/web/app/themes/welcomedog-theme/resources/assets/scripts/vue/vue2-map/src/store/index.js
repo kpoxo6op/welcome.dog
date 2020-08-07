@@ -21,6 +21,8 @@ const store = new Vuex.Store({
     mapBounds: null,
     categoriesFromURL: [],
     status: null,
+    categoriesPromise: null,
+    mapBoundsPromise: null,
   },
 
   getters: {
@@ -83,9 +85,35 @@ const store = new Vuex.Store({
         .flat()
         .map(el => el.id)[0]
     },
+
+    normalisedCategories: (state) => (categoriesFromWP) => {// eslint-disable-line
+      const categoriesSorted = categoriesFromWP.sort(
+        (i, j) => i.parent - j.parent
+      )
+      let categoriesParentChild = []
+      categoriesSorted.reduce((acc, category) => {
+        let ctg = {
+          id: category.id,
+          name: category.name,
+          children: [],
+        }
+        if (category.parent) {
+          acc[category.parent].children.push(ctg)
+        } else {
+          categoriesParentChild.push(ctg)
+          ctg['isOpen'] = false
+        }
+        acc[category.id] = ctg
+        return acc
+      }, [])
+      return categoriesParentChild
+    },
   },
 
   mutations: {
+    setCategoriesPromise: (state, promise) => {
+      state.CategoriesPromise = promise;
+    },
 
     requestLoading: (state) => {
       state.status = 'loading';
@@ -98,12 +126,17 @@ const store = new Vuex.Store({
     },
 
     setURLCategories(state, categoryNameString) {
-      state.categoriesFromURL = categoryNameString.split(',')
-      console.log('2.1(step done) saved category names from URL to Store')
+      if (categoryNameString.length) {
+        state.categoriesFromURL = categoryNameString.split(',')
+        console.log('saved category names from URL to Store')
+      } else {
+        console.log('no categories on URL found')
+      }
+
     },
 
     setBounds(state, bounds) {
-      console.log('1.1(step done) saved map bounds to store')
+      console.log('saved map bounds to store')
       state.mapBounds = bounds
     },
 
@@ -175,7 +208,7 @@ const store = new Vuex.Store({
 
     setCategories(state, categories) {
       state.categories = categories
-      console.log('3.2(step done) Wrote Categories from WordPress to Store')
+      console.log('wrote Categories from WordPress to Store')
 
     },
 
@@ -215,37 +248,39 @@ const store = new Vuex.Store({
     addToFilterFromStore({ state, commit, getters }) {
       let categoryIDs = state.categoriesFromURL.map(
         categoryName => {
-          console.log('4.1 converted category name to id:', categoryName)
+          console.log('converted category name to id:', categoryName)
           return getters.categoryIdByName(categoryName)
         }
       )
       categoryIDs.map(
         cid => {
-          console.log('4.2(step done) Added URL categoryID to Filter:', cid)
+          console.log('added URL categoryID to Filter:', cid)
           return commit('addToChecked', cid)
         }
       )
     },
 
-    // addToFilterFromURL({ commit, getters }, categoryNameString) {
-    //   let categoryNameArray = categoryNameString.split(',')
-    //   let categoryIDs = categoryNameArray.map(
-    //     categoryName => {
-    //       console.log('x.x converted category name to id:', categoryName)
-    //       return getters.c a t e g o r y I d By N a m e(categoryName)
-    //     }
-    //   )
-    //   categoryIDs.map(
-    //     cid => {
-    //       console.log('x.x Added URL categoryID to Filter:', cid)
-    //       return commit('a d d T o C h e c k e d', cid)
-    //     }
-    //   )
-    // },
+    addToFilterFromURL({ commit, dispatch, getters }, categoryNameString) {
+      return dispatch('getCategories').then(() => {
+        let categoryNameArray = categoryNameString.split(',')
+        let categoryIDs = categoryNameArray.map(
+          categoryName => {
+            console.log('converted category name to id:', categoryName)
+            return getters.categoryIdByName(categoryName)
+          }
+        )
 
-    searchDogPlacesWithinBounds({ commit, dispatch }) {
+        categoryIDs.map(
+          cid => {
+            console.log('added URL categoryID to Filter:', cid)
+            return commit('addToChecked', cid)
+          }
+        )
+      })
+    },
+
+    searchDogPlacesWithinBounds({ commit }) {
       commit('hideSearchHereBtn')
-      dispatch('getDogPlaces')
       //console.log('getters.boundsAreSet', getters.boundsAreSet)
     },
 
@@ -289,54 +324,61 @@ const store = new Vuex.Store({
     closeCards({ commit }) {
       commit('closeCards')
     },
-    //TODO: abstract out axios API
-    setCategories({ commit, dispatch }) {
-      return Api().get('/wp/v2/dogplace-type?per_page=100') // <--return promise
+
+    getCategories({ state, commit, getters }) {
+      if (state.categories.length) {
+        return state.categories
+      }
+
+      if (state.categoriesPromise) {
+        return state.categoriesPromise
+      }
+
+      let promise = Api().get('/wp/v2/dogplace-type?per_page=100') // <--return promise
         .then(response => {
-          const categoriesFlat = response.data
-          const categoriesSorted = categoriesFlat.sort(
-            (i, j) => i.parent - j.parent
-          )
-          let categoriesParentChild = []
-          categoriesSorted.reduce((acc, category) => {
-            let ctg = {
-              id: category.id,
-              name: category.name,
-              children: [],
-            }
-            if (category.parent) {
-              acc[category.parent].children.push(ctg)
-            } else {
-              categoriesParentChild.push(ctg)
-              ctg['isOpen'] = false
-            }
-            acc[category.id] = ctg
-            return acc
-          }, [])
-
-          console.log('3.1 write ALL WP categories to Store')
-          commit('setCategories', categoriesParentChild)
+          commit('requestLoading')
+          let categories = getters.normalisedCategories(response.data)
+          console.log('write ALL WP categories to Store')
+          commit('setCategories', categories)
           commit('requestSuccess')
-
-          console.log('4.0 add URL category IDs to Filters')
-          dispatch('addToFilterFromStore')
-
-          //from example:
-          //https://forum.vuejs.org/t/wait-for-store-getter-to-deliver-data/62690/2
 
         })
         .catch(err => {
           commit('requestError')
           console.log('handle errors', err)
         })
+
+      commit('setCategoriesPromise', promise)
+      return promise
     },
-    getDogPlaces({ state, commit }) {
+
+    async ASYNCgetCategories({ state, commit, getters }) {
+      if (state.categories.length) {
+        console.log('returning categories from store')
+        return state.categories
+      }
+
+      try {
+        commit('requestLoading')
+        let response = await Api().get('/wp/v2/dogplace-type?per_page=100')
+        let categories = getters.normalisedCategories(response.data)
+        console.log('write ALL WP categories to Store')
+        commit('setCategories', categories)
+        commit('requestSuccess')
+
+      } catch (error) {
+        commit('requestError')
+        console.log('handle errors', error)
+      }
+    },
+
+    async getDogPlaces({ state, commit }) {
       /*
       17 - grooming, 22 - shopping
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       switched from '/wp/v2/dogplace' to custom route '/wdog/v1/dogplaces'
       */
-      console.log('5.1 get filtered places within bounds')
+      console.log('get filtered places within bounds')
       const ids = encodeURIComponent(state.markedCheckboxIds.toString())
       const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue())
       const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue())
@@ -348,7 +390,7 @@ const store = new Vuex.Store({
         },
       })
         .then(response => {
-          console.log('5.2(step done) write retrieved Dog Places to Store')
+          console.log('write retrieved Dog Places to Store')
           commit('setDogPlaces', response.data)
         })
         .catch(e => {

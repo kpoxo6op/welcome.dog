@@ -137,37 +137,17 @@ export default {
 
     onIdle() {
       this.$store.commit('mapIsIdle', true)
-      // console.log('4.0 dispatch "Set map bounds"')
-      // this.$store.commit('setBounds', this.$refs.mapRef.$mapObject.getBounds())
-      // .then(() => {
-      //   console.log('4.2 check mapBounds object status')
-      //   console.log('mapBounds', this.$store.mapBounds)
-      // })
     },
 
-    boundsChanged() {
-      if (this.boundsAreSet) {
-        console.log('1.2 bounds already set (duplicate boundsChanged event bug)')
-      } else {
-        console.log('1.0 dispatch "Set map bounds"')
-        this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
-        .then(() => {
-          if (this.$route.query.category) {
-            console.log('2.0 commit "save category names from URL"')
-            this.$store.commit('setURLCategories', this.$route.query.category)
-            console.log('3.0 dispatch "set Categories"')
-            this.$store.dispatch('setCategories').then(() => {
-              if (this.requestSuccess && this.boundsAreSet) {
-                console.log('5.0 dispatch "Get places"')
-                this.$store.dispatch('getDogPlaces')
-              } else {
-                console.log('5.0 doesnt meet conditions to get dogplaces: ')
-                console.log('this.requestSuccess', this.requestSuccess)
-                console.log('this.boundsAreSet', this.boundsAreSet)
-              }
-            });
-          }
-        })
+    async boundsChanged() {
+      //no bounds mean we just loaded our app
+      if (!this.boundsAreSet) {
+        await this.$store.dispatch('addToFilterFromURL', this.$route.query.category)
+        var init = true
+      }
+      await this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      if (init) {
+        await this.$store.dispatch('getDogPlaces')
       }
     },
   },
