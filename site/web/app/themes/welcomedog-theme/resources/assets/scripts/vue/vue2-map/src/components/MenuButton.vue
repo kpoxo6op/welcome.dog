@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="toggleCard(button.id)" class="relative w-full text-left z-100010 sm:text-center sm:mx-2 sm:border sm:border-gray-900 sm:rounded-full">
+    <button @click="toggleCard(button.id)" class="relative w-full z-100010 text-center border rounded-full">
       {{ button.name }}
     </button>
     <CheckboxCard v-if="button.isOpen"

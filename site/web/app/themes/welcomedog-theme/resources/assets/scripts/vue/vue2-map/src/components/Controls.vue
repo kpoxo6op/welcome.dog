@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="mapIsSmall" class="sm:hidden">
+    <div v-show="mapIsSmall">
       <div class="pt-6 relative text-center text-xl opacity-100 z-100040 bg-white">
         <FiltersButton></FiltersButton>
       </div>

@@ -8,10 +8,10 @@
       leave-class="scale-100 opacity-100"
       leave-to-class="scale-95 opacity-0"
     >
-      <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050 md:static">
+      <div v-show="filterOpen" class="fixed inset-0 flex flex-col items-center w-full h-auto overflow-auto bg-white z-100050">
         <FullScreenMobileFilterTopBar></FullScreenMobileFilterTopBar>
         <div class="pb-32 mt-16 min-w-1/3">
-          <div class="mt-4 md:p-2" v-for="(value, name) in categories" :key="name.id">
+          <div class="mt-4" v-for="(value, name) in categories" :key="name.id">
             <MenuButtonMobile
               v-bind:button="value"
             ></MenuButtonMobile>

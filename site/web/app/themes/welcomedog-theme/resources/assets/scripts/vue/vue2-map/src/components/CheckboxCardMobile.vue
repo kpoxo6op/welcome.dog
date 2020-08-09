@@ -1,11 +1,5 @@
 <template>
-  <div class="relative rounded md:absolute z-100040">
-    <!--
-      TODO:
-      Error: "[vuex] do not mutate vuex store state outside mutation handlers."
-      convert checkbox to component with computed props
-      -->
-    <!-- new -->
+  <div class="relative rounded z-100040">
     <form>
       <div v-for="(checkbox) in checkboxProps.children" :key="checkbox.id">
         <CheckboxToggle :checkbox="checkbox"></CheckboxToggle>
