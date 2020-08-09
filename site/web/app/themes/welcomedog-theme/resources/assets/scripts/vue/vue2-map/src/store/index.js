@@ -126,13 +126,7 @@ const store = new Vuex.Store({
     },
 
     setURLCategories(state, categoryNameString) {
-      if (categoryNameString.length) {
-        state.categoriesFromURL = categoryNameString.split(',')
-        console.log('saved category names from URL to Store')
-      } else {
-        console.log('no categories on URL found')
-      }
-
+      state.categoriesFromURL = categoryNameString.split(',')
     },
 
     setBounds(state, bounds) {
@@ -262,20 +256,22 @@ const store = new Vuex.Store({
 
     addToFilterFromURL({ commit, dispatch, getters }, categoryNameString) {
       return dispatch('getCategories').then(() => {
-        let categoryNameArray = categoryNameString.split(',')
-        let categoryIDs = categoryNameArray.map(
-          categoryName => {
-            console.log('converted category name to id:', categoryName)
-            return getters.categoryIdByName(categoryName)
-          }
-        )
-
-        categoryIDs.map(
-          cid => {
-            console.log('added URL categoryID to Filter:', cid)
-            return commit('addToChecked', cid)
-          }
-        )
+        if (categoryNameString !== 'indefined' && categoryNameString.length) {
+          let categoryNameArray = categoryNameString.split(',')
+          let categoryIDs = categoryNameArray.map(
+            categoryName => {
+              console.log('converted category name to id:', categoryName)
+              return getters.categoryIdByName(categoryName)
+            }
+          )
+          categoryIDs.map(
+            cid => {
+              console.log('added URL categoryID to Filter:', cid)
+              return commit('addToChecked', cid)
+            })
+        } else {
+          console.log('no categories in URL')
+        }
       })
     },
 

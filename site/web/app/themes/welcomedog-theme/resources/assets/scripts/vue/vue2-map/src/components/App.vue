@@ -2,6 +2,7 @@
   <div class="antialiased">
     <SearchBar></SearchBar>
     <GoogleMap></GoogleMap>
+    
     <MainContent></MainContent>
   </div>
 </template>

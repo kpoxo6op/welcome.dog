@@ -1,7 +1,7 @@
 import Vue from 'vue'
 // import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-import Controls from '../components/Controls.vue'
+import GoogleMap from '../components/GoogleMap.vue'
 Vue.use(VueRouter)
 
 //TODO: find out why passed props are undefined object
@@ -10,7 +10,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Controls,
+    component: GoogleMap,
+    //props: true,
     beforeEnter: (to, from, next) => {
       console.log('entered route: ', to.name, ', query string:', to.query)
       next()

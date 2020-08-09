@@ -59,6 +59,7 @@ import {mapGetters, mapState, mapActions} from 'vuex';
 import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
 import FullScreenSwipeCardsBar from './FullScreenSwipeCardsBar.vue';
 export default {
+
   components: {
     FullScreenMapControlsBar,
     FullScreenSwipeCardsBar,
@@ -142,8 +143,10 @@ export default {
     async boundsChanged() {
       //no bounds mean we just loaded our app
       if (!this.boundsAreSet) {
-        await this.$store.dispatch('addToFilterFromURL', this.$route.query.category)
         var init = true
+        if (this.$route.query.category) {
+          await this.$store.dispatch('addToFilterFromURL', this.$route.query.category)
+        }
       }
       await this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
       if (init) {

@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white">
-    <!-- TODO: replace fixed height with proper map window -->
-    <!-- insert h-64 windows between searchbar and button row -->
-    <div class="h-64"></div>
+<div>
+  <div class="h-screen/2"></div>
+  <div class="w-screen z-100050">
     <Controls></Controls>
     <SearchResults></SearchResults>
   </div>
+</div>
 </template>
 
 <script>
