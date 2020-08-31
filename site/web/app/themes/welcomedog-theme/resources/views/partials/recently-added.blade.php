@@ -13,6 +13,7 @@
                 <div class="text-gray-600 text-sm leading-relaxed block md:text-xs lg:text-sm">
                     <a class="" href="{!! $dp['term_link'] !!}">{{ $dp['type'] }}</a>
                     <p>{!! $dp['excerpt'] !!}</p>
+                    
                 </div>
                 <div class="relative mt-2 lg:absolute bottom-0 mb-4 md:hidden lg:block">
                     <!---<a class="inline bg-gray-300 py-1 px-2 rounded-full text-xs lowercase text-gray-700" href="#">#hashtag</a>--> 

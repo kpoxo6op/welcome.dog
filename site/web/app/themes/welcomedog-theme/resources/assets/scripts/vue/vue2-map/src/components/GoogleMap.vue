@@ -2,22 +2,38 @@
   <div>
     <!-- v-show="mobileMapIsFullSreen" breaks slider -->
     <div class="fixed w-full h-full">
-      <FullScreenMapControlsBar v-show="mobileMapIsFullSreen"></FullScreenMapControlsBar>
-      <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen"></FullScreenSwipeCardsBar>
+      <FullScreenMapControlsBar v-show="mobileMapIsFullSreen" />
+      <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen" />
+      <SearchBar
+        v-model="location"
+        :search-results="searchResults"
+      />
+      <!-- <input
+        type="text"
+        v-model="location"
+      >
+      <ul>
+        <li
+          v-for="(result, i) in searchResults"
+          :key="i"
+        >
+          {{ result }}
+        </li>
+      </ul> -->
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
         @zoom_changed="showSearchHereBtn"
+        @bounds_changed="boundsChanged"
         @dragend="showSearchHereBtn"
         @click="goFullScreen"
         @dragstart="goFullScreen"
         @rightclick="goFullScreen"
         @dblclick="goFullScreen"
         @idle="onIdle"
-        @bounds_changed="boundsChanged"
-        :center="changingCenter"
-        :zoom='10'
-        style=''
+        :center="initCenter"
+        :zoom="10"
+        style=""
         :options="{
           zoomControl: false,
           mapTypeControl: false,
@@ -28,13 +44,12 @@
           disableDefaultUi: false,
         }"
       >
-
         <GmapMarker
-          v-for='(m, index) in allDogPlaceCoordinates'
-          :key='m.id'
-          :position='m.position'
-          :clickable='true'
-          :draggable='false'
+          v-for="(m, index) in allDogPlaceCoordinates"
+          :key="m.id"
+          :position="m.position"
+          :clickable="true"
+          :draggable="false"
           @click="selectMarker({
             index: index
             //id: m.id
@@ -45,80 +60,82 @@
             fillOpacity: 1,
             //strokeWeight: 0,
             scale: 1.3,
+            // eslint-disable-next-line max-len
             path: 'M16,9V4l1,0c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H7C6.45,2,6,2.45,6,3v0 c0,0.55,0.45,1,1,1l1,0v5c0,1.66-1.34,3-3,3h0v2h5.97v7l1,1l1-1v-7H19v-2h0C17.34,12,16,10.66,16,9z',
           }"
-        >
-        </GmapMarker>
+        />
       </GmapMap>
     </div>
   </div>
 </template>
 <script>
 
-import {mapGetters, mapState, mapActions} from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 import FullScreenMapControlsBar from './FullScreenMapControlsBar.vue';
 import FullScreenSwipeCardsBar from './FullScreenSwipeCardsBar.vue';
+import SearchBar from './SearchBar.vue';
+
 export default {
 
   components: {
     FullScreenMapControlsBar,
     FullScreenSwipeCardsBar,
+    SearchBar,
   },
 
   name: 'GoogleMap',
   data() {
     return {
-      changingCenter: {
+      initCenter: {
         lat: -36.8485,
         lng: 174.7633,
       },
-      //imageUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-    }
+      location: '',
+      searchResults: [],
+      service: null,
+    };
   },
 
   computed: {
-    ...mapGetters({
-      allDogPlaceCoordinates: 'allDogPlaceCoordinates',
-      boundsAreSet: 'boundsAreSet',
-    }),
-
+    ...mapGetters(['allDogPlaceCoordinates', 'boundsAreSet', 'center']),
     ...mapState({
-      mobileMapIsFullSreen: state => state.mobileMapIsFullSreen,
-      mapIsSmall: state => !state.mobileMapIsFullSreen,
-      selectedMapMarkerIndex: state => state.selectedMarkerIndex,
-      boundsExist: state => state.mapBounds,
+      mobileMapIsFullSreen: (state) => state.mobileMapIsFullSreen,
+      mapIsSmall: (state) => !state.mobileMapIsFullSreen,
+      selectedMapMarkerIndex: (state) => state.selectedMarkerIndex,
+      boundsExist: (state) => state.mapBounds,
     }),
   },
 
   watch: {
     mobileMapIsFullSreen(isFullSreen) {
       if (isFullSreen) {
-        this.$refs.mapRef.panBy(0, -120)
+        this.$refs.mapRef.panBy(0, -120);
       } else {
-        this.$refs.mapRef.panBy(0, +120)
+        this.$refs.mapRef.panBy(0, +120);
       }
     },
-  },
-
-  created () {//change to created event handler
-      // this.$store.dispatch("userRequest").then(profile => {
-      //   if (this.$store.getters.isAuthenticated) {//wait for user request action to complete before evaluating getters
-      //   Vue.prototype.$gate = new Gate(profile);//can use profile directly here
-      // }
-      // });
+    location(newValue) {
+      if (newValue) {
+        this.service.getPlacePredictions({
+          input: this.location,
+          types: ['(cities)'],
+        }, this.displaySuggestions);
+      }
+    },
   },
 
   mounted() {
     // At this point, the child GmapMap has been mounted, but
     // its map has not been initialized.
     // Therefore we need to write mapRef.$mapPromise.then(() => ...)
- 
-     this.$refs.mapRef.$mapPromise.then((map) => {
-       if (this.mapIsSmall) {
-         //TODO: pan to variable value because due to different screen size
-         map.panBy(0, +120)
-       }
-     })
+
+    this.$refs.mapRef.$mapPromise.then((map) => {
+      if (this.mapIsSmall) {
+        // TODO: pan to variable value because due to different screen size
+        map.panBy(0, +120);
+      }
+      this.service = new window.google.maps.places.AutocompleteService();
+    });
   },
 
   methods: {
@@ -132,35 +149,44 @@ export default {
 
     goFullScreen() {
       if (this.mapIsSmall) {
-        this.$store.commit('enterFullScreenMap')
+        this.$store.commit('enterFullScreenMap');
       }
     },
 
-    onIdle() {
-      this.$store.commit('mapIsIdle', true)
+    displaySuggestions(predictions, status) {
+      if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
+        this.searchResults = [];
+        return;
+      }
+      this.searchResults = predictions.map((prediction) => prediction.description);
+      console.log('searchResults:', this.searchResults);
     },
 
-    async boundsChanged() {
-      //no bounds mean we just loaded our app
+    async onIdle() {
+      this.$store.commit('mapIsIdle', true);
+      this.$store.dispatch('setCenter', this.$refs.mapRef.$mapObject.getCenter());
+
+      // no bounds mean we just loaded our app
       if (!this.boundsAreSet) {
-        var init = true
+        // eslint-disable-next-line vars-on-top, no-var
+        var init = true;
         if (this.$route.query.category) {
-          await this.$store.dispatch('addToFilterFromURL', this.$route.query.category)
+          await this.$store.dispatch('addToFilterFromURL', this.$route.query.category);
         }
       }
-      await this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds())
+      await this.$store.dispatch('setBounds', this.$refs.mapRef.$mapObject.getBounds());
+      // eslint-disable-next-line block-scoped-var
       if (init) {
-        await this.$store.dispatch('getDogPlaces')
+        await this.$store.dispatch('getDogPlaces');
       }
     },
-  },
-}
 
+    boundsChanged() {},
+  },
+};
 
 </script>
 
 <style lang='scss' scoped>
 
 </style>
-
-

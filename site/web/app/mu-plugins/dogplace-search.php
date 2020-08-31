@@ -23,6 +23,13 @@ define("AKL_SW_BOUNDARY_LNG", 173.997302);
 define("AKL_NE_BOUNDARY_LAT", -36.304059);
 define("AKL_NE_BOUNDARY_LNG", 175.305529);
 
+
+define("WGN_SW_BOUNDARY_LAT", -41.359674);
+define("WGN_SW_BOUNDARY_LNG", 174.696757);
+
+define("WGN_NE_BOUNDARY_LAT", -41.261679);
+define("WGN_NE_BOUNDARY_LNG", 174.865095);
+
 //sample places to check my function
 define("AKL_LAT", -36.848461);
 define("AKL_LNG", 174.763336);
@@ -65,8 +72,8 @@ function get_dogplaces_within_bounds( WP_REST_Request $request ) {
   /* BEGIN check if we get coordintates */
   $sw_coords = array_map('floatval', explode(',', urldecode($request['sw'])));
   $ne_coords = array_map('floatval', explode(',', urldecode($request['ne'])));
-  
   $dogplace_type_str = urldecode($request['dogplace-type']);
+
   if ($dogplace_type_str !== '') {
     $dogplace_type_arr = explode( ',', $dogplace_type_str );
   } else {
@@ -103,22 +110,50 @@ function get_dogplaces_within_bounds( WP_REST_Request $request ) {
   }
   /* END check if we get coordintates */
 
-  //TODO: what would happen when we have like 1mil places?
-  $args = array(
+  $sw_boundary_lat = $sw_coords[0];
+  $sw_boundary_lng = $sw_coords[1];
+
+  $ne_boundary_lat = $ne_coords[0];
+  $ne_boundary_lng = $ne_coords[1];
+
+  $search_term = '';
+  add_filter( 'posts_where', 'title_filter', 10, 2 );
+  $args = [
+    'suppress_filters'  => false,
+    'search_prod_title' => $search_term,
     'numberposts' => -1,
-    'post_type' => 'dogplace',
-    //pagination?
-    'tax_query' => array(
-        array(
+    'post_type'   => 'dogplace',
+    'tax_query' => [
+        [
             'taxonomy' => 'dogplace-type',
             'field'    => 'term_id',
             'terms'    => $dogplace_type_arr,
-        ),
-    ),
-  );
-  //we grab all places from the DB. TODO only return places within bounds from the DB
-  //also have a look at pagination
+        ],
+    ],
+    'meta_query' => [
+      'relation' => 'AND',
+      [
+        'key'   => 'lat',
+        'value' => [$sw_boundary_lat, $ne_boundary_lat],
+        // 'value' => [WGN_SW_BOUNDARY_LAT, WGN_NE_BOUNDARY_LAT],
+        // 'value' => [AKL_SW_BOUNDARY_LAT, AKL_NE_BOUNDARY_LAT],
+        // 'value' => [-1000, 1000],
+        'compare' => 'BETWEEN',
+        'type'    => 'DECIMAL(10,3)',
+      ],
+      [
+        'key'   => 'lng',
+        'value' => [$sw_boundary_lng, $ne_boundary_lng],
+        // 'value' => [AKL_SW_BOUNDARY_LNG, AKL_NE_BOUNDARY_LNG],
+        // 'value' => [WGN_SW_BOUNDARY_LNG, WGN_NE_BOUNDARY_LNG],
+        // 'value' => [-1000, 1000],
+        'compare' => 'BETWEEN',
+        'type'    => 'DECIMAL(10,3)',
+      ],
+    ],
+  ];
   $all_dogplaces = get_posts($args);
+  remove_filter( 'posts_where', 'title_filter', 10 );
   
   $dogplaces = [];
   foreach($all_dogplaces as $post) {
@@ -157,49 +192,16 @@ function get_dogplaces_within_bounds( WP_REST_Request $request ) {
       'img_url'        => $img_url        ?: 'https://i.imgur.com/2D8GXzj.jpg'
     );
     $post->{'wdog_meta'} = $additional_post_data;
+    $dogplaces[] = $post;
 
     $acf = get_fields( $post->ID );
     $post->{'acf'} = $acf;
     /* END attach wdog_meta to each post */
-
-    if ($geolimit) {
-      //only return if place fits within map bounds
-      $place_coords = array($acf['dogplace_map']['lat'], $acf['dogplace_map']['lng']);
-      if ( is_place_within_bounds($place_coords, $sw_coords, $ne_coords) ) {
-        $dogplaces[] = $post;
-      }
-    } else {
-      $dogplaces[] = $post;
-    }
   }
-
+  wp_reset_postdata();
   return $dogplaces;
 }
 
-function is_place_within_bounds($placeLatLng, $swLatLng, $neLatLng) {
-  $dp_lat = $placeLatLng[0];
-  $dp_lng = $placeLatLng[1];
-
-  $sw_lat = $swLatLng[0];
-  $sw_lng = $swLatLng[1];
-
-  $ne_lat = $neLatLng[0];
-  $ne_lng = $neLatLng[1];
-
-  if ($dp_lat >= $sw_lat && $dp_lat <= $ne_lat) {
-    $lat_within_range = true;
-  } else {
-    $lat_within_range = false;
-  }
-
-  if ($dp_lng >= $sw_lng && $dp_lng <= $ne_lng) {
-    $lng_within_range = true;
-  } else {
-    $lng_within_range = false;
-  }
-
-  return ($lat_within_range && $lng_within_range);
-}
 
 
 /*

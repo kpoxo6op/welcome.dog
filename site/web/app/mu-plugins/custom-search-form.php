@@ -9,6 +9,7 @@ Author URI:   https://roots.io/
 License:      MIT License
 */
 
+// undefined error when welcome.dog theme is not selected
 add_filter('get_search_form', function () {
   return \App\template( 'partials.searchform' );
 });

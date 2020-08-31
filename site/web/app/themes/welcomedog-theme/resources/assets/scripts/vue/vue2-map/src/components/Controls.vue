@@ -2,17 +2,17 @@
   <div>
     <div v-show="mapIsSmall">
       <div class="pt-6 relative text-center text-xl opacity-100 z-100040 bg-white">
-        <FiltersButton></FiltersButton>
+        <FiltersButton />
       </div>
     </div>
-    <FullScreenMobileFilter></FullScreenMobileFilter>
+    <FullScreenMobileFilter />
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import FullScreenMobileFilter from './FullScreenMobileFilter.vue'
-import FiltersButton from './FiltersButton.vue'
+import { mapState } from 'vuex';
+import FullScreenMobileFilter from './FullScreenMobileFilter.vue';
+import FiltersButton from './FiltersButton.vue';
 
 export default {
   components: {
@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     ...mapState({
-      mapIsSmall: state => !state.mobileMapIsFullSreen,
+      mapIsSmall: (state) => !state.mobileMapIsFullSreen,
     }),
   },
-}
+};
 
 </script>
 

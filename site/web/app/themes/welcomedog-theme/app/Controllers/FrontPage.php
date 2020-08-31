@@ -26,6 +26,7 @@ class FrontPage extends Controller {
                 /*
                 lines above produce this error:
                 current() expects parameter 1 to be array, bool given, probably due to Dogplace taxonomy doubling
+                workaround is set categories using quick edit
                 */
             ];
         }, $raw_posts);

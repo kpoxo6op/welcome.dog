@@ -3,18 +3,27 @@
     <div class="flex items-baseline mt-4 text-2xl">
       <!-- Close Button -->
       <div class="w-1/3">
-          <button class="w-full pl-8 text-left" @click="toggleMobileFilter">X</button>
+        <button
+          class="w-full pl-8 text-left"
+          @click="toggleMobileFilter"
+        >
+          X
+        </button>
       </div>
       <!-- Filters Title -->
       <div class="w-1/3 text-center">
-        <h6 class="font-semibold text-gray-900">Filters</h6>
+        <h6 class="font-semibold text-gray-900">
+          Filters
+        </h6>
       </div>
       <!-- Clear All button -->
       <div class="w-1/3 text-right">
-        <button :class="{ 'text-gray-900': someCheckboxesMarked }"
-                class="pr-8 text-gray-500 whitespace-no-wrap"
-                @click="clearAllCheckboxesAction">
-                Clear all
+        <button
+          :class="{ 'text-gray-900': someCheckboxesMarked }"
+          class="pr-8 text-gray-500 whitespace-no-wrap"
+          @click="clearAllCheckboxesAction"
+        >
+          Clear all
         </button>
       </div>
     </div>
@@ -23,20 +32,21 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  export default {
-    computed: {
-      ...mapGetters([
-        'someCheckboxesMarked',
-      ]),
+import { mapGetters, mapActions } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters([
+      'someCheckboxesMarked',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'clearAllCheckboxesAction',
+    ]),
+    toggleMobileFilter() {
+      this.$store.commit('toggleMobileFilter');
     },
-    methods: {
-      ...mapActions([
-        'clearAllCheckboxesAction',
-      ]),
-      toggleMobileFilter() {
-        this.$store.commit('toggleMobileFilter')
-      },
-    },
-  }
+  },
+};
 </script>

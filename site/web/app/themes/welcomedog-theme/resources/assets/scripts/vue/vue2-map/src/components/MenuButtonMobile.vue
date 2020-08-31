@@ -7,12 +7,13 @@
         {{ button.name }}
       </button>
     </div>
-    <CheckboxCardMobile v-bind:checkboxProps="button"></CheckboxCardMobile>
+    <CheckboxCardMobile :checkbox-props="button" />
   </div>
 </template>
 
 <script>
 import CheckboxCardMobile from './CheckboxCardMobile.vue';
+
 export default {
   components: {
     CheckboxCardMobile,

@@ -1,13 +1,18 @@
 <template>
-  <button @click="exitFullScreenMap" class="px-4 text-center bg-white border border-black rounded-full">X</button>
+  <button
+    @click="exitFullScreenMap"
+    class="px-4 text-center bg-white border border-black rounded-full"
+  >
+    X
+  </button>
 </template>
 
 <script>
-  export default {
-    methods: {
-      exitFullScreenMap() {
-        this.$store.commit('exitFullScreenMap')
-      },
+export default {
+  methods: {
+    exitFullScreenMap() {
+      this.$store.commit('exitFullScreenMap');
     },
-  }
+  },
+};
 </script>

@@ -63,8 +63,8 @@ let webpackConfig = {
           { loader: 'cache' },
           {
             loader: 'babel', options: {
-              presets: ['@babel/preset-env']
-            }
+              presets: ['@babel/preset-env'],
+            },
             // loader: 'buble', options: {
             //   objectAssign: 'Object.assign',
             //   transforms: {

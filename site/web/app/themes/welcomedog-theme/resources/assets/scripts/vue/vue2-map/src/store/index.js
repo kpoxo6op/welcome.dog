@@ -1,15 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Api from './api'
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-syntax */
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Api from './api';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  //this does not set it to true in Dev
-  //strict: process.env.NODE_ENV !== 'production',
+  // this does not set it to true in Dev
+  // strict: process.env.NODE_ENV !== 'production',
   strict: true,
 
   state: {
+    oldCenter: null,
+    center: null,
     categories: [],
     dogPlaces: [],
     markedCheckboxIds: [],
@@ -26,19 +30,14 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    boundsAreSet: state => {
-      if (typeof state.mapBounds !== 'undefined' && state.mapBounds !== null && Object.keys(state.mapBounds).length !== 0) {
-        //console.log('getter: bounds are set')
-        return true
-      } else {
-        //console.log('getter: bounds are NOT set')
-      }
-    },
-    requestSuccess: state => state.status === 'success',
-    categories: state => state.categories,
-    allDogPlaces: state => state.dogPlaces,
-    allDogPlaceCoordinates: state => {
-      let allDogPlaceCoordinates = []
+    oldCenter: (state) => state.oldCenter,
+    center: (state) => state.center,
+    boundsAreSet: (state) => typeof state.mapBounds !== 'undefined' && state.mapBounds !== null && Object.keys(state.mapBounds).length !== 0,
+    requestSuccess: (state) => state.status === 'success',
+    categories: (state) => state.categories,
+    allDogPlaces: (state) => state.dogPlaces,
+    allDogPlaceCoordinates: (state) => {
+      const allDogPlaceCoordinates = [];
       for (const [, value] of Object.entries(state.dogPlaces)) {
         allDogPlaceCoordinates.push({
           id: value.id,
@@ -46,71 +45,75 @@ const store = new Vuex.Store({
             lat: value.acf.dogplace_map.lat,
             lng: value.acf.dogplace_map.lng,
           },
-        })
+        });
       }
-      return allDogPlaceCoordinates
+      return allDogPlaceCoordinates;
     },
 
-    someCheckboxesMarked: state => {
-      return state.markedCheckboxIds && state.markedCheckboxIds.length
-    },
+    someCheckboxesMarked: (state) => state.markedCheckboxIds && state.markedCheckboxIds.length,
 
-    markedCheckboxesCount: state => {
-      return state.markedCheckboxIds.length
-    },
+    markedCheckboxesCount: (state) => state.markedCheckboxIds.length,
 
     dogPlaceCards: (state) => {
-      let dogPlaceCards = []
+      const dogPlaceCards = [];
       for (const [, dogPlace] of Object.entries(state.dogPlaces)) {
+        // eslint-disable-next-line no-prototype-builtins
         if (dogPlace.hasOwnProperty('wdog_meta')) {
           dogPlaceCards.push({
             id: dogPlace.id,
-            imgURL: dogPlace.wdog_meta['img_url'],
-            alt: dogPlace.wdog_meta['img_alt'],
-            title: dogPlace.wdog_meta['wdog_title'],
-            category: dogPlace.wdog_meta['wdog_term'],
-            link: dogPlace.wdog_meta['wdog_link'],
-          })
+            imgURL: dogPlace.wdog_meta.img_url,
+            alt: dogPlace.wdog_meta.img_alt,
+            title: dogPlace.wdog_meta.wdog_title,
+            category: dogPlace.wdog_meta.wdog_term,
+            link: dogPlace.wdog_meta.wdog_link,
+          });
         }
       }
-      return dogPlaceCards
+      return dogPlaceCards;
     },
 
-    categoryIdByName: (state) => (categoryName) => {
-      return state.categories
-        .map(
-          el => el.children.filter(el => el.name === categoryName)
-        )
-        .filter(el => el.length)
-        .flat()
-        .map(el => el.id)[0]
-    },
+    categoryIdByName: (state) => (categoryName) => state.categories
+      .map(
+        (el) => el.children.filter((elem) => elem.name === categoryName)
+      )
+      .filter((el) => el.length)
+      .flat()
+      .map((el) => el.id)[0],
 
     normalisedCategories: (state) => (categoriesFromWP) => {// eslint-disable-line
       const categoriesSorted = categoriesFromWP.sort(
         (i, j) => i.parent - j.parent
-      )
-      let categoriesParentChild = []
+      );
+      const categoriesParentChild = [];
       categoriesSorted.reduce((acc, category) => {
-        let ctg = {
+        const ctg = {
           id: category.id,
           name: category.name,
           children: [],
-        }
+        };
         if (category.parent) {
-          acc[category.parent].children.push(ctg)
+          acc[category.parent].children.push(ctg);
         } else {
-          categoriesParentChild.push(ctg)
-          ctg['isOpen'] = false
+          categoriesParentChild.push(ctg);
+          ctg.isOpen = false;
         }
-        acc[category.id] = ctg
-        return acc
-      }, [])
-      return categoriesParentChild
+        acc[category.id] = ctg;
+        return acc;
+      }, []);
+      return categoriesParentChild;
     },
   },
 
   mutations: {
+
+    setCenter(state, value) {
+      state.center = value;
+    },
+
+    setOldCenter(state, value) {
+      state.oldCenter = value;
+    },
+
     setCategoriesPromise: (state, promise) => {
       state.CategoriesPromise = promise;
     },
@@ -126,56 +129,56 @@ const store = new Vuex.Store({
     },
 
     setURLCategories(state, categoryNameString) {
-      state.categoriesFromURL = categoryNameString.split(',')
+      state.categoriesFromURL = categoryNameString.split(',');
     },
 
     setBounds(state, bounds) {
-      console.log('saved map bounds to store')
-      state.mapBounds = bounds
+      console.log('saved map bounds to store');
+      state.mapBounds = bounds;
     },
 
     mapIsIdle(state, mapIsIdleState) {
-      state.mapIsIdle = mapIsIdleState
+      state.mapIsIdle = mapIsIdleState;
     },
 
     hideSearchHereBtn(state) {
-      state.searchHereBtnIsVisible = false
+      state.searchHereBtnIsVisible = false;
     },
 
     showSearchHereBtn(state) {
       if (state.mapIsIdle) {
-        state.searchHereBtnIsVisible = true
+        state.searchHereBtnIsVisible = true;
       }
     },
 
     selectMarker(state, selectedMarkerIndex) {
-      //console.log('mutation selects marker', selectedMarkerIndex)
-      state.selectedMarkerIndex = selectedMarkerIndex
+      // console.log('mutation selects marker', selectedMarkerIndex)
+      state.selectedMarkerIndex = selectedMarkerIndex;
     },
 
     enterFullScreenMap(state) {
-      state.mobileMapIsFullSreen = true
+      state.mobileMapIsFullSreen = true;
     },
 
     exitFullScreenMap(state) {
-      state.mobileMapIsFullSreen = false
+      state.mobileMapIsFullSreen = false;
     },
 
     toggleMobileFilter(state) {
-      state.mobileFilterIsOpen = !state.mobileFilterIsOpen
+      state.mobileFilterIsOpen = !state.mobileFilterIsOpen;
     },
 
     addToChecked(state, categoryId) {
-      if (state.markedCheckboxIds.indexOf(categoryId) == -1) {
-        state.markedCheckboxIds.push(categoryId)
+      if (state.markedCheckboxIds.indexOf(categoryId) === -1) {
+        state.markedCheckboxIds.push(categoryId);
       } else {
-        //TODO: remove code called twice in GoogleMap setbounds
-        console.log('already marked', categoryId)
+        // TODO: remove code called twice in GoogleMap setbounds
+        console.log('already marked', categoryId);
       }
     },
 
     removeFromChecked(state, checkboxId) {
-      //console.log('store uncheck ' + checkboxId)
+      // console.log('store uncheck ' + checkboxId)
       const index = state.markedCheckboxIds.indexOf(checkboxId);
       if (index !== -1) {
         state.markedCheckboxIds.splice(index, 1);
@@ -183,34 +186,32 @@ const store = new Vuex.Store({
     },
 
     clearAllCheckboxes(state) {
-      state.markedCheckboxIds = []
+      state.markedCheckboxIds = [];
     },
 
     clearCheckboxesByCardId(state, checkboxCardId) {
+      console.log('mutation checkboxCardId - ');
+      console.log(checkboxCardId);
 
-      console.log('mutation checkboxCardId - ')
-      console.log(checkboxCardId)
-
-      let cardCheckboxIds = state.categories
-        .filter(el => el.id === checkboxCardId)
-        .map(el => el.children.map(el => el.id))
+      const cardCheckboxIds = state.categories
+        .filter((el) => el.id === checkboxCardId)
+        .map((el) => el.children.map((elem) => elem.id))
         .flat();
 
       state.markedCheckboxIds = state.markedCheckboxIds
-        .filter(el => !cardCheckboxIds.includes(el));
+        .filter((el) => !cardCheckboxIds.includes(el));
     },
 
     setCategories(state, categories) {
-      state.categories = categories
-      console.log('wrote Categories from WordPress to Store')
-
+      state.categories = categories;
+      console.log('wrote Categories from WordPress to Store');
     },
 
     setDogPlaces(state, dogPlaces) {
-      state.dogPlaces = dogPlaces
+      state.dogPlaces = dogPlaces;
     },
     toggleCard(state, clickedItemId) {
-      state.categories = state.categories.map(el => {
+      state.categories = state.categories.map((el) => {
         if (el.id === clickedItemId) {
           return {
             ...el,
@@ -220,152 +221,135 @@ const store = new Vuex.Store({
         return {
           ...el,
           isOpen: false,
-        }
-      })
+        };
+      });
     },
     closeCards(state) {
-      state.categories = state.categories.map(el => {
-        return {
-          ...el,
-          isOpen: false,
-        }
-      })
-    }, //closeCards mutation end
-  }, //mutations end
+      state.categories = state.categories.map((el) => ({
+        ...el,
+        isOpen: false,
+      }));
+    }, // closeCards mutation end
+  }, // mutations end
 
   actions: {
 
+    setCenter({ commit, getters }, value) {
+      commit('setOldCenter', getters.center);
+      commit('setCenter', value);
+    },
+
     setBounds({ commit }, bounds) {
-      commit('setBounds', bounds)
+      commit('setBounds', bounds);
     },
 
     addToFilterFromStore({ state, commit, getters }) {
-      let categoryIDs = state.categoriesFromURL.map(
-        categoryName => {
-          console.log('converted category name to id:', categoryName)
-          return getters.categoryIdByName(categoryName)
+      const categoryIDs = state.categoriesFromURL.map(
+        (categoryName) => {
+          console.log('converted category name to id:', categoryName);
+          return getters.categoryIdByName(categoryName);
         }
-      )
+      );
       categoryIDs.map(
-        cid => {
-          console.log('added URL categoryID to Filter:', cid)
-          return commit('addToChecked', cid)
+        (cid) => {
+          console.log('added URL categoryID to Filter:', cid);
+          return commit('addToChecked', cid);
         }
-      )
+      );
     },
 
     addToFilterFromURL({ commit, dispatch, getters }, categoryNameString) {
       return dispatch('getCategories').then(() => {
         if (categoryNameString !== 'indefined' && categoryNameString.length) {
-          let categoryNameArray = categoryNameString.split(',')
-          let categoryIDs = categoryNameArray.map(
-            categoryName => {
-              console.log('converted category name to id:', categoryName)
-              return getters.categoryIdByName(categoryName)
+          const categoryNameArray = categoryNameString.split(',');
+          const categoryIDs = categoryNameArray.map(
+            (categoryName) => {
+              console.log('converted category name to id:', categoryName);
+              return getters.categoryIdByName(categoryName);
             }
-          )
+          );
           categoryIDs.map(
-            cid => {
-              console.log('added URL categoryID to Filter:', cid)
-              return commit('addToChecked', cid)
-            })
+            (cid) => {
+              console.log('added URL categoryID to Filter:', cid);
+              return commit('addToChecked', cid);
+            }
+          );
         } else {
-          console.log('no categories in URL')
+          console.log('no categories in URL');
         }
-      })
+      });
     },
 
     searchDogPlacesWithinBounds({ commit }) {
-      commit('hideSearchHereBtn')
-      //console.log('getters.boundsAreSet', getters.boundsAreSet)
+      commit('hideSearchHereBtn');
+      // console.log('getters.boundsAreSet', getters.boundsAreSet)
     },
 
     hideSearchHereBtn({ commit }) {
-      commit('hideSearchHereBtn')
+      commit('hideSearchHereBtn');
     },
 
     showSearchHereBtn({ state, commit }) {
       if (state.mobileMapIsFullSreen) {
-        //console.log('display search here button when fullsreen')
-        commit('showSearchHereBtn')
+        // console.log('display search here button when fullsreen')
+        commit('showSearchHereBtn');
       }
     },
 
     selectMarker({ commit }, { index }) {
-      //TODO - remove index or id
-      commit('enterFullScreenMap')
-      commit('selectMarker', index)
-      //console.log('store got index', index)
-      //console.log('store got id', id)
+      // TODO - remove index or id
+      commit('enterFullScreenMap');
+      commit('selectMarker', index);
+      // console.log('store got index', index)
+      // console.log('store got id', id)
     },
 
     clearAllCheckboxesAction({ commit }) {
-      commit('clearAllCheckboxes')
+      commit('clearAllCheckboxes');
     },
 
     clearCheckboxByCardIdAction({ commit }, checkboxCardId) {
-      console.log('action checkboxCardId - ')
-      console.log(checkboxCardId)
-      commit('clearCheckboxesByCardId', checkboxCardId)
+      console.log('action checkboxCardId - ');
+      console.log(checkboxCardId);
+      commit('clearCheckboxesByCardId', checkboxCardId);
     },
 
     updateCategoryCheckboxAction({ commit }, checkbox) {
-      commit('toggleCheckbox', checkbox)
+      commit('toggleCheckbox', checkbox);
     },
 
     toggleCard({ commit }, id) {
-      commit('toggleCard', id)
+      commit('toggleCard', id);
     },
 
     closeCards({ commit }) {
-      commit('closeCards')
+      commit('closeCards');
     },
 
     getCategories({ state, commit, getters }) {
       if (state.categories.length) {
-        return state.categories
+        return state.categories;
       }
 
       if (state.categoriesPromise) {
-        return state.categoriesPromise
+        return state.categoriesPromise;
       }
 
-      let promise = Api().get('/wp/v2/dogplace-type?per_page=100') // <--return promise
-        .then(response => {
-          commit('requestLoading')
-          let categories = getters.normalisedCategories(response.data)
-          console.log('write ALL WP categories to Store')
-          commit('setCategories', categories)
-          commit('requestSuccess')
-
+      const promise = Api().get('/wp/v2/dogplace-type?per_page=100') // <--return promise
+        .then((response) => {
+          commit('requestLoading');
+          const categories = getters.normalisedCategories(response.data);
+          console.log('write ALL WP categories to Store');
+          commit('setCategories', categories);
+          commit('requestSuccess');
         })
-        .catch(err => {
-          commit('requestError')
-          console.log('handle errors', err)
-        })
+        .catch((err) => {
+          commit('requestError');
+          console.log('handle errors', err);
+        });
 
-      commit('setCategoriesPromise', promise)
-      return promise
-    },
-
-    async ASYNCgetCategories({ state, commit, getters }) {
-      if (state.categories.length) {
-        console.log('returning categories from store')
-        return state.categories
-      }
-
-      try {
-        commit('requestLoading')
-        let response = await Api().get('/wp/v2/dogplace-type?per_page=100')
-        let categories = getters.normalisedCategories(response.data)
-        console.log('write ALL WP categories to Store')
-        commit('setCategories', categories)
-        commit('requestSuccess')
-
-      } catch (error) {
-        commit('requestError')
-        console.log('handle errors', error)
-      }
+      commit('setCategoriesPromise', promise);
+      return promise;
     },
 
     async getDogPlaces({ state, commit }) {
@@ -374,24 +358,24 @@ const store = new Vuex.Store({
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       switched from '/wp/v2/dogplace' to custom route '/wdog/v1/dogplaces'
       */
-      console.log('get filtered places within bounds')
-      const ids = encodeURIComponent(state.markedCheckboxIds.toString())
-      const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue())
-      const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue())
+      console.log('get filtered places within bounds');
+      const ids = encodeURIComponent(state.markedCheckboxIds.toString());
+      const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue());
+      const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue());
       Api().get('/wdog/v1/dogplaces', {
         params: {
           'dogplace-type': ids,
-          'sw': sw,
-          'ne': ne,
+          sw,
+          ne,
         },
       })
-        .then(response => {
-          console.log('write retrieved Dog Places to Store')
-          commit('setDogPlaces', response.data)
+        .then((response) => {
+          console.log('write retrieved Dog Places to Store');
+          commit('setDogPlaces', response.data);
         })
-        .catch(e => {
-          console.log(e)
-        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 
@@ -399,6 +383,6 @@ const store = new Vuex.Store({
 
   },
 
-})
+});
 
-export default store
+export default store;

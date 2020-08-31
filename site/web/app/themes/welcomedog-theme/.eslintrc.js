@@ -14,7 +14,9 @@ module.exports = {
     'browser': true,
     'jquery': true,
   },
+  extends: ['airbnb-base', 'plugin:vue/strongly-recommended'],
   'parserOptions': {
+    parser: 'babel-eslint',
     'ecmaFeatures': {
       'globalReturn': true,
       'generators': false,
@@ -35,6 +37,8 @@ module.exports = {
     ],
   },
   'rules': {
+    'max-len': ['error', { code: 200, ignoreStrings: true, ignoreUrls: true }],
+    'linebreak-style': 0,
     'no-console': 0,
     'quotes': ['error', 'single'],
     'comma-dangle': [

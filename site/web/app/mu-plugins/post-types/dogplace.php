@@ -23,7 +23,7 @@ add_action( 'init', function() {
 
 
 //https://wordpress.org/support/topic/remove-duplicate-custom-taxonomy/#post-13171928
-add_action('add_meta_boxes', function() {
-   global $wp_meta_boxes;
-   var_dump( $wp_meta_boxes );
-}, 9999 );
+// add_action('add_meta_boxes', function() {
+//    global $wp_meta_boxes;
+//    var_dump( $wp_meta_boxes );
+// }, 9999 );

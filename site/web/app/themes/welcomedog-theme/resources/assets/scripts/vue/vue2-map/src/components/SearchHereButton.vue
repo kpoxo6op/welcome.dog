@@ -2,28 +2,32 @@
   <div>
     <button
       v-show="searchHereBtnIsVisible"
-      @click="searchDogPlacesWithinBounds"
+      @click="searchHere"
       type="button"
-      class="px-2 text-center bg-white border border-gray-900 rounded-full">Search Here
+      class="px-2 text-center bg-white border border-gray-900 rounded-full"
+    >
+      Search Here
     </button>
   </div>
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
-  export default {
+import { mapState } from 'vuex';
 
-    computed: {
-      ...mapState({
-        searchHereBtnIsVisible: state => state.searchHereBtnIsVisible,
-      }),
+export default {
+
+  computed: {
+    ...mapState({
+      searchHereBtnIsVisible: (state) => state.searchHereBtnIsVisible,
+    }),
+  },
+  methods: {
+    searchHere() {
+      this.$store.dispatch('getDogPlaces');
+      this.$store.commit('hideSearchHereBtn');
     },
-    methods: {
-      ...mapActions([
-        'searchDogPlacesWithinBounds',
-      ]),
-    },
-  }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
