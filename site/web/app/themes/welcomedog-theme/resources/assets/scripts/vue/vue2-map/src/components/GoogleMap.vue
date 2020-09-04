@@ -5,21 +5,9 @@
       <FullScreenMapControlsBar v-show="mobileMapIsFullSreen" />
       <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen" />
       <SearchBar
-        v-model="location"
+        v-model="searchString"
         :search-results="searchResults"
       />
-      <!-- <input
-        type="text"
-        v-model="location"
-      >
-      <ul>
-        <li
-          v-for="(result, i) in searchResults"
-          :key="i"
-        >
-          {{ result }}
-        </li>
-      </ul> -->
       <GmapMap
         ref="mapRef"
         class="fixed w-full h-full"
@@ -90,9 +78,11 @@ export default {
         lat: -36.8485,
         lng: 174.7633,
       },
-      location: '',
+      searchString: '',
+      searchResultsMap: [],
+      searchResultsDogPlaces: [],
       searchResults: [],
-      service: null,
+      AutocompleteService: null,
     };
   },
 
@@ -103,6 +93,7 @@ export default {
       mapIsSmall: (state) => !state.mobileMapIsFullSreen,
       selectedMapMarkerIndex: (state) => state.selectedMarkerIndex,
       boundsExist: (state) => state.mapBounds,
+      autocompleteData: (state) => state.autocompleteData,
     }),
   },
 
@@ -114,12 +105,20 @@ export default {
         this.$refs.mapRef.panBy(0, +120);
       }
     },
-    location(newValue) {
+    searchString(newValue) {
       if (newValue) {
-        this.service.getPlacePredictions({
-          input: this.location,
+        if (this.searchString.length < 3) {
+          this.searchResults = [];
+          return;
+        }
+        const request = {
+          input: this.searchString,
+          componentRestrictions: { country: 'nz' },
           types: ['(cities)'],
-        }, this.displaySuggestions);
+          sessionToken: this.sessionToken,
+          bounds: this.$store.state.mapBounds,
+        };
+        this.AutocompleteService.getPlacePredictions(request, this.getSuggestions);
       }
     },
   },
@@ -134,7 +133,8 @@ export default {
         // TODO: pan to variable value because due to different screen size
         map.panBy(0, +120);
       }
-      this.service = new window.google.maps.places.AutocompleteService();
+      this.AutocompleteService = new window.google.maps.places.AutocompleteService();
+      this.sessionToken = new window.google.maps.places.AutocompleteSessionToken();
     });
   },
 
@@ -153,13 +153,18 @@ export default {
       }
     },
 
-    displaySuggestions(predictions, status) {
+    getSuggestions(predictions, status) {
       if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
-        this.searchResults = [];
+        this.searchResultsMap = [];
         return;
       }
-      this.searchResults = predictions.map((prediction) => prediction.description);
-      console.log('searchResults:', this.searchResults);
+      this.searchResultsMap = predictions.map((prediction) => prediction.description);
+      this.searchResultsDogPlaces = this.autocompleteData.filter((el) => el.toLowerCase().indexOf(this.searchString) > -1);
+      this.searchResults = this.searchResultsMap.concat(this.searchResultsDogPlaces);
+      // console.log('this.autocompleteData', this.autocompleteData);
+      // console.log('this.searchString', this.searchString);
+      // console.log('this.searchResultsDogPlaces', this.searchResultsDogPlaces);
+      // console.log('this.searchResults', this.searchResults);
     },
 
     async onIdle() {
@@ -178,6 +183,7 @@ export default {
       // eslint-disable-next-line block-scoped-var
       if (init) {
         await this.$store.dispatch('getDogPlaces');
+        await this.$store.dispatch('getAutocompleteData');
       }
     },
 

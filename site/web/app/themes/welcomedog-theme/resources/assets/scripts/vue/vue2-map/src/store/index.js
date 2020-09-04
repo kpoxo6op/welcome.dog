@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     status: null,
     categoriesPromise: null,
     mapBoundsPromise: null,
+    autocompleteData: null,
   },
 
   getters: {
@@ -105,6 +106,10 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+
+    setAutocompleteData(state, value) {
+      state.autocompleteData = value;
+    },
 
     setCenter(state, value) {
       state.center = value;
@@ -204,7 +209,7 @@ const store = new Vuex.Store({
 
     setCategories(state, categories) {
       state.categories = categories;
-      console.log('wrote Categories from WordPress to Store');
+      // console.log('wrote Categories from WordPress to Store');
     },
 
     setDogPlaces(state, dogPlaces) {
@@ -339,7 +344,7 @@ const store = new Vuex.Store({
         .then((response) => {
           commit('requestLoading');
           const categories = getters.normalisedCategories(response.data);
-          console.log('write ALL WP categories to Store');
+          // console.log('write ALL WP categories to Store');
           commit('setCategories', categories);
           commit('requestSuccess');
         })
@@ -358,7 +363,7 @@ const store = new Vuex.Store({
       instance.get('wp-json/wp/v2/dogplace?per_page=100&dogplace-type=17,22')
       switched from '/wp/v2/dogplace' to custom route '/wdog/v1/dogplaces'
       */
-      console.log('get filtered places within bounds');
+      // console.log('get filtered places within bounds');
       const ids = encodeURIComponent(state.markedCheckboxIds.toString());
       const sw = encodeURIComponent(state.mapBounds.getSouthWest().toUrlValue());
       const ne = encodeURIComponent(state.mapBounds.getNorthEast().toUrlValue());
@@ -370,12 +375,35 @@ const store = new Vuex.Store({
         },
       })
         .then((response) => {
-          console.log('write retrieved Dog Places to Store');
+          // console.log('write retrieved Dog Places to Store');
           commit('setDogPlaces', response.data);
         })
         .catch((e) => {
           console.log(e);
         });
+    },
+
+    async getAutocompleteData({ commit }) {
+      try {
+        const response = await Api().get('/wp/v2/dogplace', {
+          params: {
+            _fields: 'id,link,title,dogplace-type',
+          },
+        });
+
+        // const autocompleteData = response.data.map((el) => ({
+        //   id: el.id,
+        //   link: el.link,
+        //   title: el.title.rendered,
+        //   dogplaceType: el['dogplace-type'][0],
+        // }));
+
+        const autocompleteData = response.data.map((el) => el.title.rendered);
+
+        commit('setAutocompleteData', autocompleteData);
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 
