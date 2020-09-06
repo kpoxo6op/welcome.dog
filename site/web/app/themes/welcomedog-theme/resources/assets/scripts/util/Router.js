@@ -9,7 +9,6 @@ import camelCase from './camelCase';
  * Add additional events for more control over timing e.g. a finalize event
  */
 class Router {
-
   /**
    * Create a new Router
    * @param {Object} routes
@@ -32,7 +31,7 @@ class Router {
         fn: event,
       },
     }));
-    
+
     const fire = route !== '' && this.routes[route] && typeof this.routes[route][event] === 'function';
     if (fire) {
       this.routes[route][event](arg);

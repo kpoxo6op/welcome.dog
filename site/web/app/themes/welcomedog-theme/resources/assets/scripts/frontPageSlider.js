@@ -1,5 +1,4 @@
-$(document).ready(function () {
-
+$(document).ready(() => {
   $('.card-slider').slick({
     dots: false,
     arrows: false,
@@ -28,7 +27,6 @@ $(document).ready(function () {
   //     console.log('chilling');
   //   }
   // });
-
 });
 
 /*
