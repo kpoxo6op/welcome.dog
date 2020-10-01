@@ -1,7 +1,8 @@
 import Vue from 'vue';
 // import Vuex from 'vuex'
 import VueRouter from 'vue-router';
-import GoogleMap from '../components/GoogleMap.vue';
+import Search from '../components/Search.vue';
+import FrontPage from '../components/FrontPage.vue';
 
 Vue.use(VueRouter);
 
@@ -11,12 +12,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: GoogleMap,
-    // props: true,
-    beforeEnter: (to, from, next) => {
-      console.log('entered route: ', to.name, ', query string:', to.query);
-      next();
-    },
+    component: FrontPage,
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: FrontPage,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
   },
 ];
 

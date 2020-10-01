@@ -2,6 +2,7 @@
   <div class="antialiased">
     <GoogleMap />
     <MainContent />
+    <!-- <router-view /> -->
   </div>
 </template>
 

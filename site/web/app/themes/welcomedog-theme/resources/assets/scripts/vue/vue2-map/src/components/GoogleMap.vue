@@ -2,15 +2,6 @@
   <div>
     <!-- v-show="mobileMapIsFullSreen" breaks slider -->
     <div class="fixed w-full h-full">
-      <div class="mt-32 fixed z-100050 w-full bg-yellow-200">
-        autocompleteData: {{ autocompleteData }}
-      </div>
-      <div class="mt-48 fixed z-100050 w-full bg-yellow-400">
-        searchResultsDogPlaces: {{ this.searchResultsDogPlaces }}
-      </div>
-      <div class="mt-64 fixed z-100050 w-full bg-yellow-600">
-        searchResults: {{ searchResults }}
-      </div>
       <FullScreenMapControlsBar v-show="mobileMapIsFullSreen" />
       <FullScreenSwipeCardsBar v-if="mobileMapIsFullSreen" />
       <SearchBar
@@ -63,6 +54,15 @@
         />
       </GmapMap>
     </div>
+    <!-- <div class="mt-32 fixed z-100050 w-full bg-yellow-200">
+        autocompleteData: {{ autocompleteData }}
+      </div>
+      <div class="mt-48 fixed z-100050 w-full bg-yellow-400">
+        searchResultsDogPlaces: {{ this.searchResultsDogPlaces }}
+      </div>
+      <div class="mt-64 fixed z-100050 w-full bg-yellow-600">
+        searchResults: {{ searchResults }}
+      </div> -->
   </div>
 </template>
 <script>
@@ -83,6 +83,7 @@ export default {
   name: 'GoogleMap',
   data() {
     return {
+      AutocompleteService: null,
       initCenter: {
         lat: -36.8485,
         lng: 174.7633,
@@ -91,7 +92,6 @@ export default {
       searchResultsMap: [],
       searchResultsDogPlaces: [],
       searchResults: [],
-      AutocompleteService: null,
     };
   },
 
@@ -168,10 +168,19 @@ export default {
       if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
         this.searchResultsMap = [];
       } else {
-        this.searchResultsMap = predictions.map((prediction) => prediction.description);
+        this.searchResultsMap = predictions.map((el) => ({
+          id: el.place_id,
+          link: null,
+          title: el.description,
+        }));
       }
-      this.searchResultsDogPlaces = this.autocompleteData.filter((el) => el.toLowerCase().includes(this.searchString.toLowerCase()));
+      // this.searchResultsDogPlaces = this.autocompleteData.filter((el) => el.toLowerCase().includes(this.searchString.toLowerCase()));
+      this.searchResultsDogPlaces = this.autocompleteData;
       this.searchResults = [...this.searchResultsMap, ...this.searchResultsDogPlaces];
+      console.log('autocompleteData', this.autocompleteData);
+      console.log('searchResultsDogPlaces', this.searchResultsDogPlaces);
+      console.log('searchResultsMap', this.searchResultsMap);
+      console.log('searchResults', this.searchResults);
     },
 
     async onIdle() {

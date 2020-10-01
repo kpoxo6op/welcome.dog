@@ -391,14 +391,14 @@ const store = new Vuex.Store({
           },
         });
 
-        // const autocompleteData = response.data.map((el) => ({
-        //   id: el.id,
-        //   link: el.link,
-        //   title: el.title.rendered,
-        //   dogplaceType: el['dogplace-type'][0],
-        // }));
+        const autocompleteData = response.data.map((el) => ({
+          id: el.id,
+          link: el.link,
+          title: el.title.rendered,
+          // dogplaceType: el['dogplace-type'][0],
+        }));
 
-        const autocompleteData = response.data.map((el) => el.title.rendered);
+        // const autocompleteData = response.data.map((el) => el.title.rendered);
 
         commit('setAutocompleteData', autocompleteData);
       } catch (e) {

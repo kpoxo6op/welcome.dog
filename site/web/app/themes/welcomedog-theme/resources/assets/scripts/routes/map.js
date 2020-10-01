@@ -2,6 +2,7 @@
 // console.log('loaded map.js')
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import LoadScript from 'vue-plugin-load-script';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 import store from '../vue/vue2-map/src/store';
@@ -14,7 +15,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
   },
 });
-
+Vue.use(LoadScript);
 Vue.use(VueAwesomeSwiper);
 
 export default {
@@ -25,6 +26,7 @@ export default {
       el: '#map-app',
       store,
       router,
+      LoadScript,
       components: {
         app: AppComponent,
       },
