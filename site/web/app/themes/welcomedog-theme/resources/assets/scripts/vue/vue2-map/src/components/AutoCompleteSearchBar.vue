@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Google AutocompleteService Component</p>
     <input
       class="border border-black"
       v-model="searchString"

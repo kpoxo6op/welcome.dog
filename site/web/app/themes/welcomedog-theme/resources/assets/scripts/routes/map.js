@@ -4,6 +4,7 @@ import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import LoadScript from 'vue-plugin-load-script';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+import vSelect from 'vue-select';
 import 'swiper/css/swiper.css';
 import store from '../vue/vue2-map/src/store';
 import router from '../vue/vue2-map/src/router';
@@ -17,6 +18,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.use(LoadScript);
 Vue.use(VueAwesomeSwiper);
+Vue.component('v-select', vSelect);
 
 export default {
   init() {

@@ -1,35 +1,37 @@
 <template>
   <div>
-    <div>Frontpage content (map is not loaded)</div>
-    <AutoCompleteSearchBar />
-    <router-link
-      to="/search?category=Beach"
-    >
-      router link to Map component ->
-    </router-link>
-    <!-- <div>title</div>
-    <div>subtitle</div>
-    <div>
-      card row
-      <router-link
-        to="/search?category=Beach"
-        class="text-3xl"
-      >
-        Beaches card
-      </router-link>
+    <FrontPagePHPLink />
+    <AutoCompleteSelect class="flex justify-center content-center mx-6 my-10" />
+    <FrontPageHero />
+    <div class="mt-8 card-slider sm:mx-6">
+      <FrontPagePromoCard />
+      <FrontPagePromoCard />
+      <FrontPagePromoCard />
     </div>
-    <div>Destinations</div>
-    <div>Submit new place</div>
-    <div>footer</div> -->
+    <FrontPageDestinations />
+    <FrontPageSubmitNewPlace />
+    <FrontPageFooter />
   </div>
 </template>
 
 <script>
-import AutoCompleteSearchBar from './AutoCompleteSearchBar.vue';
+import AutoCompleteSelect from './AutoCompleteSelect.vue';
+import FrontPageHero from './FrontPageHero.vue';
+import FrontPagePromoCard from './FrontPagePromoCard.vue';
+import FrontPageDestinations from './FrontPageDestinations.vue';
+import FrontPageSubmitNewPlace from './FrontPageSubmitNewPlace.vue';
+import FrontPageFooter from './FrontPageFooter.vue';
+import FrontPagePHPLink from './FrontPagePHPLink.vue';
 
 export default {
   components: {
-    AutoCompleteSearchBar,
+    AutoCompleteSelect,
+    FrontPageHero,
+    FrontPagePromoCard,
+    FrontPageDestinations,
+    FrontPageSubmitNewPlace,
+    FrontPageFooter,
+    FrontPagePHPLink,
   },
 
   data() {

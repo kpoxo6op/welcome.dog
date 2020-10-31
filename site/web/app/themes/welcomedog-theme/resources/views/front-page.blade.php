@@ -1,5 +1,6 @@
 @extends('layouts.noheader')
 @section('content')
+    @include('partials.ajax-frontpage-link')
     @include('partials.search')
     @include('partials.hero')
     @include('partials.promocards')
